@@ -1,0 +1,156 @@
+.col-01 {
+  flex: 0 0 auto;
+  width: 7.5%;
+}
+.col-02 {
+  flex: 0 0 auto;
+  width: 12.5%;
+}
+.col-03 {
+  flex: 0 0 auto;
+  width: 37.5%;
+}
+.col-04 {
+  flex: 0 0 auto;
+  width: 2.5%;
+}
+.col-05 {
+  flex: 0 0 auto;
+  width: 95%;
+}
+.col-06 {
+  flex: 0 0 auto;
+  width: 47.5%;
+}
+.col-07 {
+  flex: 0 0 auto;
+  width: 20%;
+}
+.col-08 {
+  flex: 0 0 auto;
+  width: 80%;
+}
+.col-09 {
+  flex: 0 0 auto;
+  width: 25%;
+}
+.col-010 {
+  flex: 0 0 auto;
+  width: 45%;
+}
+.col-011 {
+  flex: 0 0 auto;
+  width: 10%;
+}
+.col-012 {
+  flex: 0 0 auto;
+  width: 75%;
+}
+.col-013 {
+  flex: 0 0 auto;
+  width: 35%;
+}
+.col-14 {
+  flex: 0 0 auto;
+  width: 15%;
+}
+.col-15 {
+  flex: 0 0 auto;
+  width: 40%;
+}
+.col-016 {
+  flex: 0 0 auto;
+  width: 60%;
+}
+.col-017 {
+  flex: 0 0 auto;
+  width: 48.75%;
+}
+.col-018 {
+  flex: 0 0 auto;
+  width: 5%;
+}
+
+@media screen and (max-width: 991px) {
+  .dropdown-menu-end {
+    --bs-position: start;
+  }
+  .dropdown-menu-end[data-bs-popper] {
+    right: auto;
+    left: 0;
+  }
+}
+
+.col_resize_empty {
+  flex: 0 0 auto;
+  width: 10%;
+}
+@media screen and (max-width: 1023px) {
+  .col_resize_empty {
+    flex: 0 0 auto;
+    width: 0%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .col_resize_empty {
+    flex: 0 0 auto;
+    width: 0%;
+  }
+}
+
+.col_resize_empty_2 {
+  flex: 0 0 auto;
+  width: 2.5%;
+}
+@media screen and (max-width: 1023px) {
+  .col_resize_empty_2 {
+    flex: 0 0 auto;
+    width: 0%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .col_resize_empty_2 {
+    flex: 0 0 auto;
+    width: 0%;
+  }
+}
+
+.col_resize {
+  flex: 0 0 auto;
+  width: 50%;
+  height: 100%;
+}
+
+@media screen and (max-width: 1023px) {
+  .col_resize {
+    flex: 0 0 auto;
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .col_resize {
+    flex: 0 0 auto;
+    width: 90%;
+  }
+}
+
+.col_resize_chat {
+  flex: 0 0 auto;
+  width: 27.5%;
+}
+@media screen and (max-width: 1023px) {
+  .col_resize_chat {
+    flex: 0 0 auto;
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .col_resize_chat {
+    flex: 0 0 auto;
+    width: 90%;
+  }
+}

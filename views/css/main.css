@@ -1,0 +1,256 @@
+.top_padding {
+  padding-top: 1.5vmax;
+}
+.center_line {
+  text-align: center;
+}
+
+.border_R {
+  border-right: 1px solid black;
+}
+.border_L {
+  border-left: 1px solid black;
+}
+.border_T {
+  border-top: 1px solid black;
+}
+.border_B {
+  border-bottom: 1px solid black;
+}
+
+@font-face {
+  font-family: "GangwonEdu_OTFBoldA";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+* {
+  font-family: "GangwonEdu_OTFBoldA";
+}
+/*스크롤바 없애기*/
+.box {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.box::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
+}
+
+/*이쁜 스크롤바*/
+.test {
+  overflow: overlay;
+}
+
+.test::-webkit-scrollbar {
+  width: 1vw;
+}
+
+.test::-webkit-scrollbar-thumb {
+  background-color: hsla(0, 0%, 42%, 0.1);
+  border-radius: 100px;
+}
+
+/*사용 안하면 둘러보구 삭제함*/
+.hig1 {
+  line-height: 300px;
+  height: 300px;
+}
+
+.just {
+  line-height: calc(5em - 5px);
+  height: 5em;
+  border-width: thick;
+  border-bottom-style: solid;
+  border-radius: 20px;
+  color: white;
+}
+
+.notRadius {
+  line-height: calc(3em - 5px);
+  height: 3em;
+  border-width: thick;
+  border-bottom-style: solid;
+  color: white;
+}
+.mainbanner {
+  line-height: calc(30em - 5px);
+  line-height: 30em;
+  height: 30em;
+  border-width: thick;
+  border-bottom-style: solid;
+  color: white;
+}
+.subbanner {
+  line-height: calc(10em - 5px);
+  line-height: 10em;
+  height: 10em;
+  border-width: thick;
+  border-bottom-style: solid;
+  color: white;
+}
+.banner1 {
+  border-color: #adb5bd;
+  background-color: #adb5bd;
+}
+.banner2 {
+  border-color: #868e96;
+  background-color: #868e96;
+}
+.banner3 {
+  border-color: #495057;
+  background-color: #495057;
+}
+.banner4 {
+  color: #343a40;
+  background-color: #343a40;
+}
+
+/*그라데이션 배너*/
+
+.jbGrad011 {
+  background-image: linear-gradient(to right, #44b1e9, #44b1e9),
+    linear-gradient(to right, #44b1e9, #44b1e9);
+}
+.jbGrad012 {
+  background-image: linear-gradient(to right, #44b1e9 60%, #fbfaf5),
+    linear-gradient(to right, #44b1e9, #fbfaf5);
+}
+.jbGrad012_1 {
+  background-image: linear-gradient(to right, #c7e5f1 60%, #fbfaf5),
+    linear-gradient(to right, #c7e5f1 60%, #fbfaf5);
+}
+
+.jbGrad013 {
+  background-image: linear-gradient(to right, #44b1e9 60%, #f7cb82),
+    linear-gradient(to right, #44b1e9, #f7cb82);
+}
+.jbGrad014 {
+  background-image: linear-gradient(
+      to right,
+      #44b1e9,
+      #fbfaf5,
+      #f7cb82,
+      #fae4bd
+    ),
+    linear-gradient(to right, #44b1e9, #fbfaf5, #f7cb82, #fae4bd);
+}
+.jbGrad016 {
+  background-image: linear-gradient(
+      to right,
+      #44b1e9,
+      #5fbceb,
+      #8eceed,
+      #fbfaf5,
+      #f7cb82,
+      #fae4bd
+    ),
+    linear-gradient(
+      to right,
+      #44b1e9,
+      #5fbceb,
+      #8eceed,
+      #fbfaf5,
+      #f7cb82,
+      #fae4bd
+    );
+}
+.jbGrad023 {
+  background-image: linear-gradient(to right, #fbfaf5, #f7cb82),
+    linear-gradient(to right, #fbfaf5, #f7cb82);
+}
+.jbGrad024 {
+  background-image: linear-gradient(to righ, t #fbfaf5, #fae4bd),
+    linear-gradient(to right, #fbfaf5, #fae4bd);
+}
+.jbGrad034 {
+  background-image: linear-gradient(to right, #f7cb82, #fae4bd),
+    linear-gradient(to right, #f7cb82, #fae4bd);
+}
+.jbGrad044 {
+  background-image: linear-gradient(to right, #fae4bd, #fae4bd),
+    linear-gradient(to right, #fae4bd, #fae4bd);
+}
+
+/* 카카오톡 테마*/
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+.wrap {
+  padding: 40px 0;
+  background-color: #a8c0d6;
+}
+
+.chat {
+  display: flex;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.chat .icon {
+  position: relative;
+  overflow: hidden;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #eee;
+}
+
+.chat .icon i {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  font-size: 2.5rem;
+  color: #aaa;
+  transform: translateX(-50%);
+}
+
+.chat .textbox {
+  position: relative;
+  display: inline-block;
+  max-width: calc(100% - 70px);
+  padding: 10px;
+  margin-top: 7px;
+  font-size: 13px;
+  border-radius: 10px;
+}
+
+.chat .textbox::before {
+  position: absolute;
+  display: block;
+  top: 0;
+  font-size: 1.5rem;
+}
+
+.ch1 .textbox {
+  margin-left: 20px;
+  background-color: #ddd;
+}
+
+.ch1 .textbox::before {
+  left: -15px;
+  content: "◀";
+  color: #ddd;
+}
+
+.ch2 {
+  flex-direction: row-reverse;
+}
+
+.ch2 .textbox {
+  margin-right: 20px;
+  background-color: #f9eb54;
+}
+
+.ch2 .textbox::before {
+  right: -15px;
+  content: "▶";
+  color: #f9eb54;
+}

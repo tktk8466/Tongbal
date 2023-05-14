@@ -1,0 +1,194 @@
+/* Smartphones (landscape) ---------------- */
+
+@media only screen and (min-width: 321px) and (max-width: 767px) {
+  .Poc_main_font {
+    font-size: 1vmax;
+    zoom: 1.2;
+  }
+  .Poc_chat_font {
+    font-size: 1vmax;
+    zoom: 1;
+  }
+  .pc {
+    width: 100%;
+    border: 1px solid #444444;
+    border-collapse: collapse;
+    font-size: 1vmax;
+    zoom: 1.2;
+  }
+  .pc th,
+  .pc td {
+    border: 1px solid #444444;
+    font-size: 1vmax;
+    zoom: 1.2;
+  }
+  .pc_chat {
+    width: 100%;
+    border: 1px solid #444444;
+    border-collapse: collapse;
+    font-size: 1vmax;
+    zoom: 1;
+  }
+  .pc_chat th,
+  .pc_chat td {
+    border: 1px solid #444444;
+    font-size: 1vmax;
+    zoom: 1;
+  }
+}
+
+/* Tablets (portrait) -------------------- */
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
+  .Poc_main_font {
+    font-size: 1vmax;
+    zoom: 1.2;
+  }
+  .Poc_chat_font {
+    font-size: 1vmax;
+    zoom: 1.4;
+  }
+  .pc {
+    width: 100%;
+    border: 1px solid #444444;
+    border-collapse: collapse;
+    font-size: 1vmax;
+    zoom: 1.2;
+  }
+  .pc th,
+  .pc td {
+    border: 1px solid #444444;
+    font-size: 1vmax;
+    zoom: 1.2;
+  }
+  .pc_chat {
+    width: 100%;
+    border: 1px solid #444444;
+    border-collapse: collapse;
+    font-size: 1vmax;
+    zoom: 1.1;
+  }
+  .pc_chat th,
+  .pc_chat td {
+    border: 1px solid #444444;
+    font-size: 1vmax;
+    zoom: 1.1;
+  }
+}
+
+/* Tablets (landscape) ------------------- */
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
+  .Poc_main_font {
+    font-size: 1vmax;
+    zoom: 1.2;
+  }
+  .Poc_chat_font {
+    font-size: 1vmax;
+    zoom: 1.2;
+  }
+  .pc {
+    width: 100%;
+    border: 1px solid #444444;
+    border-collapse: collapse;
+    font-size: 1vmax;
+    zoom: 1.2;
+  }
+  .pc th,
+  .pc td {
+    border: 1px solid #444444;
+    font-size: 1vmax;
+    zoom: 1.2;
+  }
+  .pc_chat {
+    width: 100%;
+    border: 1px solid #444444;
+    border-collapse: collapse;
+    font-size: 1vmax;
+    zoom: 1.1;
+  }
+  .pc_chat th,
+  .pc_chat td {
+    border: 1px solid #444444;
+    font-size: 1vmax;
+    zoom: 1.1;
+  }
+}
+
+/* Old Desktops and laptops ------------------ */
+
+@media only screen and (min-width: 1025px) {
+  .Poc_main_font {
+    font-size: 1vmax;
+    zoom: 0.9;
+  }
+  .Poc_chat_font {
+    font-size: 1vmax;
+    zoom: 0.9;
+  }
+  .pc {
+    width: 100%;
+    border: 1px solid #444444;
+    border-collapse: collapse;
+    font-size: 1vmax;
+    zoom: 0.9;
+  }
+  .pc th,
+  .pc td {
+    border: 1px solid #444444;
+    font-size: 1vmax;
+    zoom: 0.9;
+  }
+  .pc_chat {
+    width: 100%;
+    border: 1px solid #444444;
+    border-collapse: collapse;
+    font-size: 1vmax;
+    zoom: 1.1;
+  }
+  .pc_chat th,
+  .pc_chat td {
+    border: 1px solid #444444;
+    font-size: 1vmax;
+    zoom: 1.1;
+  }
+}
+
+/* Desktops ------------------ */
+
+@media only screen and (min-width: 1440px) {
+  .Poc_main_font {
+    font-size: 1vmax;
+  }
+  .Poc_main_font {
+    font-size: 1vmax;
+  }
+  .Poc_chat_font {
+    font-size: 1vmax;
+  }
+  .pc {
+    width: 100%;
+    border: 1px solid #444444;
+    border-collapse: collapse;
+    font-size: 1vmax;
+  }
+  .pc th,
+  .pc td {
+    border: 1px solid #444444;
+    font-size: 1vmax;
+  }
+  .pc_chat {
+    width: 100%;
+    border: 1px solid #444444;
+    border-collapse: collapse;
+    font-size: 1vmax;
+  }
+  .pc_chat th,
+  .pc_chat td {
+    border: 1px solid #444444;
+    font-size: 1vmax;
+  }
+  .Poc_center {
+    font-size: 1vmax;
+  }
+}

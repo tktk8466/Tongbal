@@ -29,10 +29,35 @@
     <link href="/css/font.css" rel="stylesheet" />
     <link href="/css/div.css" rel="stylesheet" />
     <link href="/css/class.css" rel="stylesheet" />
+
     <style>
       html {
         width: 100vw;
         height: 100vh;
+      }
+      input {
+        outline: none;
+        border: none;
+      }
+
+      li {
+        list-style: none;
+      }
+      img {
+        width: 90%;
+      }
+      .real-upload {
+        display: none;
+      }
+
+      .upload {
+        width: 20px;
+        height: 20px;
+        background-color: #444444;
+      }
+
+      .image-preview {
+        gap: 20px;
       }
     </style>
   </head>
@@ -484,6 +509,26 @@
             </tr>
           </tbody>
         </table>
+        <textarea
+          id="editor"
+          class="image-preview border_A"
+          style="
+            border-radius: 0;
+            justify-self: cneter;
+            width: 100%;
+            height: 100%;
+          "
+        ></textarea>
+        <input
+          style="color: #444444"
+          value="File"
+          type="file"
+          class="real-upload"
+          accept="image/*"
+          required
+          multiple
+        />
+        <div class="upload"></div>
       </div>
     </div>
   </body>

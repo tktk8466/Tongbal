@@ -7,10 +7,10 @@ module.exports = {
       // 비동기 처리
       try {
         const sql_text_1 =
-          " SELECT Title, Content, FirstOrder_date, Order_date, Delivery_date, \
+          " SELECT Title, Content, FirstOrder_date, Order_date, Delivery_date, OrderComp_ID, Contractor_ID,\
     (SELECT Comp_NAME FROM tb_company WHERE UUID = tb_purchase_order.OrderComp_ID) as Order_Company, \
     (SELECT Comp_NAME FROM tb_company WHERE UUID = tb_purchase_order.Contractor_ID) as Contractor \
-    FROM tb_purchase_order WHERE OrderComp_ID = (SELECT Company_ID FROM tb_user WHERE tb_user.UUID = ?);";
+    FROM tb_purchase_order WHERE Contractor_ID = (SELECT Company_ID FROM tb_user WHERE tb_user.UUID = ?);";
 
         const sql_text_2 =
           " SELECT * FROM tb_company WHERE UUID = (SELECT Company_ID FROM tb_user WHERE UUID = ?)";
@@ -33,13 +33,9 @@ module.exports = {
 
         if (Received_Order != undefined && MyCompanyInfo != undefined) {
           req.session.Received_Order = Received_Order;
-          req.session.Received_Order[0]["FirstOrder_date"].toLocaleDateString();
           req.session.MyCompanyInfo = MyCompanyInfo;
-          req.session.LastQueryTime = req.session.CurrQueryTime;
-          req.session.CurrQueryTime = time.timeString();
+          req.session.NextQueryTime = time.nextQueryTime(time.getNow());
           req.session.save();
-          // console.log(time.timeString() + "PO_Query :: 쿼리 후 세션 : ");
-          // console.log(req.session);
           resolved(connection);
         } else {
           console.log("DB_PO_Query :: Query Failed (21)");

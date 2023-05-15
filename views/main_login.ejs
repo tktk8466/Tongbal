@@ -2,6 +2,20 @@
 <html lang="en">
   <head>
     <%- include ('header_login.ejs') %>
+    <!---->
+    <% if(typeof(pass) === 'undefined') { %>
+    <script type="text/javascript">
+      alert("비정상적인 접근입니다.");
+    </script>
+    <% } else if(pass == 'NONE') { %>
+    <script type="text/javascript">
+      alert("로그인이 필요합니다.");
+    </script>
+    <% } else if(typeof(req) === 'undefined') { %>
+    <script type="text/javascript">
+      //location.reload();
+    </script>
+    <% }%>
   </head>
 
   <body>
@@ -12,294 +26,49 @@
       ></div>
     </div>
 
-    <div
-      id="carouselExampleIndicators"
-      class="carousel carousel-dark slide"
-      data-bs-ride="carousel"
-    >
-      <div class="carousel-indicators" style="margin-bottom: -25px">
-        <button
-          type="button"
-          data-bs-target="#carouselExampleIndicators"
-          data-bs-slide-to="0"
-          class="active"
-          aria-current="true"
-          aria-label="Slide 1"
-        ></button>
-        <button
-          type="button"
-          data-bs-target="#carouselExampleIndicators"
-          data-bs-slide-to="1"
-          aria-label="Slide 2"
-        ></button>
-        <button
-          type="button"
-          data-bs-target="#carouselExampleIndicators"
-          data-bs-slide-to="2"
-          aria-label="Slide 3"
-        ></button>
-      </div>
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <div class="d-flex justify-content-center">
-            <div class="col-6">
-              <div class="card">
-                <p
-                  class="card-title"
-                  style="
-                    text-align: center;
-                    font-size: 30px;
-                    border-bottom: var(--bs-border-color-translucent) 1px solid;
-                    background: #f7cb83;
-                    color: white;
-                  "
-                >
-                  받은 발주서
-                </p>
-                <div class="card-body align-items-center">
-                  <div
-                    class="d-flex flex-column align-content-center flex-wrap"
-                  >
-                    <tr>
-                      <% if(typeof(pass) === 'undefined') { %>
-                      <script type="text/javascript">
-                        alert("비정상적인 접근입니다.");
-                      </script>
-                      <% } else if(pass == 'NONE') { %>
-                      <script type="text/javascript">
-                        alert("로그인이 필요합니다.");
-                      </script>
-                      <% } else if(typeof(req) === 'undefined') { %>
-                      <script type="text/javascript">
-                        //location.reload();
-                      </script>
-                      <% } else if(locals.pass == true && locals.req) { %>
-                      <th scope="row">
-                        <%= req.session.Received_Order[0]["Title"] %>
-                      </th>
-                      <td><%=req.session.Received_Order[0]["Contractor"]%></td>
-                      <td>
-                        <%= req.session.Received_Order[0]["Order_Company"] %>
-                      </td>
-                      <td>
-                        <%=
-                        req.session.Received_Order[0]["FirstOrder_date"].split("T")[0]%>
-                      </td>
-                      <% } %>
-                    </tr>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <div class="d-flex justify-content-center">
-            <div class="col-6">
-              <div class="card">
-                <p
-                  class="card-title"
-                  style="
-                    text-align: center;
-                    font-size: 30px;
-                    border-bottom: var(--bs-border-color-translucent) 1px solid;
-                    background: #f7cb83;
-                    color: white;
-                  "
-                >
-                  받은 발주서
-                </p>
-                <div class="card-body align-items-center">
-                  <div
-                    class="d-flex flex-column align-content-center flex-wrap"
-                  ></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <div class="d-flex justify-content-center">
-            <div class="col-6">
-              <div class="card">
-                <p
-                  class="card-title"
-                  style="
-                    text-align: center;
-                    font-size: 30px;
-                    border-bottom: var(--bs-border-color-translucent) 1px solid;
-                    background: #f7cb83;
-                    color: white;
-                  "
-                >
-                  받은 발주서
-                </p>
-                <div class="card-body align-items-center">
-                  <div
-                    class="d-flex flex-column align-content-center flex-wrap"
-                  ></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="d-flex justify-content-center">
+      <div class="col-6">
+        <div class="card">
+          <p
+            class="card-title"
+            style="
+              text-align: center;
+              font-size: 30px;
+              border-bottom: var(--bs-border-color-translucent) 1px solid;
+              background: #f7cb83;
+              color: white;
+            "
+          >
+            받은 발주서
+          </p>
+          <div class="card-body align-items-center">
+            <div class="d-flex flex-column align-content-center flex-wrap">
+              <table>
+                <%if (typeof(req.session.Received_Order) !== 'undefined') {%>
+                <tr>
+                  <td>제목</td>
+                  <td>발신 업체</td>
+                  <td>발신일</td>
+                  <td></td>
+                </tr>
+                <%var i = 0;%> <% for (var key in req.session.Received_Order) {
+                %>
+                <tr>
+                  <td><%= req.session.Received_Order[i]["Title"] %></td>
 
-      <!-- 시작하기 아래 버튼 -->
-      <button
-        class="carousel-control-prev"
-        type="button"
-        data-bs-target="#carouselExampleIndicators"
-        data-bs-slide="prev"
-      >
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button
-        class="carousel-control-next"
-        type="button"
-        data-bs-target="#carouselExampleIndicators"
-        data-bs-slide="next"
-      >
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
-
-    <!-- 공지 슬라이드 -->
-    <div
-      id="carouselExampleIndicators_info"
-      class="carousel carousel-dark slide"
-      data-bs-ride="carousel"
-      style="margin-top: 50px"
-    >
-      <div class="carousel-indicators" style="margin-bottom: -25px">
-        <button
-          type="button"
-          data-bs-target="#carouselExampleIndicators_info"
-          data-bs-slide-to="0"
-          class="active"
-          aria-current="true"
-          aria-label="Slide 1"
-        ></button>
-        <button
-          type="button"
-          data-bs-target="#carouselExampleIndicators_info"
-          data-bs-slide-to="1"
-          aria-label="Slide 2"
-        ></button>
-        <button
-          type="button"
-          data-bs-target="#carouselExampleIndicators_info"
-          data-bs-slide-to="2"
-          aria-label="Slide 3"
-        ></button>
-      </div>
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <div class="d-flex justify-content-center">
-            <div class="col-6">
-              <div class="card">
-                <p
-                  class="card-title"
-                  style="
-                    text-align: center;
-                    font-size: 30px;
-                    border-bottom: var(--bs-border-color-translucent) 1px solid;
-                    background: #f7cb83;
-                    color: white;
-                  "
-                >
-                  보낸 발주서
-                </p>
-                <div class="card-body align-items-center">
-                  <div
-                    class="d-flex flex-column align-content-center flex-wrap"
-                  >
-                    <!--내용 추가-->
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <div class="d-flex justify-content-center">
-            <div class="col-6">
-              <div class="card">
-                <p
-                  class="card-title"
-                  style="
-                    text-align: center;
-                    font-size: 30px;
-                    border-bottom: var(--bs-border-color-translucent) 1px solid;
-                    background: #f7cb83;
-                    color: white;
-                  "
-                >
-                  보낸 발주서
-                </p>
-                <div class="card-body align-items-center">
-                  <div
-                    class="d-flex flex-column align-content-center flex-wrap"
-                  ></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <div class="d-flex justify-content-center">
-            <div class="col-6">
-              <div class="card">
-                <p
-                  class="card-title"
-                  style="
-                    text-align: center;
-                    font-size: 30px;
-                    border-bottom: var(--bs-border-color-translucent) 1px solid;
-                    background: #f7cb83;
-                    color: white;
-                  "
-                >
-                  보낸 발주서
-                </p>
-                <div class="card-body align-items-center">
-                  <div
-                    class="d-flex flex-column align-content-center flex-wrap"
-                  >
-                    <p
-                      class="card-text"
-                      style="margin-top: auto; margin-bottom: auto"
-                    >
-                      최근 발주서 3
-                    </p>
-                  </div>
-                </div>
-              </div>
+                  <td><%= req.session.Received_Order[i]["Order_Company"] %></td>
+                  <td>
+                    <%=
+                    req.session.Received_Order[i]["Order_date"].toLocaleString();
+                    %>
+                  </td>
+                </tr>
+                <%i++;%> <%}}%>
+              </table>
             </div>
           </div>
         </div>
       </div>
-
-      <button
-        class="carousel-control-prev"
-        type="button"
-        data-bs-target="#carouselExampleIndicators_info"
-        data-bs-slide="prev"
-      >
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button
-        class="carousel-control-next"
-        type="button"
-        data-bs-target="#carouselExampleIndicators_info"
-        data-bs-slide="next"
-      >
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
     </div>
   </body>
 </html>

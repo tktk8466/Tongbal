@@ -18,7 +18,7 @@
     </script>
     <% } else if(typeof(req) === 'undefined') { %>
     <script type="text/javascript">
-      alert("req 없음");
+      alert("비정상적인 접근입니다.");
       window.location.href = "/";
     </script>
     <% } %>
@@ -68,24 +68,30 @@
           <thead>
             <tr>
               <th scope="col">제목</th>
-              <th scope="col">받은 업체</th>
               <th scope="col">보낸 업체</th>
-              <th scope="col">최초작성일</th>
+
+              <th scope="col">발주일</th>
+              <th scope="col">납품기한</th>
             </tr>
           </thead>
           <tbody>
-            <%var i = 0;%> <% for (var key in req.session.Received_Order) { %>
+            <%if (typeof(req.session.Received_Order) !== 'undefined') {%> <% for
+            (var key in req.session.Received_Order) { %>
             <tr>
-              <th scope="row"><%= req.session.Received_Order[i]["Title"] %></th>
-              <td><%=req.session.Received_Order[i]["Contractor"]%></td>
-              <td><%= req.session.Received_Order[i]["Order_Company"] %></td>
+              <th scope="row">
+                <%= req.session.Received_Order[key]["Title"] %>
+              </th>
+              <td><%= req.session.Received_Order[key]["Order_Company"] %></td>
               <td>
-                <%=
-                req.session.Received_Order[i]["FirstOrder_date"].split('T')[0];
+                <%= req.session.Received_Order[key]["Order_date"].split('T')[0];
                 %>
               </td>
+              <td>
+                <%=
+                req.session.Received_Order[key]["Delivery_date"].split('T')[0];%>
+              </td>
             </tr>
-            <%i++;%> <%}%>
+            <%}}%>
           </tbody>
         </table>
 
@@ -113,6 +119,7 @@
           >
             <i class="bi bi-x-lg"></i>
           </button>
+
           <div id="PO1" class="col-12" style="text-align: center">
             <div
               style="
@@ -149,6 +156,7 @@
                 class="col-017 d-flex flex-wrap"
                 style="height: 100%"
               >
+                <%for (var key in req.session.Received_Order){%>
                 <div
                   class="col-12 d-flex flex-wrap border_R border_B"
                   style="align-items: center; justify-content: center"
@@ -162,7 +170,7 @@
                       type="text"
                       id="Comp_NAME"
                       name="Comp_NAME"
-                      value="<%=req.session.Received_Order[0]['Order_Company']%>"
+                      value="<%=req.session.Received_Order[key]['Order_Company']%>"
                       required
                       style="width: 100%; height: 100%; text-align: center"
                     />
@@ -182,7 +190,7 @@
                       type="text"
                       id="President_NAME"
                       name="President_NAME"
-                      value="President_NAME"
+                      value="<%=req.session.Received_Order[key]['President_NAME']%>"
                       required
                       style="width: 100%; height: 100%; text-align: center"
                     />
@@ -202,7 +210,7 @@
                       type="text"
                       id="Business_Address"
                       name="Business_Address"
-                      value="Business_Address"
+                      value="<%=req.session.Received_Order[key]['Business_Address']%>"
                       requiredun
                       style="width: 100%; height: 100%; text-align: center"
                     />
@@ -221,7 +229,7 @@
                       type="text"
                       id="TEL"
                       name="TEL"
-                      value="TEL"
+                      value="<%=req.session.Received_Order[key]['TEL']%>"
                       required
                       style="width: 100%; height: 100%; text-align: center"
                     />
@@ -240,13 +248,15 @@
                       type="text"
                       id="FAX"
                       name="FAX"
-                      value="FAX"
+                      value="<%=req.session.Received_Order[key]['FAX']%>"
                       required
                       style="width: 100%; height: 100%; text-align: center"
                     />
                   </div>
                 </div>
+                <%}%>
               </div>
+
               <div
                 class="col-04 d-flex flex-wrap"
                 style="
@@ -259,6 +269,7 @@
                 <div calss="col-12" style="width: 100%">급</div>
                 <div calss="col-12" style="width: 100%">자</div>
               </div>
+
               <!--공급자-->
               <div
                 id="company-2"

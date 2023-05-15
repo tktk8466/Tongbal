@@ -18,7 +18,7 @@
     </script>
     <% } else if(typeof(req) === 'undefined') { %>
     <script type="text/javascript">
-      alert("req 없음");
+      alert("비정상적인 접근입니다.");
       window.location.href = "/";
     </script>
     <% } %>
@@ -56,29 +56,38 @@
     <div class="d-flex flex-wrap justify-content-center">
       <div class="col_resize_empty">&nbsp;</div>
       <table class="table table-hover" id="POtable" onclick="toggletoggle()">
-        <thead>
-          <tr>
-            <th scope="col">제목</th>
-            <th scope="col">받은 업체</th>
-            <th scope="col">보낸 업체</th>
-            <th scope="col">최초작성일</th>
-          </tr>
-        </thead>
-        <tbody>
-          <%var i = 0;%> <% for (var key in req.session.Received_Order) { %>
-          <tr>
-            <th scope="row"><%= req.session.Received_Order[i]["Title"] %></th>
-            <td><%=req.session.Received_Order[i]["Contractor"]%></td>
-            <td><%= req.session.Received_Order[i]["Order_Company"] %></td>
-            <td>
-              <%=
-              req.session.Received_Order[i]["FirstOrder_date"].split('T')[0]; %>
-            </td>
-          </tr>
-          <%i++;%> <%}%>
-        </tbody>
-      </table>
+          <thead>
+            <tr>
+              <th scope="col">제목</th>
+              <th scope="col">보낸 업체</th>
+
+              <th scope="col">발주일</th>
+              <th scope="col">납품기한</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%if (typeof(req.session.Received_Order) !== 'undefined') {%> <% for
+            (var key in req.session.Received_Order) { %>
+            <tr>
+              <th scope="row">
+                <%= req.session.Received_Order[key]["Title"] %>
+              </th>
+              <td><%= req.session.Received_Order[key]["Order_Company"] %></td>
+              <td>
+                <%= req.session.Received_Order[key]["Order_date"].split('T')[0];
+                %>
+              </td>
+              <td>
+                <%=
+                req.session.Received_Order[key]["Delivery_date"].split('T')[0];%>
+              </td>
+            </tr>
+            <%}}%>
+          </tbody>
+        </table>
+        
       <div class="col_resize">
+
         <div
           class="col-12"
           style="text-align: center; background-color: white; display: none"
@@ -97,7 +106,6 @@
           >
             <i class="bi bi-x-lg"></i>
           </button>
-
           <button
             onclick="window.open('/PO_edit','_blank')"
             style="font-size: 2vmin; justify-items: end"
@@ -158,6 +166,7 @@
               type="button"
               onclick=" sendMessage();"
               class="btn btn-secondary"
+
               style="
                 border: var(--bs-border-color-translucent) 1px solid;
                 border-radius: 0;

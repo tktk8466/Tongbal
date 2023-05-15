@@ -52,8 +52,8 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <form class="d-flex" action="/" method="post">
-                <input type="hidden" name="NextPage" value="PO_M" />
+              <form class="d-flex" action="/" method="get">
+                <input type="hidden" name="Page" value="PO_M" />
                 <input
                   class="nav-link active"
                   type="submit"
@@ -63,8 +63,8 @@
               </form>
             </li>
             <li class="nav-item">
-              <form class="d-flex" action="/" method="post">
-                <input type="hidden" name="NextPage" value="PO_R" />
+              <form class="d-flex" action="/" method="get">
+                <input type="hidden" name="Page" value="PO_R" />
                 <input
                   class="nav-link active"
                   type="submit"
@@ -74,8 +74,8 @@
               </form>
             </li>
             <li class="nav-item">
-              <form class="d-flex" action="/" method="post">
-                <input type="hidden" name="NextPage" value="PO_S" />
+              <form class="d-flex" action="/" method="get">
+                <input type="hidden" name="Page" value="PO_S" />
                 <input
                   class="nav-link active"
                   type="submit"
@@ -86,7 +86,7 @@
             </li>
             <li class="nav-item">
               <form class="d-flex" action="/" method="post">
-                <input type="hidden" name="NextPage" value="Login" />
+                <input type="hidden" name="Page" value="Login" />
                 <input
                   class="nav-link active"
                   type="submit"
@@ -100,7 +100,7 @@
           <!--로그인 안되어 있을 경우 (세션 없음)-->
 
           <form class="d-flex" action="/" method="post">
-            <input type="hidden" name="NextPage" value="Login" />
+            <input type="hidden" name="Page" value="Login" />
             <input
               class="btn btn btn-outline-dark"
               type="submit"

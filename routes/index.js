@@ -19,72 +19,136 @@ router.use(
 // 로그인 전 메인
 
 router.get("/", async (req, res) => {
-  console.log(time.timeString() + " get'/' :: 로그인 세션 체크중...");
-  var NextPage = req.query.NextPage;
-  if (req.session.isLogin == true) {
-    // 로그인 세션 있을 때
+  try {
+    var Page = req.query.Page;
+    console.log(time.timeString() + " get'/' :: " + Page);
 
-    console.log(time.timeString() + "Next Page :" + NextPage);
-    if (NextPage == "PO_R") {
-      try {
+    console.log(time.timeString() + " get'/' :: 로그인 세션 체크중...");
+    if (req.session.isLogin == true) {
+      if (Page == "PO_M") {
+        console.log(time.timeString() + " else if PO_M ");
+        if (req.session.isLogin != true) {
+          // 로그인 세션 없을 때
+          res.render("../views/login.ejs", {
+            pass: "NONE",
+          });
+          console.log(
+            time.timeString() +
+              " get'/' :: 로그인 세션 없음, 로그인 페이지 연계"
+          );
+        } else {
+          res.render("../views/Purchase_Order_M.ejs");
+        }
+      } else if (Page == "PO_R") {
+        console.log(time.timeString() + " else if PO_R ");
+        if (req.session.isLogin != true) {
+          // 로그인 세션 없을 때
+          res.render("../views/login.ejs", {
+            pass: "NONE",
+          });
+          console.log(
+            time.timeString() +
+              " get'/' :: 로그인 세션 없음, 로그인 페이지 연계"
+          );
+        } else {
+          try {
+            console.log(
+              "NextQueryTIme : " +
+                req.session.NextQueryTime +
+                "\nNow           : " +
+                time.getNow().toISOString()
+            );
+
+            console.log(
+              "DB reloading : " +
+                (req.session.NextQueryTime <= time.getNow().toISOString())
+            );
+            if (
+              req.session.NextQueryTime == undefined ||
+              req.session.NextQueryTime <= time.getNow().toISOString()
+            ) {
+              console.log(time.timeString() + " get'PO_R' getPO ");
+              await po_query.getPO(req, res);
+              res.render("../views/Purchase_Order_Received.ejs", {
+                req,
+                pass: true,
+              });
+            } else {
+              console.log(
+                time.timeString() +
+                  "Next Query will execute at " +
+                  req.session.NextQueryTime
+              );
+              res.render("../views/Purchase_Order_Received.ejs", {
+                req,
+                pass: true,
+              });
+            }
+          } catch (err) {
+            console.log(
+              time.timeString() + " Error at Page =='PO_R' :: " + err
+            );
+          }
+        }
+      } else if (Page == "PO_S") {
+        console.log(time.timeString() + " else if PO_S ");
+        if (req.session.isLogin != true) {
+          // 로그인 세션 없을 때
+          res.render("../views/login.ejs", {
+            pass: "NONE",
+          });
+          console.log(
+            time.timeString() +
+              " get'/' :: 로그인 세션 없음, 로그인 페이지 연계"
+          );
+        } else {
+          //res.render("../views/Purchase_Order_Sent.ejs");
+          res.redirect("/");
+        }
+      } else {
+        // 로그인 세션 있음, 메인 연결
+        console.log(time.timeString() + " get'/' :: 로그인 세션 있음");
         if (
           req.session.LastQueryTime == undefined &&
           req.session.CurrQueryTime == undefined
         ) {
-          console.log(time.timeString() + " post'PO_R' getPO ");
           await po_query.getPO(req, res);
+
+          console.log(time.timeString() + " get'/' :: getPO 이후 세션 ");
+          console.log(req.session);
+          res.render("../views/main_login.ejs", { req, pass: true });
         } else {
+          console.log(req.session);
           console.log(
             time.timeString() +
               "Already Queried at " +
               req.session.LastQueryTime
           );
+          res.render("../views/main_login.ejs", { req, pass: true });
         }
-        res.render("../views/Purchase_Order_Received.ejs", {
-          req,
-          pass: true,
-        });
-      } catch (err) {
-        console.log(
-          time.timeString() + " Error at NextPage =='PO_R' :: " + err
-        );
       }
-    }
-    console.log(time.timeString() + " get'/' :: 로그인 세션 있음");
-    if (
-      req.session.LastQueryTime == undefined &&
-      req.session.CurrQueryTime == undefined
-    ) {
-      await po_query.getPO(req, res);
-
-      console.log(time.timeString() + " get'/' :: getPO 이후 세션 ");
-      console.log(req.session);
-      res.render("../views/main_login.ejs", { req, pass: true });
     } else {
-      console.log(
-        time.timeString() + "Already Queried at " + req.session.LastQueryTime
-      );
-      res.render("../views/main_login.ejs", { req, pass: true });
+      // 로그인 세션 없을 때
+      res.render(path.join(__dirname, "../views/main.ejs"));
+      console.log(time.timeString() + " get'/' :: 로그인 세션 없음");
     }
-  } else {
-    // 로그인 세션 없을 때
-    res.render(path.join(__dirname, "../views/main.ejs"));
-    console.log(time.timeString() + " get'/' :: 로그인 세션 없음");
+  } catch (err) {
+    console.log(err);
   }
 });
 
 router.post("/", async (req, res) => {
   try {
-    var NextPage = req.body.NextPage;
-    console.log(time.timeString() + " post'/' :: " + NextPage);
+    var Page = req.body.Page;
+    console.log(time.timeString() + " post'/' :: " + Page);
 
-    if (NextPage == "Login") {
+    if (Page == "Login") {
       res.render("../views/login.ejs", {
         pass: "attempt",
       });
       console.log(time.timeString() + " post'/' :: 로그인 시도");
       //
-    } else if (NextPage == "Login_attempt") {
+    } else if (Page == "Login_attempt") {
       console.log(time.timeString() + " else if Login_attempt ");
       let ID = req.body.userID;
       let PW = req.body.userPW;
@@ -106,76 +170,9 @@ router.post("/", async (req, res) => {
           });
         }
       } catch (err) {
-        console.log(
-          time.timeString() + " Error at NextPage =='Login' :: " + err
-        );
+        console.log(time.timeString() + " Error at Page =='Login' :: " + err);
       }
       //
-    } else if (NextPage == "Main") {
-      res.render("../views/main_login.ejs", { req });
-      //
-    } else if (NextPage == "PO_M") {
-      console.log(time.timeString() + " else if PO_M ");
-      if (req.session.isLogin != true) {
-        // 로그인 세션 없을 때
-        res.render("../views/login.ejs", {
-          pass: "NONE",
-        });
-        console.log(
-          time.timeString() + " post'/' :: 로그인 세션 없음, 로그인 페이지 연계"
-        );
-      } else {
-        res.render("../views/Purchase_Order_M.ejs");
-      }
-    } else if (NextPage == "PO_R") {
-      console.log(time.timeString() + " else if PO_R ");
-      if (req.session.isLogin != true) {
-        // 로그인 세션 없을 때
-        res.render("../views/login.ejs", {
-          pass: "NONE",
-        });
-        console.log(
-          time.timeString() + " post'/' :: 로그인 세션 없음, 로그인 페이지 연계"
-        );
-      } else {
-        try {
-          if (
-            req.session.LastQueryTime == undefined &&
-            req.session.CurrQueryTime == undefined
-          ) {
-            console.log(time.timeString() + " post'PO_R' getPO ");
-            await po_query.getPO(req, res);
-          } else {
-            console.log(
-              time.timeString() +
-                "Already Queried at " +
-                req.session.LastQueryTime
-            );
-          }
-          res.locals.Received_Order = req.session.Received_Order;
-          res.render("../views/Purchase_Order_Received.ejs", {
-            req,
-            pass: true,
-          });
-        } catch (err) {
-          console.log(
-            time.timeString() + " Error at NextPage =='PO_R' :: " + err
-          );
-        }
-      }
-    } else if (NextPage == "PO_S") {
-      console.log(time.timeString() + " else if PO_S ");
-      if (req.session.isLogin != true) {
-        // 로그인 세션 없을 때
-        res.render("../views/login.ejs", {
-          pass: "NONE",
-        });
-        console.log(
-          time.timeString() + " post'/' :: 로그인 세션 없음, 로그인 페이지 연계"
-        );
-      } else {
-        res.render("../views/Purchase_Order_Sent.ejs");
-      }
     }
   } catch (err) {
     console.log(err);
@@ -189,6 +186,10 @@ router.get("/logout", (req, res) => {
   } catch (err) {
     console.log(err);
   }
+});
+
+router.get("/PO_edit", (req, res) => {
+  res.render(path.join(__dirname, "../views/Purchase_Order_edit.ejs"));
 });
 
 /*
@@ -221,7 +222,7 @@ router.post("/login", async (req, res) => {
       });
     }
   } catch (err) {
-    console.log(time.timeString() + " Error at NextPage =='Login' :: " + err);
+    console.log(time.timeString() + " Error at Page =='Login' :: " + err);
   }
 });
 
@@ -265,15 +266,21 @@ router.get("/PO_S", (req, res) => {
     res.sendFile(path.join(__dirname, "../views/login.ejs"));
   }
 });
-
+*/
 // 마이페이지
 router.get("/MYPAGE", (req, res) => {
-  if (req.session.isLogin) {
-    res.render(path.join(__dirname, "../views/MyPage.ejs"));
+  if (req.session.isLogin == true) {
+    res.render(path.join(__dirname, "../views/MyPage.ejs"), {
+      req,
+      pass: true,
+    });
   } else {
-    res.sendFile(path.join(__dirname, "../views/login.ejs"));
+    // 로그인 세션 없을 때
+    res.render("../views/login.ejs", { pass: "NONE" });
+    console.log(
+      time.timeString() + " get'/' :: 로그인 세션 없음, 로그인 페이지 연계"
+    );
   }
 });
-*/
 
 module.exports = router;

@@ -51,13 +51,26 @@
       }
 
       .upload {
-        width: 20px;
-        height: 20px;
+        width: 40px;
+        height: 40px;
         background-color: #444444;
       }
 
       .image-preview {
         gap: 20px;
+      }
+      .file-label {
+        margin-top: 30px;
+        background-color: #5b975b;
+        color: #fff;
+        text-align: center;
+        padding: 10px 0;
+        width: 65%;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+      .file {
+        display: none;
       }
     </style>
   </head>
@@ -510,8 +523,8 @@
           </tbody>
         </table>
         <textarea
-          id="editor"
-          class="image-preview border_A"
+          id="remarks"
+          class="border_A"
           style="
             border-radius: 0;
             justify-self: cneter;
@@ -519,6 +532,7 @@
             height: 100%;
           "
         ></textarea>
+        <div class="upload">사진 업로드</div>
         <input
           style="color: #444444"
           value="File"
@@ -528,7 +542,15 @@
           required
           multiple
         />
-        <div class="upload"></div>
+
+        <div
+          id="editor"
+          class="image-preview"
+          style="border-radius: 0; justify-self: cneter"
+        ></div>
+
+        <label class="file-label" for="chooseFile">Choose File</label>
+        <input class="file" id="chooseFile" type="file" multiple />
       </div>
     </div>
   </body>

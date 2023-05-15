@@ -4,7 +4,9 @@
 .center_line {
   text-align: center;
 }
-
+.border_A {
+  border: 1px solid black;
+}
 .border_R {
   border-right: 1px solid black;
 }

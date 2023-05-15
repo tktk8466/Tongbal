@@ -50,11 +50,11 @@
   flex: 0 0 auto;
   width: 35%;
 }
-.col-14 {
+.col-014 {
   flex: 0 0 auto;
   width: 15%;
 }
-.col-15 {
+.col-015 {
   flex: 0 0 auto;
   width: 40%;
 }
@@ -69,6 +69,18 @@
 .col-018 {
   flex: 0 0 auto;
   width: 5%;
+}
+.col-019 {
+  flex: 0 0 auto;
+  width: 90%;
+}
+.col-020 {
+  flex: 0 0 auto;
+  width: 87.5%;
+}
+.col-021 {
+  flex: 0 0 auto;
+  width: 30%;
 }
 
 @media screen and (max-width: 991px) {
@@ -122,18 +134,17 @@
   width: 50%;
   height: 100%;
 }
-
 @media screen and (max-width: 1023px) {
   .col_resize {
     flex: 0 0 auto;
-    width: 90%;
+    width: 100%;
   }
 }
 
 @media screen and (max-width: 767px) {
   .col_resize {
     flex: 0 0 auto;
-    width: 90%;
+    width: 100%;
   }
 }
 

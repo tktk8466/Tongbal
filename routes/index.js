@@ -191,6 +191,10 @@ router.get("/logout", (req, res) => {
   }
 });
 
+router.get("/PO_edit", (req, res) => {
+  res.render(path.join(__dirname, "../views/Purchase_Order_edit.ejs"));
+});
+
 /*
 // 로그인 페이지
 router.get("/login", (req, res) => {

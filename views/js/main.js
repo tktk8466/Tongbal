@@ -13,7 +13,9 @@ function SetInput() {
 function reload() {
   (location || window.location || document.location).reload();
 }
-
+function Display_none(div) {
+  div.style.display = "none";
+}
 //div전환함수
 function toggleDiv(div) {
   if (div.style.display === "none") {
@@ -25,9 +27,6 @@ function toggleDiv(div) {
 //테이블 클릭시 div 전환함수
 function toggletoggle() {
   //실제 창 전환 함수
-
-  //<!-- const div = document.getElementById('chat_tables'); -->
-
   if (chat_tables.childElementCount != 0) {
     removeAllchild(chat_tables); //자식으로 div가 있으면 삭제(다른 테이블 값이 들어왔을때, 채팅방 내용두 달라야해서 원래 있는 채팅방의 내용을 삭제)
   }
@@ -108,11 +107,6 @@ function createDiv2(dix) {
   chat_tables.append(newDiv);
 }
 
-function On_enter() {
-  if (event.keyCode == 13) {
-    createDiv();
-  }
-}
 // 메세지 발신
 function sendMessage() {
   const message = document.getElementById("txt_on").value;

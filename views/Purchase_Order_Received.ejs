@@ -6,7 +6,9 @@
       const ws = new WebSocket("ws://localhost:8001");
       ws.onmessage = receiveMessage;
     </script>
-    <%- include ('header_login.ejs') %> <% if(typeof(pass) === 'undefined') { %>
+    <%- include ('header_login.ejs') %>
+    <!--비정상 접근 차단-->
+    <% if(typeof(pass) === 'undefined') { %>
     <script type="text/javascript">
       alert("비정상적인 접근입니다.");
       window.location.href = "/";
@@ -63,20 +65,12 @@
         </tr>
       </thead>
       <tbody>
-        <%if (typeof(req.session.Received_Order) !== 'undefined') {%> <% for
-        (var key in req.session.Received_Order) { %>
-        <tr
-          onclick="toggleDiv(myDIV),toggleDiv(myDIV2),toggleDiv(POtable),toggleDiv(Purchase_Order_<%=key%>) ;"
-        >
+        <%if (typeof(req.session.Received_Order) !== 'undefined') { for (var key in req.session.Received_Order) { %>
+        <tr onclick="toggleDiv(myDIV),toggleDiv(myDIV2),toggleDiv(POtable),toggleDiv(Purchase_Order_<%=key%>) ;">
           <th scope="row"><%= req.session.Received_Order[key]["Title"] %></th>
-          <td><%= req.session.Received_Order[key]["Order_Company"] %></td>
-          <td>
-            <%= req.session.Received_Order[key]["Order_date"].split('T')[0]; %>
-          </td>
-          <td>
-            <%=
-            req.session.Received_Order[key]["Delivery_date"].split('T')[0];%>
-          </td>
+          <td><%= req.session.CompanyInfo[key]["Comp_NAME"] %></td>
+          <td><%= req.session.Received_Order[key]["Order_Date"].split(' ')[0] %></td>
+          <td><%= req.session.Received_Order[key]["Delivery_Date"].split(' ')[0] %></td>
         </tr>
         <%}}%>
       </tbody>
@@ -85,24 +79,16 @@
     <div class="d-flex flex-wrap justify-content-center">
       <div id="BIG_DIV" class="col-12 d-flex flex-wrap">
         <div class="col_resize_empty">&nbsp;</div>
-        <div
-          class="col_resize"
-          style="text-align: center; background-color: white; display: none"
-          id="myDIV"
-        >
+        <div class="col_resize" style="text-align: center; background-color: white; display: none" id="myDIV">
           <button
             type="button"
             onclick="
             toggleDiv(myDIV),toggleDiv(myDIV2),
               <% for(var key in req.session.Received_Order) {%>
                   Display_none(Purchase_Order_<%=key%>), 
-                  <%}%>
-                    toggleDiv(POtable);"
-            style="
-              float: left;
-              background-color: transparent;
-              border: transparent;
-            "
+              <%}%>
+                  toggleDiv(POtable);"
+            style="float: left; background-color: transparent; border: transparent"
           >
             <i class="bi bi-x-lg"></i>
           </button>
@@ -116,18 +102,8 @@
           <div><%- include ('Purchase_Order_Received_form.ejs') %></div>
         </div>
         <div class="col_resize_empty_2">&nbsp;</div>
-        <div
-          class="col_resize_chat content"
-          id="myDIV2"
-          style="text-align: center; font-size: 1.75vw; display: none"
-        >
-          <div
-            id="CHAT"
-            style="
-              background-color: #d2e9f2;
-              border: var(--bs-border-color-translucent) 1px solid;
-            "
-          >
+        <div class="col_resize_chat content" id="myDIV2" style="text-align: center; font-size: 1.75vw; display: none">
+          <div id="CHAT" style="background-color: #d2e9f2; border: var(--bs-border-color-translucent) 1px solid">
             날짜 연월
           </div>
           <div
@@ -155,10 +131,7 @@
               type="button"
               onclick=" sendMessage();"
               class="btn btn-secondary"
-              style="
-                border: var(--bs-border-color-translucent) 1px solid;
-                border-radius: 0;
-              "
+              style="border: var(--bs-border-color-translucent) 1px solid; border-radius: 0"
             >
               <i class="bi bi-send"></i>
             </button>

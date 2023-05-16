@@ -35,8 +35,7 @@ function resizableGrid(table) {
     });
 
     div.addEventListener("mouseover", function (e) {
-      e.target.style.borderRight =
-        "2px solid var(--bs-border-color-translucent)";
+      e.target.style.borderRight = "2px solid var(--bs-border-color-translucent)";
     });
 
     div.addEventListener("mouseout", function (e) {

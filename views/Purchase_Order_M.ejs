@@ -37,105 +37,37 @@
   <body>
     <!-- Nav Bar -->
 
-    <div
-      class="d-flex flex-wrap justify-content-center"
-      style="margin: 50px 0px; position: relative; justify-content: center"
-    >
-      <div
-        class="col-1 d-flex flex-wrap"
-        style="justify-content: left"
-        class="btn btn-light"
-      >
-        &nbsp;
-      </div>
-      <div
-        class="col-5 d-flex flex-wrap"
-        style="justify-content: left"
-        class="btn btn-light"
-      >
-        <button
-          onclick="F_Trading_statement()"
-          style="font-size: 2vmin"
-          class="btn btn-light"
-        >
-          거래명세서
-        </button>
+    <div class="d-flex flex-wrap justify-content-center" style="margin: 50px 0px; position: relative; justify-content: center">
+      <div class="col-1 d-flex flex-wrap" style="justify-content: left" class="btn btn-light">&nbsp;</div>
+      <div class="col-5 d-flex flex-wrap" style="justify-content: left" class="btn btn-light">
+        <button onclick="F_Trading_statement()" style="font-size: 2vmin" class="btn btn-light">거래명세서</button>
 
-        <button
-          onclick="F_Bill()"
-          style="font-size: 2vmin"
-          class="btn btn-light"
-        >
-          영수증
-        </button>
+        <button onclick="F_Bill()" style="font-size: 2vmin" class="btn btn-light">영수증</button>
         <!--발 주 서-->
-        <button
-          onclick="F_Purchase_Order()"
-          style="font-size: 2vmin"
-          class="btn btn-light"
-        >
-          발 주 서
-        </button>
-        <button
-          onclick="F_Tax_Bill()"
-          style="font-size: 2vmin"
-          class="btn btn-light"
-        >
-          세금계산서
-        </button>
+        <button onclick="F_Purchase_Order()" style="font-size: 2vmin" class="btn btn-light">발 주 서</button>
+        <button onclick="F_Tax_Bill()" style="font-size: 2vmin" class="btn btn-light">세금계산서</button>
       </div>
       <div class="col-5 d-flex flex-wrap" style="justify-content: right">
-        <button class="btn btn-light" onclick="" style="font-size: 2vmin">
-          취소
-        </button>
+        <button class="btn btn-light" onclick="" style="font-size: 2vmin">취소</button>
 
-        <button class="btn btn-light" onclick="" style="font-size: 2vmin">
-          수정
-        </button>
+        <button class="btn btn-light" onclick="" style="font-size: 2vmin">수정</button>
 
-        <button
-          type="submit"
-          class="btn btn-light"
-          onclick="F_Board()"
-          style="font-size: 2vmin"
-        >
-          목록
-        </button>
+        <button type="submit" class="btn btn-light" onclick="F_Board()" style="font-size: 2vmin">목록</button>
 
-        <button
-          class="btn btn-light"
-          onclick="onclick=window.print()"
-          style="font-size: 2vmin"
-        >
-          인쇄
-        </button>
+        <button class="btn btn-light" onclick="onclick=window.print()" style="font-size: 2vmin">인쇄</button>
 
-        <button class="btn btn-light" onClick="" style="font-size: 2vmin">
-          저장
-        </button>
+        <button class="btn btn-light" onClick="" style="font-size: 2vmin">저장</button>
       </div>
-      <div class="col-1 d-flex flex-wrap" style="justify-content: left">
-        &nbsp;
-      </div>
+      <div class="col-1 d-flex flex-wrap" style="justify-content: left">&nbsp;</div>
       <!--발주서-->
       <div class="col-12" style="height: 10wh"></div>
 
       <!--세금계산서-->
-      <div id="PO1" class="col-10" style="text-align: center; display: none">
-        1
-      </div>
-      <div id="PO2" class="col-10" style="text-align: center; display: none">
-        <%- include ('Bill.ejs') %>
-      </div>
-      <div id="PO3" class="col-10" style="text-align: center; display: none">
-        <%- include ('Purchase_Order.ejs') %>
-      </div>
-      <div id="PO4" class="col-10" style="text-align: center; display: none">
-        <%- include ('Tax_Bill.ejs') %>
-      </div>
-      <div id="PO5" class="col-10" style="text-align: center; display: none">
-        <%- include ('Purchase_Order_Board.ejs') %>
-      </div>
+      <div id="PO1" class="col-10" style="text-align: center; display: none">1</div>
+      <div id="PO2" class="col-10" style="text-align: center; display: none"><%- include ('Bill.ejs') %></div>
+      <div id="PO3" class="col-10" style="text-align: center; display: none"><%- include ('Purchase_Order.ejs') %></div>
+      <div id="PO4" class="col-10" style="text-align: center; display: none"><%- include ('Tax_Bill.ejs') %></div>
+      <div id="PO5" class="col-10" style="text-align: center; display: none"><%- include ('Purchase_Order_Board.ejs') %></div>
     </div>
   </body>
 </html>

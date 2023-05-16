@@ -14,6 +14,8 @@ const dbConfig = {
   user: "root",
   password: "Tongbal123!@#",
   database: "tongbal",
+  connectionLimit: 100,
+  dateStrings: "date",
 };
 
 const DB = mysql.createPool(dbConfig);
@@ -26,14 +28,10 @@ module.exports = {
       console.log(time.timeString() + "[2] database :: DB 접속 부여중...");
       try {
         resolve(DB.getConnection());
-        console.log(
-          time.timeString() + "[2] database :: DB 접속 부여중...DONE"
-        );
+        console.log(time.timeString() + "[2] database :: DB 접속 부여중...DONE");
       } catch (err) {
         reject();
-        console.log(
-          time.timeString() + "[2] database :: DB 접속 부여중...FAILED"
-        );
+        console.log(time.timeString() + "[2] database :: DB 접속 부여중...FAILED");
       }
     });
   },

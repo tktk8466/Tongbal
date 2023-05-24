@@ -119,7 +119,7 @@ function sendMessage() {
 
 function submitTextarea(event) {
   let key = event.key || event.keyCode;
-
+  console.log("3");
   if ((key === "Enter" && !event.shiftKey) || (key === 13 && key !== 16)) {
     event.preventDefault();
     sendMessage();
@@ -128,8 +128,10 @@ function submitTextarea(event) {
 }
 
 function enterkey() {
-  const textarea = document.getElementById("txt_on");
-  textarea.addEventListener("keyup", (event) => submitTextarea(event));
+  const input = document.getElementById("txt_on");
+  console.log("1");
+  input.addEventListener("keyup", (event) => submitTextarea(event));
+  console.log("2");
 }
 
 function receiveMessage(event) {

@@ -1,4 +1,4 @@
-<% for(var key in req.session.Received_Order) { %>
+<% for(var key in req.session.Send_Order) { %>
 <div id="Purchase_Order_<%=key%>" class="col-12" style="text-align: center; display: none">
   <div style="text-align: center; font-size: 3vmax; border-top: 1px solid #444444; border-left: 1px solid #444444; border-right: 1px solid #444444">
     발&nbsp;&nbsp;주&nbsp;&nbsp;서
@@ -15,7 +15,7 @@
             type="text"
             id="Comp_NAME"
             name="Comp_NAME"
-            value="<%=req.session.R_CompanyInfo[key]['Comp_NAME']%>"
+            value="<%=req.session.MyCompanyInfo[0]['Comp_NAME']%>"
             required
             style="width: 100%; height: 100%; text-align: center"
             readonly
@@ -30,7 +30,7 @@
             type="text"
             id="President_NAME"
             name="President_NAME"
-            value="<%=req.session.R_CompanyInfo[key]['President_NAME']%>"
+            value="<%=req.session.MyCompanyInfo[0]['President_NAME']%>"
             required
             style="width: 100%; height: 100%; text-align: center"
             readonly
@@ -45,7 +45,7 @@
             type="text"
             id="Business_Address"
             name="Business_Address"
-            value="<%=req.session.R_CompanyInfo[key]['Business_ADDR']%>"
+            value="<%=req.session.MyCompanyInfo[0]['Business_ADDR']%>"
             requiredun
             style="width: 100%; height: 100%; text-align: center"
             readonly
@@ -59,7 +59,7 @@
             type="text"
             id="TEL"
             name="TEL"
-            value="<%=req.session.R_CompanyInfo[key]['TEL']%>"
+            value="<%=req.session.MyCompanyInfo[0]['TEL']%>"
             required
             style="width: 100%; height: 100%; text-align: center"
             readonly
@@ -73,7 +73,7 @@
             type="text"
             id="FAX"
             name="FAX"
-            value="<%=req.session.R_CompanyInfo[key]['FAX']%>"
+            value="<%=req.session.MyCompanyInfo[0]['FAX']%>"
             required
             style="width: 100%; height: 100%; text-align: center"
             readonly
@@ -95,7 +95,7 @@
             type="text"
             id="Comp_NAM2"
             name="Comp_NAME2"
-            value="<%=req.session.MyCompanyInfo[0]['Comp_NAME']%>"
+            value="<%=req.session.S_CompanyInfo[key]['Comp_NAME']%>"
             required
             style="width: 100%; height: 100%; text-align: center"
             readonly
@@ -109,7 +109,7 @@
             type="text"
             id="President_NAME_2"
             name="President_NAME_2"
-            value="<%=req.session.MyCompanyInfo[0]['President_NAME']%>"
+            value="<%=req.session.S_CompanyInfo[key]['President_NAME']%>"
             required
             style="width: 100%; height: 100%; text-align: center"
             readonly
@@ -123,7 +123,7 @@
             type="text"
             id="Business_NUM"
             name="Business_NUM"
-            value="<%=req.session.MyCompanyInfo[0]['Business_NUM']%>"
+            value="<%=req.session.S_CompanyInfo[key]['Business_NUM']%>"
             required
             style="width: 100%; height: 100%; text-align: center"
             readonly
@@ -137,7 +137,7 @@
             type="text"
             id="Business_Address_2"
             name="Business_Address_2"
-            value="<%=req.session.MyCompanyInfo[0]['Business_ADDR']%>"
+            value="<%=req.session.S_CompanyInfo[key]['Business_ADDR']%>"
             requiredun
             style="width: 100%; height: 100%; text-align: center"
             readonly
@@ -151,7 +151,7 @@
             type="text"
             id="Business_Address_F"
             name="Business_Address_F"
-            value="<%=req.session.MyCompanyInfo[0]['Factory_ADDR(OPTIONAL)']%>"
+            value="<%=req.session.S_CompanyInfo[key]['Factory_ADDR(OPTIONAL)']%>"
             required
             style="width: 100%; height: 100%; text-align: center"
             readonly
@@ -161,15 +161,7 @@
       <div class="col-12 d-flex flex-wrap border_B" style="align-items: center; justify-content: center">
         <div class="col-07 Poc_chat_font">발주 담당자</div>
         <div class="col-08 Poc_chat_font border_L" style="height: 100%">
-          <input
-            type="text"
-            id="Manager"
-            name="Manager"
-            value="<%=req.session.UserName%>"
-            required
-            style="width: 100%; height: 100%; text-align: center"
-            readonly
-          />
+          <input type="text" id="Manager" name="Manager" value="" required style="width: 100%; height: 100%; text-align: center" readonly />
         </div>
       </div>
       <div class="col-12 d-flex flex-wrap border_B" style="align-items: center; justify-content: center">
@@ -179,7 +171,7 @@
             type="text"
             id="TEL2"
             name="TEL2"
-            value="<%=req.session.MyCompanyInfo[0]['TEL']%>"
+            value="<%=req.session.S_CompanyInfo[key]['TEL']%>"
             required
             style="width: 100%; height: 100%; text-align: center"
             readonly
@@ -193,7 +185,7 @@
             type="text"
             id="Fax2"
             name="Fax2"
-            value="<%=req.session.MyCompanyInfo[0]['FAX']%>"
+            value="<%=req.session.S_CompanyInfo[key]['FAX']%>"
             required
             style="width: 100%; height: 100%; text-align: center"
             readonly

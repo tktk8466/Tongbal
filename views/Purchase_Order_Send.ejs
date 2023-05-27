@@ -76,8 +76,8 @@
 
         var MSG = JSON.parse(message.data);
         console.log("onmessage :: Chat message Received = " + MSG.msg);
-        <% for (var key in req.session.Received_Order) { %>
-          if(MSG.chat_room_id == `<%= req.session.Received_Order[key]['TB_CHAT_ROOM_ID'] %>`){
+        <% for (var key in req.session.Send_Order) { %>
+          if(MSG.chat_room_id == `<%= req.session.Send_Order[key]['TB_CHAT_ROOM_ID'] %>`){
             if (MSG.user_id != uid) {
               newReceiveDiv(chat_tables_<%=key%>, MSG.msg);
             } else {
@@ -93,7 +93,6 @@
 
     <script type="text/javascript">
       // 채팅 관련 함수들
-
       function Enter_Check(div_id, chat_room, key) {
         // 엔터키의 코드는 13
         if (event.keyCode == 13) {
@@ -125,15 +124,16 @@
         </tr>
       </thead>
       <tbody>
-        <%if (typeof(req.session.Received_Order) !== 'undefined') { for (var key in req.session.Received_Order) { %>
+        <%if (typeof(req.session.Send_Order) !== 'undefined') { for (var key in req.session.Send_Order) { %>
+
         <tr
           onclick="toggleDiv(myDIV),toggleDiv(myDIV2_<%=key%>),toggleDiv(POtable),toggleDiv(Purchase_Order_<%=key%>), 
-            chat_room_<%=key%> = `<%= req.session.Received_Order[key]['TB_CHAT_ROOM_ID'] %>`, scrollBottom(`chat_tables_<%=key%>`);"
+            chat_room_<%=key%> = `<%= req.session.Send_Order[key]['TB_CHAT_ROOM_ID'] %>`, scrollBottom(`chat_tables_<%=key%>`);"
         >
-          <th scope="row"><%= req.session.Received_Order[key]["Title"] %></th>
-          <td><%= req.session.R_CompanyInfo[key]["Comp_NAME"] %></td>
-          <td><%= req.session.Received_Order[key]["Order_Date"].split(' ')[0] %></td>
-          <td><%= req.session.Received_Order[key]["Delivery_Date"].split(' ')[0] %></td>
+          <th scope="row"><%= req.session.Send_Order[key]["Title"] %></th>
+          <td><%= req.session.S_CompanyInfo[key]["Comp_NAME"] %></td>
+          <td><%= req.session.Send_Order[key]["Order_Date"].split(' ')[0] %></td>
+          <td><%= req.session.Send_Order[key]["Delivery_Date"].split(' ')[0] %></td>
         </tr>
         <%}}%>
       </tbody>
@@ -148,7 +148,7 @@
             type="button"
             onclick="
               toggleDiv(myDIV), 
-              <% for(var key in req.session.Received_Order) {%>
+              <% for(var key in req.session.Send_Order) {%>
                 Display_none(myDIV2_<%=key%>),
                 Display_none(Purchase_Order_<%=key%>),
               <%}%> toggleDiv(POtable)"
@@ -157,11 +157,11 @@
             <i class="bi bi-x-lg"></i>
           </button>
           <button onclick="window.open('/PO_edit','_blank')" style="font-size: 2vmin; justify-items: end" class="btn btn-light">수정</button>
-          <div><%- include ('Purchase_Order_Received_form.ejs') %></div>
+          <div><%- include ('Purchase_Order_Send_form.ejs') %></div>
         </div>
         <div class="col_resize_empty_2">&nbsp;</div>
 
-        <% for (var key in req.session.Received_Order) { %>
+        <% for (var key in req.session.Send_Order) { %>
         <div class="col_resize_chat content" id="myDIV2_<%=key%>" style="text-align: center; font-size: 1.75vw; display: none">
           <div id="CHAT" style="background-color: #d2e9f2; border: var(--bs-border-color-translucent) 1px solid"><%=key%></div>
           <div
@@ -202,7 +202,7 @@
 
     <script>
       // 첫 채팅 메세지 로딩
-      var MSG = JSON.parse(`<%- req.session.R_Chatting[key] %>`);
+      var MSG = JSON.parse(`<%- req.session.S_Chatting[key] %>`);
       chat_load(chat_tables_<%=key%>, MSG);
     </script>
     <%}%>

@@ -18,7 +18,7 @@ module.exports = {
   },
 
   nextQueryTime: (time) => {
-    time.setSeconds(time.getSeconds() + 30);
+    time.setSeconds(time.getSeconds() + 3);
     return time;
   },
 };

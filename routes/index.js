@@ -4,6 +4,7 @@ const path = require("path");
 const time = require("../views/js/time.js");
 const db_query = require("../DB/login_out_query.js");
 const po_query = require("../DB/PO_query.js");
+const chat_query = require("../Chat/ChatMsg_query.js");
 
 // Bootstrap
 router.use("/bootstrap", express.static(path.join(__dirname, "../node_modules/bootstrap/dist")));
@@ -15,36 +16,30 @@ router.use("/node_modules", express.static(path.join(__dirname, "../node_modules
 router.get("/", async (req, res) => {
   try {
     var Page = req.query.Page;
-    console.log(time.timeString() + " get'/' :: " + Page);
+    //console.log(time.timeString() + " get'/' :: " + Page);
 
-    console.log(time.timeString() + " get'/' :: 로그인 세션 체크중...");
+    //console.log(time.timeString() + " get'/' :: 로그인 세션 체크중...");
     if (req.session.isLogin == true) {
       if (Page == "PO_M") {
-        console.log(time.timeString() + " else if PO_M ");
+        //console.log(time.timeString() + " else if PO_M ");
         if (req.session.isLogin != true) {
           // 로그인 세션 없을 때
           res.render("../views/login.ejs", {
             pass: "NONE",
           });
-          console.log(time.timeString() + " get'/' :: 로그인 세션 없음, 로그인 페이지 연계");
+          //console.log(time.timeString() + " get'/' :: 로그인 세션 없음, 로그인 페이지 연계");
         } else {
           res.render("../views/Purchase_Order_M.ejs");
         }
       } else if (Page == "PO_R") {
-        console.log(time.timeString() + " else if PO_R ");
         if (req.session.isLogin != true) {
           // 로그인 세션 없을 때
           res.render("../views/login.ejs", {
             pass: "NONE",
           });
-          console.log(time.timeString() + " get'/' :: 로그인 세션 없음, 로그인 페이지 연계");
         } else {
           try {
-            console.log("NextQueryTIme : " + req.session.NextQueryTime + "\nNow           : " + time.getNow().toISOString());
-
-            console.log("DB reloading : " + (req.session.NextQueryTime <= time.getNow().toISOString()));
             if (req.session.NextQueryTime == undefined || req.session.NextQueryTime <= time.getNow().toISOString()) {
-              console.log(time.timeString() + " get'PO_R' getPO ");
               await po_query.getPO(req, res);
               res.render("../views/Purchase_Order_Received.ejs", {
                 req,
@@ -62,28 +57,41 @@ router.get("/", async (req, res) => {
           }
         }
       } else if (Page == "PO_S") {
-        console.log(time.timeString() + " else if PO_S ");
         if (req.session.isLogin != true) {
           // 로그인 세션 없을 때
           res.render("../views/login.ejs", {
             pass: "NONE",
           });
-          console.log(time.timeString() + " get'/' :: 로그인 세션 없음, 로그인 페이지 연계");
         } else {
-          //res.render("../views/Purchase_Order_Sent.ejs");
-          res.redirect("/");
+          try {
+            if (req.session.NextQueryTime == undefined || req.session.NextQueryTime <= time.getNow().toISOString()) {
+              await po_query.getPO(req, res);
+              res.render("../views/Purchase_Order_Send.ejs", {
+                req,
+                pass: true,
+              });
+            } else {
+              console.log(time.timeString() + "Next Query will execute at " + req.session.NextQueryTime);
+              res.render("../views/Purchase_Order_Send.ejs", {
+                req,
+                pass: true,
+              });
+            }
+          } catch (err) {
+            console.log(time.timeString() + " Error at Page =='PO_S' :: " + err);
+          }
         }
       } else {
         // 로그인 세션 있음, 메인 연결
-        console.log(time.timeString() + " get'/' :: 로그인 세션 있음");
+        //console.log(time.timeString() + " get'/' :: 로그인 세션 있음");
         if (req.session.NextQueryTime == undefined || req.session.NextQueryTime <= time.getNow().toISOString()) {
           await po_query.getPO(req, res);
 
-          console.log(time.timeString() + " get'/' :: getPO 이후 세션 ");
-          console.log(req.session);
+          //console.log(time.timeString() + " get'/' :: getPO 이후 세션 ");
+          //console.log(req.session);
           res.render("../views/main_login.ejs", { req, pass: true });
         } else {
-          console.log(req.session);
+          //console.log(req.session);
           console.log(time.timeString() + "Already Queried at " + req.session.LastQueryTime);
           res.render("../views/main_login.ejs", { req, pass: true });
         }
@@ -91,7 +99,7 @@ router.get("/", async (req, res) => {
     } else {
       // 로그인 세션 없을 때
       res.render(path.join(__dirname, "../views/main.ejs"));
-      console.log(time.timeString() + " get'/' :: 로그인 세션 없음");
+      //console.log(time.timeString() + " get'/' :: 로그인 세션 없음");
     }
   } catch (err) {
     console.log(err);
@@ -101,25 +109,25 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     var Page = req.body.Page;
-    console.log(time.timeString() + " post'/' :: " + Page);
+    //console.log(time.timeString() + " post'/' :: " + Page);
 
     if (Page == "Login") {
       res.render("../views/login.ejs", {
         pass: "attempt",
       });
-      console.log(time.timeString() + " post'/' :: 로그인 시도");
+      //console.log(time.timeString() + " post'/' :: 로그인 시도");
       //
     } else if (Page == "Login_attempt") {
-      console.log(time.timeString() + " else if Login_attempt ");
+      //console.log(time.timeString() + " else if Login_attempt ");
       let ID = req.body.userID;
       let PW = req.body.userPW;
       try {
         if (await db_query.login(req, res, ID, PW)) {
-          console.log(time.timeString() + " post'Login_attempt' :: 로그인 성공, PO_S 쿼리 시작");
+          //console.log(time.timeString() + " post'Login_attempt' :: 로그인 성공, PO_S 쿼리 시작");
           await po_query.getPO(req, res);
           res.render("../views/login.ejs", { req, pass: true });
         } else {
-          console.log(time.timeString() + " post'Login_attempt' :: 로그인 실패, 페이지 다시 RENDER");
+          //console.log(time.timeString() + " post'Login_attempt' :: 로그인 실패, 페이지 다시 RENDER");
           res.render("../views/login.ejs", {
             pass: false,
           });

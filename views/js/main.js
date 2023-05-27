@@ -27,9 +27,6 @@ function toggleDiv(div) {
 //테이블 클릭시 div 전환함수
 function toggletoggle() {
   //실제 창 전환 함수
-  if (chat_tables.childElementCount != 0) {
-    removeAllchild(chat_tables); //자식으로 div가 있으면 삭제(다른 테이블 값이 들어왔을때, 채팅방 내용두 달라야해서 원래 있는 채팅방의 내용을 삭제)
-  }
   toggleDiv(myDIV);
   toggleDiv(myDIV2);
   toggleDiv(POtable);
@@ -41,8 +38,9 @@ function removeAllchild(div) {
     div.removeChild(div.firstChild);
   }
 }
+
 //<!--송신자 메시지-->
-function createDiv() {
+function newSendDiv(id, text) {
   // 1. <div> element 만들기
   const newDiv = document.createElement("div");
   const newDiv2 = document.createElement("div");
@@ -56,7 +54,7 @@ function createDiv() {
   newDiv3.className = "textbox";
   I1.className = "fa-solid fa-user";
 
-  const newText = document.getElementById("txt_on").value;
+  const newText = text;
 
   // 3. <div>에 text node 붙이기
   newDiv3.append(newText);
@@ -65,7 +63,7 @@ function createDiv() {
   // 4. <body>에 1에서 만든 <div> element 붙이기
   newDiv.append(newDiv2);
   newDiv.append(newDiv3);
-  chat_tables.append(newDiv);
+  id.append(newDiv);
 
   //아래 구조로 만들어서 채팅방에 쏘는 것임.
   //<div class = "chat ch2">
@@ -74,16 +72,10 @@ function createDiv() {
   //
   //	</div>
   //</div>
-
-  del_input(txt_on);
-}
-// 버튼 클릭이나 엔터로 문자를 쏘앗을 경우 input안에 글씨 지워 주는거
-function del_input(del_input_data) {
-  del_input_data.value = "";
 }
 
 //<!--수신자 메시지 창-->
-function createDiv2(dix) {
+function newReceiveDiv(id, text) {
   // 1. <div> element 만들기
   const newDiv = document.createElement("div");
   const newDiv2 = document.createElement("div");
@@ -96,44 +88,64 @@ function createDiv2(dix) {
   newDiv3.className = "textbox";
   I1.className = "fa-solid fa-user";
 
-  const newText = dix;
+  const newText = text;
 
   // 3. <div>에 text node 붙이기
-  newDiv3.append(dix);
+  newDiv3.append(text);
   newDiv2.append(I1);
   // 4. <body>에 1에서 만든 <div> element 붙이기
   newDiv.append(newDiv2);
   newDiv.append(newDiv3);
-  chat_tables.append(newDiv);
+  id.append(newDiv);
 }
 
 // 메세지 발신
-function sendMessage() {
-  const message = document.getElementById("txt_on").value;
-  const fullMessage = document.getElementById("txt_on").value;
-  ws.send(fullMessage);
-  createDiv();
-  document.getElementById("txt_on").value = "";
-}
-// 메세지 수신
-
-function submitTextarea(event) {
-  let key = event.key || event.keyCode;
-
-  if ((key === "Enter" && !event.shiftKey) || (key === 13 && key !== 16)) {
-    event.preventDefault();
-    sendMessage();
-    return false;
+function sendMessage(event, textarea, UserID, UserName, chat_room, div_id) {
+  if (event != undefined && textarea.value != undefined) {
+    let key = event.key || event.keyCode;
+    if (key == "Enter") {
+      const fullMessage = JSON.stringify({
+        type: "chatMessage",
+        msg: textarea.value,
+        user_id: UserID,
+        user_name: UserName,
+        chat_room_id: chat_room,
+      });
+      ws.send(fullMessage);
+      newSendDiv(div_id, textarea.value);
+      textarea.value = "";
+    }
+  } else if (event == undefined && textarea.value != undefined) {
+    console.log("event == undefined");
+    const fullMessage = JSON.stringify({ type: "chatMessage", msg: textarea.value, user_id: UserID, user_name: UserName, chat_room_id: chat_room });
+    ws.send(fullMessage);
+    newSendDiv(div_id, textarea.value);
+    textarea.value = "";
+  } else {
+    console.log("Main.js :: sendMessage() : message is undefined");
   }
 }
 
-function enterkey() {
-  const textarea = document.getElementById("txt_on");
-  textarea.addEventListener("keyup", (event) => submitTextarea(event));
+// 메세지 수신
+function receiveMessage(event) {
+  try {
+    //sql 쿼리
+
+    txt = JSON.parse(event).msg;
+    const message = document.createTextNode(txt);
+    console.log("Received :: " + txt);
+    newReceiveDiv(message);
+  } catch (err) {
+    console.log("ERROR at receiveMessage");
+  }
 }
 
-function receiveMessage(event) {
-  const message = document.createTextNode(event.data);
-  console.log(event);
-  createDiv2(message);
+function scrollBottom(div_id) {
+  if (document.getElementById(div_id)) {
+    let sp = document.getElementById(div_id);
+    sp.scrollTop = sp.scrollHeight;
+  } else {
+    console.log("scroll none error" + div_id);
+  }
 }
+// 기존 메세지 로딩

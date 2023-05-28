@@ -100,7 +100,8 @@ function newReceiveDiv(id, text) {
 }
 
 // 메세지 발신
-function sendMessage(event, textarea, UserID, UserName, chat_room, div_id) {
+function sendMessage(event, key, UserID, UserName, chat_room, div_id) {
+  const textarea = document.getElementById("txt_on_" + key);
   if (event != undefined && textarea.value != undefined) {
     let key = event.key || event.keyCode;
     if (key == "Enter") {
@@ -126,20 +127,7 @@ function sendMessage(event, textarea, UserID, UserName, chat_room, div_id) {
   }
 }
 
-// 메세지 수신
-function receiveMessage(event) {
-  try {
-    //sql 쿼리
-
-    txt = JSON.parse(event).msg;
-    const message = document.createTextNode(txt);
-    console.log("Received :: " + txt);
-    newReceiveDiv(message);
-  } catch (err) {
-    console.log("ERROR at receiveMessage");
-  }
-}
-
+// 채팅창 하단으로 스크롤
 function scrollBottom(div_id) {
   if (document.getElementById(div_id)) {
     let sp = document.getElementById(div_id);
@@ -148,4 +136,3 @@ function scrollBottom(div_id) {
     console.log("scroll none error" + div_id);
   }
 }
-// 기존 메세지 로딩

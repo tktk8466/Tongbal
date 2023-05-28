@@ -97,7 +97,7 @@
       function Enter_Check(div_id, chat_room, key) {
         // 엔터키의 코드는 13
         if (event.keyCode == 13) {
-          sendMessage(event, document.getElementById("txt_on_" + key), uid, uname, chat_room, div_id);
+          sendMessage(event, key, uid, uname, chat_room, div_id);
           return;
         }
       }
@@ -188,7 +188,7 @@
             />
             <button
               type="button"
-              onclick="sendMessage(undefined, document.getElementById('txt_on_' + key), uid, uname, chat_room_<%=key%>, chat_tables_<%=key%>), scrollBottom(`chat_tables_<%=key%>`)"
+              onclick="sendMessage(undefined, <%=key%>, uid, uname, chat_room_<%=key%>, chat_tables_<%=key%>), scrollBottom(`chat_tables_<%=key%>`)"
               class="btn btn-secondary"
               style="border: var(--bs-border-color-translucent) 1px solid; border-radius: 0"
             >

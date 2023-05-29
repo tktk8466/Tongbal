@@ -8,7 +8,7 @@ module.exports = {
     return new Promise(async (resolved, rejected) => {
       try {
         if (ID && PW) {
-          var sql_text = "SELECT UUID, UserName FROM tb_user WHERE UserID = ? AND Passwd = ?;";
+          var sql_text = "SELECT UUID, UserName FROM tb_user WHERE BINARY(UserID) = ? AND BINARY(Passwd) = ?;";
 
           console.log(time.timeString() + "[1] auth :: DB 연결");
           let connection = await database.conn();

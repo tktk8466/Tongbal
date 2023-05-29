@@ -4,6 +4,7 @@ const database = require("./DB/Database.js");
 const time = require("./views/js/time.js");
 const indexRouter = require("./routes/index.js");
 const app = express();
+const WebSocketServer = require("./Chat/WebSocket_Module.js");
 
 //---------------세션 미들웨어----------------------
 //app.use(cookieparser);
@@ -36,35 +37,9 @@ app.use((err, req, res, next) => {
 });
 
 //------------------웹소켓----------------------------
-const { WebSocketServer } = require("ws");
-const wss = new WebSocketServer({ port: 8001 });
 
-// 웹소켓 서버 연결 이벤트 바인드
-
-wss.on("connection", (ws, request) => {
-  wss.clients.forEach((client) => {
-    client.send(`누군가 들어왔습니다.`);
-  });
-
-  console.log(`누군가 들어왔습니다.`);
-
-  ws.on("message", (data) => {
-    wss.clients.forEach((client) => {
-      if (client !== ws) {
-        client.send(data.toString());
-      }
-    });
-  });
-});
-
-wss.on("connection", (ws, request) => {
-  ws.on("close", () => {
-    wss.clients.forEach((client) => {
-      client.send(`누군가가 나갔습니다`);
-      console.log(`누군가 나감`);
-    });
-  });
-});
+const wss = new WebSocketServer(8080);
+wss.start();
 
 //------------------서버 포트설정----------------------------
 app.set("view engine", "ejs");

@@ -76,8 +76,8 @@
 
         var MSG = JSON.parse(message.data);
         console.log("onmessage :: Chat message Received = " + MSG.msg);
-        <% for (var key in req.session.Received_Order) { %>
-          if(MSG.chat_room_id == `<%= req.session.Received_Order[key]['TB_CHAT_ROOM_ID'] %>`){
+        <% for (var key in req.session.Send_Order) { %>
+          if(MSG.chat_room_id == `<%= req.session.Send_Order[key]['TB_CHAT_ROOM_ID'] %>`){
             if (MSG.user_id != uid) {
               newReceiveDiv(chat_tables_<%=key%>, MSG.msg);
             } else {
@@ -93,11 +93,10 @@
 
     <script type="text/javascript">
       // 채팅 관련 함수들
-
       function Enter_Check(div_id, chat_room, key) {
         // 엔터키의 코드는 13
         if (event.keyCode == 13) {
-          sendMessage(event, key, uid, uname, chat_room, div_id);
+          sendMessage(event, document.getElementById("txt_on_" + key), uid, uname, chat_room, div_id);
           return;
         }
       }
@@ -114,28 +113,27 @@
     </script>
 
     <div style="height: 50px"></div>
-    <div class="d-flex flex-wrap" style="margin: auto; width: 900px">
-      <table class="table table-hover" id="POtable">
-        <thead>
-          <tr>
-            <th scope="col">제목</th>
-            <th scope="col">보낸 업체</th>
-
+    <table class="table table-hover" id="POtable" style="width: 100vw">
+      <thead>
+        <tr>
+          <th scope="col">제목</th>
+          <th scope="col">보낸 업체</th>
 
           <th scope="col">발주일</th>
           <th scope="col">납품기한</th>
         </tr>
       </thead>
       <tbody>
-        <%if (typeof(req.session.Received_Order) !== 'undefined') { for (var key in req.session.Received_Order) { %>
+        <%if (typeof(req.session.Send_Order) !== 'undefined') { for (var key in req.session.Send_Order) { %>
+
         <tr
           onclick="toggleDiv(myDIV),toggleDiv(myDIV2_<%=key%>),toggleDiv(POtable),toggleDiv(Purchase_Order_<%=key%>), 
-            chat_room_<%=key%> = `<%= req.session.Received_Order[key]['TB_CHAT_ROOM_ID'] %>`, scrollBottom(`chat_tables_<%=key%>`);"
+            chat_room_<%=key%> = `<%= req.session.Send_Order[key]['TB_CHAT_ROOM_ID'] %>`, scrollBottom(`chat_tables_<%=key%>`);"
         >
-          <th scope="row"><%= req.session.Received_Order[key]["Title"] %></th>
-          <td><%= req.session.R_CompanyInfo[key]["Comp_NAME"] %></td>
-          <td><%= req.session.Received_Order[key]["Order_Date"].split(' ')[0] %></td>
-          <td><%= req.session.Received_Order[key]["Delivery_Date"].split(' ')[0] %></td>
+          <th scope="row"><%= req.session.Send_Order[key]["Title"] %></th>
+          <td><%= req.session.S_CompanyInfo[key]["Comp_NAME"] %></td>
+          <td><%= req.session.Send_Order[key]["Order_Date"].split(' ')[0] %></td>
+          <td><%= req.session.Send_Order[key]["Delivery_Date"].split(' ')[0] %></td>
         </tr>
         <%}}%>
       </tbody>
@@ -143,25 +141,14 @@
 
     <!---------- 채팅창 파트 ------------>
     <div class="d-flex flex-wrap justify-content-center">
-      <div id="BIG_DIV" class="d-flex flex-wrap justify-content-center">
-        <div style="width: 10px"></div>
-        <div
-          class="col_resize"
-          style="
-            text-align: center;
-            background-color: white;
-            display: none;
-            min-width: 900px;
-            max-height: 900px;
-            height: 700px;
-          "
-          id="myDIV"
-        >
+      <div id="BIG_DIV" class="col-12 d-flex flex-wrap">
+        <div class="col_resize_empty">&nbsp;</div>
+        <div class="col_resize" style="text-align: center; background-color: white; display: none" id="myDIV">
           <button
             type="button"
             onclick="
               toggleDiv(myDIV), 
-              <% for(var key in req.session.Received_Order) {%>
+              <% for(var key in req.session.Send_Order) {%>
                 Display_none(myDIV2_<%=key%>),
                 Display_none(Purchase_Order_<%=key%>),
               <%}%> toggleDiv(POtable)"
@@ -170,13 +157,12 @@
             <i class="bi bi-x-lg"></i>
           </button>
           <button onclick="window.open('/PO_edit','_blank')" style="font-size: 2vmin; justify-items: end" class="btn btn-light">수정</button>
-          <div><%- include ('Purchase_Order_Received_form.ejs') %></div>
+          <div><%- include ('Purchase_Order_Send_form.ejs') %></div>
         </div>
-        <div style="width: 10px"></div>
         <div class="col_resize_empty_2">&nbsp;</div>
 
-        <% for (var key in req.session.Received_Order) { %>
-        <div class="col_resize_chat content MY_DIV2_SIZE_960" id="myDIV2_<%=key%>" style="text-align: center; font-size: 1.75vw; display: none">
+        <% for (var key in req.session.Send_Order) { %>
+        <div class="col_resize_chat content" id="myDIV2_<%=key%>" style="text-align: center; font-size: 1.75vw; display: none">
           <div id="CHAT" style="background-color: #d2e9f2; border: var(--bs-border-color-translucent) 1px solid"><%=key%></div>
           <div
             id="chat_tables_<%=key%>"
@@ -187,7 +173,7 @@
               background-color: #d2e9f2;
               min-height: 600px;
               max-height: 1100px;
-              height: 300px;
+              height: calc(82vh - 150px);
               overflow-y: scroll;
             "
           ></div>
@@ -204,28 +190,19 @@
               type="button"
               onclick="sendMessage(undefined, <%=key%>, uid, uname, chat_room_<%=key%>, chat_tables_<%=key%>), scrollBottom(`chat_tables_<%=key%>`)"
               class="btn btn-secondary"
-              style="
-                border: var(--bs-border-color-translucent) 1px solid;
-                border-radius: 0;
-              "
+              style="border: var(--bs-border-color-translucent) 1px solid; border-radius: 0"
             >
               <i class="bi bi-send"></i>
             </button>
           </div>
         </div>
-        <div
-          class="col-12"
-          id="myDIv3"
-          style="text-align: center; height: 50px"
-        >
-          &nbsp;
-        </div>
+        <div class="col_resize_empty">&nbsp;</div>
       </div>
     </div>
 
     <script>
       // 첫 채팅 메세지 로딩
-      var MSG = JSON.parse(`<%- req.session.R_Chatting[key] %>`);
+      var MSG = JSON.parse(`<%- req.session.S_Chatting[key] %>`);
       chat_load(chat_tables_<%=key%>, MSG);
     </script>
     <%}%>

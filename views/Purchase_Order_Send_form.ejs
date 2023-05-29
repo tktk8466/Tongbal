@@ -1,148 +1,20 @@
-<% for(var key in req.session.Received_Order) { %>
-<div
-  id="Purchase_Order_<%=key%>"
-  class="col-12"
-  style="text-align: center; display: none"
->
-  <div
-    style="
-      text-align: center;
-      font-size: 32px;
-      border-top: 1px solid #444444;
-      border-left: 1px solid #444444;
-      border-right: 1px solid #444444;
-    "
-  >
+<% for(var key in req.session.Send_Order) { %>
+<div id="Purchase_Order_<%=key%>" class="col-12" style="text-align: center; display: none">
+  <div style="text-align: center; font-size: 3vmax; border-top: 1px solid #444444; border-left: 1px solid #444444; border-right: 1px solid #444444">
     발&nbsp;&nbsp;주&nbsp;&nbsp;서
   </div>
   <div
-    style="
-      text-align: center;
-      font-size: 1vw;
-      border-bottom: 1px solid #444444;
-      border-left: 1px solid #444444;
-      border-right: 1px solid #444444;
-    "
+    style="text-align: center; font-size: 1vw; border-bottom: 1px solid #444444; border-left: 1px solid #444444; border-right: 1px solid #444444"
   ></div>
-  <div
-    id="im_pc"
-    class="d-flex border_B border_L border_R"
-    style="
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      height: 250px;
-    "
-  >
+  <div id="im_pc" class="d-flex border_B border_L border_R" style="align-items: center; justify-content: center; text-align: center; height: 250px">
     <div id="company-1" class="col-017 d-flex flex-wrap" style="height: 100%">
-      <div
-        class="col-12 d-flex flex-wrap border_R border_B"
-        style="align-items: center; justify-content: center"
-      >
+      <div class="col-12 d-flex flex-wrap border_R border_B" style="align-items: center; justify-content: center">
         <div class="col-07 Poc_chat_font">본사명</div>
         <div class="col-08 Poc_chat_font border_L" style="height: 100%">
           <input
             type="text"
             id="Comp_NAME"
             name="Comp_NAME"
-            value="<%=req.session.R_CompanyInfo[key]['Comp_NAME']%>"
-            required
-            style="width: 100%; height: 100%; text-align: center"
-            readonly
-          />
-        </div>
-      </div>
-
-      <div
-        class="col-12 d-flex flex-wrap border_R border_B"
-        style="align-items: center; justify-content: center"
-      >
-        <div class="col-07 Poc_chat_font">대표자 성명</div>
-        <div class="col-08 Poc_chat_font border_L" style="height: 100%">
-          <input
-            type="text"
-            id="President_NAME"
-            name="President_NAME"
-            value="<%=req.session.R_CompanyInfo[key]['President_NAME']%>"
-            required
-            style="width: 100%; height: 100%; text-align: center"
-            readonly
-          />
-        </div>
-      </div>
-
-      <div
-        class="col-12 d-flex flex-wrap border_R border_B"
-        style="align-items: center; justify-content: center"
-      >
-        <div class="col-07 Poc_chat_font">주소</div>
-        <div class="col-08 Poc_chat_font border_L" style="height: 100%">
-          <input
-            type="text"
-            id="Business_Address"
-            name="Business_Address"
-            value="<%=req.session.R_CompanyInfo[key]['Business_ADDR']%>"
-            requiredun
-            style="width: 100%; height: 100%; text-align: center"
-            readonly
-          />
-        </div>
-      </div>
-      <div
-        class="col-12 d-flex flex-wrap border_R border_B"
-        style="align-items: center; justify-content: center"
-      >
-        <div class="col-07 Poc_chat_font">Tel.</div>
-        <div class="col-08 Poc_chat_font border_L" style="height: 100%">
-          <input
-            type="text"
-            id="TEL"
-            name="TEL"
-            value="<%=req.session.R_CompanyInfo[key]['TEL']%>"
-            required
-            style="width: 100%; height: 100%; text-align: center"
-            readonly
-          />
-        </div>
-      </div>
-      <div
-        class="col-12 d-flex flex-wrap border_R border_B"
-        style="align-items: center; justify-content: center"
-      >
-        <div class="col-07 Poc_chat_font">Fax.</div>
-        <div class="col-08 Poc_chat_font border_L" style="height: 100%">
-          <input
-            type="text"
-            id="FAX"
-            name="FAX"
-            value="<%=req.session.R_CompanyInfo[key]['FAX']%>"
-            required
-            style="width: 100%; height: 100%; text-align: center"
-            readonly
-          />
-        </div>
-      </div>
-    </div>
-    <div
-      class="col-04 d-flex flex-wrap"
-      style="font-size: 16px; border-right: 1px solid black; height: 100%"
-    >
-      <div calss="col-12" style="width: 100%">공</div>
-      <div calss="col-12" style="width: 100%">급</div>
-      <div calss="col-12" style="width: 100%">자</div>
-    </div>
-    <!--공급자-->
-    <div id="company-2" class="col-017 d-flex flex-wrap" style="height: 100%">
-      <div
-        class="col-12 d-flex flex-wrap border_B"
-        style="align-items: center; justify-content: center"
-      >
-        <div class="col-07 Poc_chat_font">본사명</div>
-        <div class="col-08 Poc_chat_font border_L" style="height: 100%">
-          <input
-            type="text"
-            id="Comp_NAM2"
-            name="Comp_NAME2"
             value="<%=req.session.MyCompanyInfo[0]['Comp_NAME']%>"
             required
             style="width: 100%; height: 100%; text-align: center"
@@ -150,16 +22,14 @@
           />
         </div>
       </div>
-      <div
-        class="col-12 d-flex flex-wrap border_B"
-        style="align-items: center; justify-content: center"
-      >
+
+      <div class="col-12 d-flex flex-wrap border_R border_B" style="align-items: center; justify-content: center">
         <div class="col-07 Poc_chat_font">대표자 성명</div>
         <div class="col-08 Poc_chat_font border_L" style="height: 100%">
           <input
             type="text"
-            id="President_NAME_2"
-            name="President_NAME_2"
+            id="President_NAME"
+            name="President_NAME"
             value="<%=req.session.MyCompanyInfo[0]['President_NAME']%>"
             required
             style="width: 100%; height: 100%; text-align: center"
@@ -167,33 +37,14 @@
           />
         </div>
       </div>
-      <div
-        class="col-12 d-flex flex-wrap border_B"
-        style="align-items: center; justify-content: center"
-      >
-        <div class="col-07 Poc_chat_font">사업자 번호</div>
+
+      <div class="col-12 d-flex flex-wrap border_R border_B" style="align-items: center; justify-content: center">
+        <div class="col-07 Poc_chat_font">주소</div>
         <div class="col-08 Poc_chat_font border_L" style="height: 100%">
           <input
             type="text"
-            id="Business_NUM"
-            name="Business_NUM"
-            value="<%=req.session.MyCompanyInfo[0]['Business_NUM']%>"
-            required
-            style="width: 100%; height: 100%; text-align: center"
-            readonly
-          />
-        </div>
-      </div>
-      <div
-        class="col-12 d-flex flex-wrap border_B"
-        style="align-items: center; justify-content: center"
-      >
-        <div class="col-07 Poc_chat_font">본사 주소</div>
-        <div class="col-08 Poc_chat_font border_L" style="height: 100%">
-          <input
-            type="text"
-            id="Business_Address_2"
-            name="Business_Address_2"
+            id="Business_Address"
+            name="Business_Address"
             value="<%=req.session.MyCompanyInfo[0]['Business_ADDR']%>"
             requiredun
             style="width: 100%; height: 100%; text-align: center"
@@ -201,50 +52,13 @@
           />
         </div>
       </div>
-      <div
-        class="col-12 d-flex flex-wrap border_B"
-        style="align-items: center; justify-content: center"
-      >
-        <div class="col-07 Poc_chat_font">공장 주소</div>
-        <div class="col-08 Poc_chat_font border_L" style="height: 100%">
-          <input
-            type="text"
-            id="Business_Address_F"
-            name="Business_Address_F"
-            value="<%=req.session.MyCompanyInfo[0]['Factory_ADDR(OPTIONAL)']%>"
-            required
-            style="width: 100%; height: 100%; text-align: center"
-            readonly
-          />
-        </div>
-      </div>
-      <div
-        class="col-12 d-flex flex-wrap border_B"
-        style="align-items: center; justify-content: center"
-      >
-        <div class="col-07 Poc_chat_font">발주 담당자</div>
-        <div class="col-08 Poc_chat_font border_L" style="height: 100%">
-          <input
-            type="text"
-            id="Manager"
-            name="Manager"
-            value="<%=req.session.UserName%>"
-            required
-            style="width: 100%; height: 100%; text-align: center"
-            readonly
-          />
-        </div>
-      </div>
-      <div
-        class="col-12 d-flex flex-wrap border_B"
-        style="align-items: center; justify-content: center"
-      >
+      <div class="col-12 d-flex flex-wrap border_R border_B" style="align-items: center; justify-content: center">
         <div class="col-07 Poc_chat_font">Tel.</div>
         <div class="col-08 Poc_chat_font border_L" style="height: 100%">
           <input
             type="text"
-            id="TEL2"
-            name="TEL2"
+            id="TEL"
+            name="TEL"
             value="<%=req.session.MyCompanyInfo[0]['TEL']%>"
             required
             style="width: 100%; height: 100%; text-align: center"
@@ -252,17 +66,126 @@
           />
         </div>
       </div>
-      <div
-        class="col-12 d-flex flex-wrap border_B"
-        style="align-items: center; justify-content: center"
-      >
+      <div class="col-12 d-flex flex-wrap border_R border_B" style="align-items: center; justify-content: center">
+        <div class="col-07 Poc_chat_font">Fax.</div>
+        <div class="col-08 Poc_chat_font border_L" style="height: 100%">
+          <input
+            type="text"
+            id="FAX"
+            name="FAX"
+            value="<%=req.session.MyCompanyInfo[0]['FAX']%>"
+            required
+            style="width: 100%; height: 100%; text-align: center"
+            readonly
+          />
+        </div>
+      </div>
+    </div>
+    <div class="col-04 d-flex flex-wrap" style="font-size: 1vmax; border-right: 1px solid black; height: 100%">
+      <div calss="col-12" style="width: 100%">공</div>
+      <div calss="col-12" style="width: 100%">급</div>
+      <div calss="col-12" style="width: 100%">자</div>
+    </div>
+    <!--공급자-->
+    <div id="company-2" class="col-017 d-flex flex-wrap" style="height: 100%">
+      <div class="col-12 d-flex flex-wrap border_B" style="align-items: center; justify-content: center">
+        <div class="col-07 Poc_chat_font">본사명</div>
+        <div class="col-08 Poc_chat_font border_L" style="height: 100%">
+          <input
+            type="text"
+            id="Comp_NAM2"
+            name="Comp_NAME2"
+            value="<%=req.session.S_CompanyInfo[key]['Comp_NAME']%>"
+            required
+            style="width: 100%; height: 100%; text-align: center"
+            readonly
+          />
+        </div>
+      </div>
+      <div class="col-12 d-flex flex-wrap border_B" style="align-items: center; justify-content: center">
+        <div class="col-07 Poc_chat_font">대표자 성명</div>
+        <div class="col-08 Poc_chat_font border_L" style="height: 100%">
+          <input
+            type="text"
+            id="President_NAME_2"
+            name="President_NAME_2"
+            value="<%=req.session.S_CompanyInfo[key]['President_NAME']%>"
+            required
+            style="width: 100%; height: 100%; text-align: center"
+            readonly
+          />
+        </div>
+      </div>
+      <div class="col-12 d-flex flex-wrap border_B" style="align-items: center; justify-content: center">
+        <div class="col-07 Poc_chat_font">사업자 번호</div>
+        <div class="col-08 Poc_chat_font border_L" style="height: 100%">
+          <input
+            type="text"
+            id="Business_NUM"
+            name="Business_NUM"
+            value="<%=req.session.S_CompanyInfo[key]['Business_NUM']%>"
+            required
+            style="width: 100%; height: 100%; text-align: center"
+            readonly
+          />
+        </div>
+      </div>
+      <div class="col-12 d-flex flex-wrap border_B" style="align-items: center; justify-content: center">
+        <div class="col-07 Poc_chat_font">본사 주소</div>
+        <div class="col-08 Poc_chat_font border_L" style="height: 100%">
+          <input
+            type="text"
+            id="Business_Address_2"
+            name="Business_Address_2"
+            value="<%=req.session.S_CompanyInfo[key]['Business_ADDR']%>"
+            requiredun
+            style="width: 100%; height: 100%; text-align: center"
+            readonly
+          />
+        </div>
+      </div>
+      <div class="col-12 d-flex flex-wrap border_B" style="align-items: center; justify-content: center">
+        <div class="col-07 Poc_chat_font">공장 주소</div>
+        <div class="col-08 Poc_chat_font border_L" style="height: 100%">
+          <input
+            type="text"
+            id="Business_Address_F"
+            name="Business_Address_F"
+            value="<%=req.session.S_CompanyInfo[key]['Factory_ADDR(OPTIONAL)']%>"
+            required
+            style="width: 100%; height: 100%; text-align: center"
+            readonly
+          />
+        </div>
+      </div>
+      <div class="col-12 d-flex flex-wrap border_B" style="align-items: center; justify-content: center">
+        <div class="col-07 Poc_chat_font">발주 담당자</div>
+        <div class="col-08 Poc_chat_font border_L" style="height: 100%">
+          <input type="text" id="Manager" name="Manager" value="" required style="width: 100%; height: 100%; text-align: center" readonly />
+        </div>
+      </div>
+      <div class="col-12 d-flex flex-wrap border_B" style="align-items: center; justify-content: center">
+        <div class="col-07 Poc_chat_font">Tel.</div>
+        <div class="col-08 Poc_chat_font border_L" style="height: 100%">
+          <input
+            type="text"
+            id="TEL2"
+            name="TEL2"
+            value="<%=req.session.S_CompanyInfo[key]['TEL']%>"
+            required
+            style="width: 100%; height: 100%; text-align: center"
+            readonly
+          />
+        </div>
+      </div>
+      <div class="col-12 d-flex flex-wrap border_B" style="align-items: center; justify-content: center">
         <div class="col-07 Poc_chat_font">Fax.</div>
         <div class="col-08 Poc_chat_font border_L" style="height: 100%">
           <input
             type="text"
             id="Fax2"
             name="Fax2"
-            value="<%=req.session.MyCompanyInfo[0]['FAX']%>"
+            value="<%=req.session.S_CompanyInfo[key]['FAX']%>"
             required
             style="width: 100%; height: 100%; text-align: center"
             readonly
@@ -274,11 +197,7 @@
 
   <div class="col-12" style="height: 10wh">&nbsp;</div>
   <!-- 테이블 -->
-  <table
-    id="tableId"
-    class="col-12 pc_chat"
-    style="width: 100%; text-align: center; border-top: 1px solid #444444"
-  >
+  <table id="tableId" class="col-12 pc_chat" style="width: 100%; text-align: center; border-top: 1px solid #444444">
     <thead>
       <tr>
         <th scope="col">No.</th>
@@ -302,13 +221,7 @@
             name="Cannes_1_1"
             value="Cannes_1_1"
             required
-            style="
-              width: 100%;
-              height: 100%;
-              text-align: center;
-              outline: none;
-              border: none;
-            "
+            style="width: 100%; height: 100%; text-align: center; outline: none; border: none"
           />
         </td>
         <td>
@@ -318,13 +231,7 @@
             name="Products_1"
             value="Products_1"
             required
-            style="
-              width: 100%;
-              height: 100%;
-              outline: none;
-              border: none;
-              text-align: center;
-            "
+            style="width: 100%; height: 100%; outline: none; border: none; text-align: center"
           />
         </td>
         <td>
@@ -334,13 +241,7 @@
             name="B_1"
             value="B_1"
             required
-            style="
-              width: 100%;
-              height: 100%;
-              outline: none;
-              border: none;
-              text-align: center;
-            "
+            style="width: 100%; height: 100%; outline: none; border: none; text-align: center"
           />
         </td>
         <td>
@@ -350,13 +251,7 @@
             name="SI_1"
             value="SI_1"
             required
-            style="
-              width: 100%;
-              height: 100%;
-              outline: none;
-              border: none;
-              text-align: center;
-            "
+            style="width: 100%; height: 100%; outline: none; border: none; text-align: center"
           />
         </td>
         <td>
@@ -366,13 +261,7 @@
             name="Q_1"
             value="Q_1"
             required
-            style="
-              width: 100%;
-              height: 100%;
-              outline: none;
-              border: none;
-              text-align: center;
-            "
+            style="width: 100%; height: 100%; outline: none; border: none; text-align: center"
           />
         </td>
         <td>
@@ -382,13 +271,7 @@
             name="P_1"
             value="P_1"
             required
-            style="
-              width: 100%;
-              height: 100%;
-              outline: none;
-              border: none;
-              text-align: center;
-            "
+            style="width: 100%; height: 100%; outline: none; border: none; text-align: center"
           />
         </td>
         <td>
@@ -398,13 +281,7 @@
             name="V_1"
             value="V_1"
             required
-            style="
-              width: 100%;
-              height: 100%;
-              outline: none;
-              border: none;
-              text-align: center;
-            "
+            style="width: 100%; height: 100%; outline: none; border: none; text-align: center"
           />
         </td>
         <td>
@@ -414,47 +291,14 @@
             name="N_1"
             value="N_1"
             required
-            style="
-              width: 100%;
-              height: 100%;
-              outline: none;
-              border: none;
-              text-align: center;
-            "
+            style="width: 100%; height: 100%; outline: none; border: none; text-align: center"
           />
         </td>
       </tr>
     </tbody>
   </table>
-  <div class="col-12" style="height: 25px">&nbsp;</div>
-  <div class="col-12 border_A" style="overflow-y: scroll; height: 200px">
-    DB연결 시켜 주세요
-    <p></p>
-    DB연결 시켜 주세요
-    <p></p>
-    DB연결 시켜 주세요
-    <p></p>
-    DB연결 시켜 주세요
-    <p></p>
-    DB연결 시켜 주세요
-    <p></p>
-    DB연결 시켜 주세요
-    <p></p>
-    DB연결 시켜 주세요
-    <p></p>
-    DB연결 시켜 주세요
-    <p></p>
-    DB연결 시켜 주세요
-    <p></p>
-    DB연결 시켜 주세요
-    <p></p>
-    DB연결 시켜 주세요
-    <p></p>
-    DB연결 시켜 주세요
-    <p></p>
-    DB연결 시켜 주세요
-    <p></p>
-  </div>
+  <div class="col-12" style="height: 10wh">&nbsp;</div>
+  <div class="col-12 border_A">DB연결 시켜 주세요</div>
 </div>
 
 <%}%>

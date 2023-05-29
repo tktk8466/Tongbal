@@ -100,7 +100,7 @@
 /* Old Desktops and laptops ------------------ */
 
 /* Desktops ------------------ */
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
+@media only screen and (min-width: 768px) and (max-width: 1440px) {
   .Poc_main_font {
     font-size: 16px;
   }

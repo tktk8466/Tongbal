@@ -96,7 +96,7 @@
       function Enter_Check(div_id, chat_room, key) {
         // 엔터키의 코드는 13
         if (event.keyCode == 13) {
-          sendMessage(event, document.getElementById("txt_on_" + key), uid, uname, chat_room, div_id);
+          sendMessage(event, key, uid, uname, chat_room, div_id);
           return;
         }
       }
@@ -113,7 +113,7 @@
     </script>
 
     <div style="height: 50px"></div>
-    <table class="table table-hover" id="POtable" style="width: 100vw">
+    <table class="table table-hover class" id="POtable" style="width: 100vw">
       <thead>
         <tr>
           <th scope="col">제목</th>
@@ -124,7 +124,8 @@
         </tr>
       </thead>
       <tbody>
-        <%if (typeof(req.session.Send_Order) !== 'undefined') { for (var key in req.session.Send_Order) { %>
+        <%if (typeof(req.session.Send_Order) !== 'undefined') { for (var key in
+        req.session.Send_Order) { %>
 
         <tr
           onclick="toggleDiv(myDIV),toggleDiv(myDIV2_<%=key%>),toggleDiv(POtable),toggleDiv(Purchase_Order_<%=key%>), 
@@ -132,8 +133,12 @@
         >
           <th scope="row"><%= req.session.Send_Order[key]["Title"] %></th>
           <td><%= req.session.S_CompanyInfo[key]["Comp_NAME"] %></td>
-          <td><%= req.session.Send_Order[key]["Order_Date"].split(' ')[0] %></td>
-          <td><%= req.session.Send_Order[key]["Delivery_Date"].split(' ')[0] %></td>
+          <td>
+            <%= req.session.Send_Order[key]["Order_Date"].split(' ')[0] %>
+          </td>
+          <td>
+            <%= req.session.Send_Order[key]["Delivery_Date"].split(' ')[0] %>
+          </td>
         </tr>
         <%}}%>
       </tbody>
@@ -143,7 +148,11 @@
     <div class="d-flex flex-wrap justify-content-center">
       <div id="BIG_DIV" class="col-12 d-flex flex-wrap">
         <div class="col_resize_empty">&nbsp;</div>
-        <div class="col_resize" style="text-align: center; background-color: white; display: none" id="myDIV">
+        <div
+          class="col_resize"
+          style="text-align: center; background-color: white; display: none"
+          id="myDIV"
+        >
           <button
             type="button"
             onclick="
@@ -152,18 +161,40 @@
                 Display_none(myDIV2_<%=key%>),
                 Display_none(Purchase_Order_<%=key%>),
               <%}%> toggleDiv(POtable)"
-            style="float: left; background-color: transparent; border: transparent"
+            style="
+              float: left;
+              background-color: transparent;
+              border: transparent;
+            "
           >
             <i class="bi bi-x-lg"></i>
           </button>
-          <button onclick="window.open('/PO_edit','_blank')" style="font-size: 2vmin; justify-items: end" class="btn btn-light">수정</button>
+          <button
+            onclick="window.open('/PO_edit','_blank')"
+            style="font-size: 2vmin; justify-items: end"
+            class="btn btn-light"
+          >
+            수정
+          </button>
           <div><%- include ('Purchase_Order_Send_form.ejs') %></div>
         </div>
         <div class="col_resize_empty_2">&nbsp;</div>
 
         <% for (var key in req.session.Send_Order) { %>
-        <div class="col_resize_chat content" id="myDIV2_<%=key%>" style="text-align: center; font-size: 1.75vw; display: none">
-          <div id="CHAT" style="background-color: #d2e9f2; border: var(--bs-border-color-translucent) 1px solid"><%=key%></div>
+        <div
+          class="col_resize_chat content"
+          id="myDIV2_<%=key%>"
+          style="text-align: center; font-size: 1.75vw; display: none"
+        >
+          <div
+            id="CHAT"
+            style="
+              background-color: #d2e9f2;
+              border: var(--bs-border-color-translucent) 1px solid;
+            "
+          >
+            <%=key%>
+          </div>
           <div
             id="chat_tables_<%=key%>"
             class="col-12 test"
@@ -190,21 +221,22 @@
               type="button"
               onclick="sendMessage(undefined, <%=key%>, uid, uname, chat_room_<%=key%>, chat_tables_<%=key%>), scrollBottom(`chat_tables_<%=key%>`)"
               class="btn btn-secondary"
-              style="border: var(--bs-border-color-translucent) 1px solid; border-radius: 0"
+              style="
+                border: var(--bs-border-color-translucent) 1px solid;
+                border-radius: 0;
+              "
             >
               <i class="bi bi-send"></i>
             </button>
           </div>
         </div>
-        <div class="col_resize_empty">&nbsp;</div>
+        <script>
+          // 첫 채팅 메세지 로딩
+          var MSG = JSON.parse(`<%- req.session.S_Chatting[key] %>`);
+          chat_load(chat_tables_<%=key%>, MSG);
+        </script>
+        <%}%>
       </div>
     </div>
-
-    <script>
-      // 첫 채팅 메세지 로딩
-      var MSG = JSON.parse(`<%- req.session.S_Chatting[key] %>`);
-      chat_load(chat_tables_<%=key%>, MSG);
-    </script>
-    <%}%>
   </body>
 </html>

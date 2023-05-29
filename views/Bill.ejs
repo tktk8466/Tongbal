@@ -18,7 +18,10 @@
       integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
       crossorigin="anonymous"
     ></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"
+    />
     <!-- 커스텀 스크립트 -->
     <script src="/js/main.js"></script>
     <!-- 커스텀 CSS -->
@@ -29,19 +32,32 @@
   </head>
   <body>
     <!-- Nav Bar -->
-    <div class="d-flex flex-wrap justify-content-center" style="justify-content: center">
-      <div id="bill" class="col-8 border_A justify-content-center Poc_main_font">
+    <div
+      class="d-flex flex-wrap justify-content-center"
+      style="justify-content: center; min-width: 1280px"
+    >
+      <div
+        id="bill"
+        class="col-8 border_A justify-content-center Poc_main_font;min-width: 1080px"
+      >
         <div class="col-12 justify-content-center">
-          <div class="col-12 Poc_main_font border_B" style="text-align: center">영수증</div>
+          <div class="col-12 Poc_main_font border_B" style="text-align: center">
+            영수증
+          </div>
           <div class="col-12 d-flex flex-wrap justify-content-center">
             <div class="col-07"></div>
-            <div class="col-08 Poc_main_font" style="text-align: end">DB연결시킬곳(영수증 받을 사람) 귀하</div>
+            <div class="col-08 Poc_main_font" style="text-align: end">
+              DB연결시킬곳(영수증 받을 사람) 귀하
+            </div>
           </div>
         </div>
 
         <div class="col-12 d-flex flex-wrap justify-content-center border_T">
-          <div class="col-018 Poc_main_font border_R border_B d-flex flex-wrap" style="align-items: center">
-            <div class="col-12 justify-content-center">
+          <div
+            class="col-018 Poc_main_font d-flex flex-wrap"
+            style="align-items: center"
+          >
+            <div class="col-12 justify-content-center" style="height: 100%">
               <div class="col-12">공</div>
               <div class="col-12">급</div>
               <div class="col-12">자</div>
@@ -49,37 +65,68 @@
           </div>
 
           <div class="col-05 d-flex flex-wrap justify-content-center">
-            <div class="col-12 d-flex flex-wrap justify-content-center border_B" style="align-items: center">
-              <div class="col-015 d-flex flex-wrap justify-content-center" style="align-items: center">
-                <div class="col-07 border_R">상<br />호</div>
-                <div class="col-08" style="text-align: start">DB 연결시켜주세요</div>
+            <div
+              class="col-12 d-flex flex-wrap justify-content-center border_B"
+              style="align-items: center"
+            >
+              <div
+                class="col-015 d-flex flex-wrap justify-content-center"
+                style="align-items: center"
+              >
+                <div class="col-07 border_R border_L">상<br />호</div>
+                <div class="col-08" style="text-align: start">
+                  DB 연결시켜주세요
+                </div>
               </div>
 
-              <div class="col-021 d-flex flex-wrap justify-content-center" style="align-items: center">
-                <div class="col-015 border_R border_L">사&nbsp;업&nbsp;자<br />등록번호</div>
+              <div
+                class="col-021 d-flex flex-wrap justify-content-center"
+                style="align-items: center"
+              >
+                <div class="col-015 border_R border_L">
+                  사&nbsp;업&nbsp;자<br />등록번호
+                </div>
                 <div class="col-015 justify-content-center">
                   <div class="col-12">00-0000-0000</div>
                 </div>
               </div>
-              <div class="col-021 d-flex flex-wrap justify-content-center" style="align-items: center">
+              <div
+                class="col-021 d-flex flex-wrap justify-content-center"
+                style="align-items: center"
+              >
                 <div class="col-015 border_R border_L">대표자<br />성명</div>
-                <div class="col-016" style="text-align: start">김상순상순상순</div>
+                <div class="col-016" style="text-align: start">
+                  김상순상순상순
+                </div>
               </div>
             </div>
 
-            <div class="col-12 d-flex flex-wrap justify-content-center border_B" style="align-items: center">
-              <div class="col-011 border_R">사&nbsp;업&nbsp;자<br />주소</div>
+            <div
+              class="col-12 d-flex flex-wrap justify-content-center"
+              style="align-items: center"
+            >
+              <div class="col-011 border_R border_L">
+                사&nbsp;업&nbsp;자<br />주소
+              </div>
               <div class="col-019 justify-content-center">
-                <div class="col-12" style="text-align: start">DB 연결시켜주세요</div>
+                <div class="col-12" style="text-align: start">
+                  DB 연결시켜주세요
+                </div>
               </div>
             </div>
           </div>
-          <div class="col-12 d-flex flex-wrap justify-content-center border_B" style="align-items: center">
-            <div class="col-07 border_R">작성 연 월 일</div>
-            <div class="col-015 border_R">공급대가 총액</div>
-            <div class="col-015">비고</div>
+          <div
+            class="col-12 d-flex flex-wrap justify-content-center border_B"
+            style="align-items: center"
+          >
+            <div class="col-07 border_R border_T">작성 연 월 일</div>
+            <div class="col-015 border_R border_T">공급대가 총액</div>
+            <div class="col-015 border_T">비고</div>
           </div>
-          <div class="col-12 d-flex flex-wrap justify-content-center border_B" style="align-items: center">
+          <div
+            class="col-12 d-flex flex-wrap justify-content-center border_B"
+            style="align-items: center"
+          >
             <div class="col-07 border_R">DB 연결시켜주세요</div>
             <div class="col-015 border_R">DB 연결시켜주세요</div>
             <div class="col-015">DB 연결시켜주세요</div>

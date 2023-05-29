@@ -2,38 +2,32 @@
 
 @media only screen and (min-width: 321px) and (max-width: 767px) {
   .Poc_main_font {
-    font-size: 1vmax;
-    zoom: 0.8;
+    font-size: 16px;
   }
   .Poc_chat_font {
-    font-size: 1vmax;
-    zoom: 1;
+    font-size: 16px;
   }
   .pc {
     width: 100%;
     border: 1px solid #444444;
     border-collapse: collapse;
-    font-size: 1vmax;
-    zoom: 1.2;
+    font-size: 16px;
   }
   .pc th,
   .pc td {
     border: 1px solid #444444;
-    font-size: 1vmax;
-    zoom: 1.2;
+    font-size: 16px;
   }
   .pc_chat {
     width: 100%;
     border: 1px solid #444444;
     border-collapse: collapse;
-    font-size: 1vmax;
-    zoom: 1;
+    font-size: 16px;
   }
   .pc_chat th,
   .pc_chat td {
     border: 1px solid #444444;
-    font-size: 1vmax;
-    zoom: 1;
+    font-size: 16px;
   }
 }
 
@@ -41,38 +35,32 @@
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
   .Poc_main_font {
-    font-size: 1vmax;
-    zoom: 0.8;
+    font-size: 16px;
   }
   .Poc_chat_font {
-    font-size: 1vmax;
-    zoom: 1.4;
+    font-size: 16px;
   }
   .pc {
     width: 100%;
     border: 1px solid #444444;
     border-collapse: collapse;
-    font-size: 1vmax;
-    zoom: 1.2;
+    font-size: 16px;
   }
   .pc th,
   .pc td {
     border: 1px solid #444444;
-    font-size: 1vmax;
-    zoom: 1.2;
+    font-size: 16px;
   }
   .pc_chat {
     width: 100%;
     border: 1px solid #444444;
     border-collapse: collapse;
-    font-size: 1vmax;
-    zoom: 1.1;
+    font-size: 16px;
   }
   .pc_chat th,
   .pc_chat td {
     border: 1px solid #444444;
-    font-size: 1vmax;
-    zoom: 1.1;
+    font-size: 16px;
   }
 }
 
@@ -80,38 +68,32 @@
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
   .Poc_main_font {
-    font-size: 1vmax;
-    zoom: 1;
+    font-size: 16px;
   }
   .Poc_chat_font {
-    font-size: 1vmax;
-    zoom: 1.2;
+    font-size: 16px;
   }
   .pc {
     width: 100%;
     border: 1px solid #444444;
     border-collapse: collapse;
-    font-size: 1vmax;
-    zoom: 1.2;
+    font-size: 16px;
   }
   .pc th,
   .pc td {
     border: 1px solid #444444;
-    font-size: 1vmax;
-    zoom: 1.2;
+    font-size: 16px;
   }
   .pc_chat {
     width: 100%;
     border: 1px solid #444444;
     border-collapse: collapse;
-    font-size: 1vmax;
-    zoom: 1.1;
+    font-size: 16px;
   }
   .pc_chat th,
   .pc_chat td {
     border: 1px solid #444444;
-    font-size: 1vmax;
-    zoom: 1.1;
+    font-size: 16px;
   }
 }
 
@@ -120,74 +102,68 @@
 /* Desktops ------------------ */
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
   .Poc_main_font {
-    font-size: 1vmax;
-    zoom: 1.2;
+    font-size: 16px;
   }
   .Poc_chat_font {
-    font-size: 1vmax;
-    zoom: 0.9;
+    font-size: 16px;
   }
   .pc {
     width: 100%;
     border: 1px solid #444444;
     border-collapse: collapse;
-    font-size: 1vmax;
-    zoom: 0.9;
+    font-size: 16px;
   }
   .pc th,
   .pc td {
     border: 1px solid #444444;
-    font-size: 1vmax;
-    zoom: 0.9;
+    font-size: 16px;
   }
   .pc_chat {
     width: 100%;
     border: 1px solid #444444;
     border-collapse: collapse;
-    font-size: 1vmax;
-    zoom: 1.1;
+    font-size: 16px;
   }
   .pc_chat th,
   .pc_chat td {
     border: 1px solid #444444;
-    font-size: 1vmax;
-    zoom: 1.1;
+    font-size: 16px;
+  }
+  .Poc_center {
+    font-size: 16px;
   }
 }
 
 @media only screen and (min-width: 1440px) {
   .Poc_main_font {
-    font-size: 1vmax;
-  }
-  .Poc_main_font {
-    font-size: 1vmax;
+    font-size: 16px;
   }
   .Poc_chat_font {
-    font-size: 1vmax;
+    font-size: 16px;
   }
   .pc {
     width: 100%;
     border: 1px solid #444444;
     border-collapse: collapse;
-    font-size: 1vmax;
+    font-size: 16px;
   }
   .pc th,
   .pc td {
     border: 1px solid #444444;
-    font-size: 1vmax;
+    font-size: 16px;
   }
   .pc_chat {
     width: 100%;
     border: 1px solid #444444;
     border-collapse: collapse;
-    font-size: 1vmax;
+    font-size: 16px;
   }
   .pc_chat th,
   .pc_chat td {
     border: 1px solid #444444;
-    font-size: 1vmax;
+    font-size: 16px;
   }
   .Poc_center {
-    font-size: 1vmax;
+    font-size: 16px;
   }
 }

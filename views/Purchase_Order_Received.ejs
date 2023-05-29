@@ -114,11 +114,13 @@
     </script>
 
     <div style="height: 50px"></div>
-    <table class="table table-hover" id="POtable" style="width: 100vw">
-      <thead>
-        <tr>
-          <th scope="col">제목</th>
-          <th scope="col">보낸 업체</th>
+    <div class="d-flex flex-wrap" style="margin: auto; width: 900px">
+      <table class="table table-hover" id="POtable">
+        <thead>
+          <tr>
+            <th scope="col">제목</th>
+            <th scope="col">보낸 업체</th>
+
 
           <th scope="col">발주일</th>
           <th scope="col">납품기한</th>
@@ -141,9 +143,20 @@
 
     <!---------- 채팅창 파트 ------------>
     <div class="d-flex flex-wrap justify-content-center">
-      <div id="BIG_DIV" class="col-12 d-flex flex-wrap">
-        <div class="col_resize_empty">&nbsp;</div>
-        <div class="col_resize" style="text-align: center; background-color: white; display: none" id="myDIV">
+      <div id="BIG_DIV" class="d-flex flex-wrap justify-content-center">
+        <div style="width: 10px"></div>
+        <div
+          class="col_resize"
+          style="
+            text-align: center;
+            background-color: white;
+            display: none;
+            min-width: 900px;
+            max-height: 900px;
+            height: 700px;
+          "
+          id="myDIV"
+        >
           <button
             type="button"
             onclick="
@@ -159,10 +172,11 @@
           <button onclick="window.open('/PO_edit','_blank')" style="font-size: 2vmin; justify-items: end" class="btn btn-light">수정</button>
           <div><%- include ('Purchase_Order_Received_form.ejs') %></div>
         </div>
+        <div style="width: 10px"></div>
         <div class="col_resize_empty_2">&nbsp;</div>
 
         <% for (var key in req.session.Received_Order) { %>
-        <div class="col_resize_chat content" id="myDIV2_<%=key%>" style="text-align: center; font-size: 1.75vw; display: none">
+        <div class="col_resize_chat content MY_DIV2_SIZE_960" id="myDIV2_<%=key%>" style="text-align: center; font-size: 1.75vw; display: none">
           <div id="CHAT" style="background-color: #d2e9f2; border: var(--bs-border-color-translucent) 1px solid"><%=key%></div>
           <div
             id="chat_tables_<%=key%>"
@@ -173,7 +187,7 @@
               background-color: #d2e9f2;
               min-height: 600px;
               max-height: 1100px;
-              height: calc(82vh - 150px);
+              height: 300px;
               overflow-y: scroll;
             "
           ></div>
@@ -190,13 +204,22 @@
               type="button"
               onclick="sendMessage(undefined, <%=key%>, uid, uname, chat_room_<%=key%>, chat_tables_<%=key%>), scrollBottom(`chat_tables_<%=key%>`)"
               class="btn btn-secondary"
-              style="border: var(--bs-border-color-translucent) 1px solid; border-radius: 0"
+              style="
+                border: var(--bs-border-color-translucent) 1px solid;
+                border-radius: 0;
+              "
             >
               <i class="bi bi-send"></i>
             </button>
           </div>
         </div>
-        <div class="col_resize_empty">&nbsp;</div>
+        <div
+          class="col-12"
+          id="myDIv3"
+          style="text-align: center; height: 50px"
+        >
+          &nbsp;
+        </div>
       </div>
     </div>
 

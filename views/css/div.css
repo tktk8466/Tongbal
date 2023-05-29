@@ -82,6 +82,10 @@
   flex: 0 0 auto;
   width: 30%;
 }
+.col-022 {
+  flex: 0 0 auto;
+  width: 17.5%;
+}
 
 @media screen and (max-width: 991px) {
   .dropdown-menu-end {
@@ -97,7 +101,7 @@
   flex: 0 0 auto;
   width: 10%;
 }
-@media screen and (max-width: 1023px) {
+/*@media screen and (max-width: 1023px) {
   .col_resize_empty {
     flex: 0 0 auto;
     width: 0%;
@@ -109,60 +113,69 @@
     flex: 0 0 auto;
     width: 0%;
   }
-}
+}*/
 
 .col_resize_empty_2 {
   flex: 0 0 auto;
   width: 2.5%;
 }
-@media screen and (max-width: 1023px) {
+@media screen and (max-width: 1520px) {
   .col_resize_empty_2 {
     flex: 0 0 auto;
     width: 0%;
   }
 }
 
-@media screen and (max-width: 767px) {
+/*@media screen and (max-width: 767px) {
   .col_resize_empty_2 {
     flex: 0 0 auto;
     width: 0%;
   }
-}
+}*/
 
 .col_resize {
   flex: 0 0 auto;
   width: 50%;
   height: 100%;
 }
-@media screen and (max-width: 1023px) {
+/*@media screen and (max-width: 1023px) {
   .col_resize {
     width: 90%;
     height: 50%;
     flex: 0 0 auto;
   }
-}
+}*/
 
-@media screen and (max-width: 767px) {
+/*@media screen and (max-width: 767px) {
   .col_resize {
     flex: 0 0 auto;
     width: 100%;
   }
-}
+}*/
 
 .col_resize_chat {
   flex: 0 0 auto;
-  width: 32.5%;
+  width: 27.5%;
 }
-@media screen and (max-width: 1023px) {
+/*@media screen and (max-width: 1023px) {
   .col_resize_chat {
     flex: 0 0 auto;
     width: 90%;
   }
-}
+}*/
 
-@media screen and (max-width: 767px) {
+/*@media screen and (max-width: 767px) {
   .col_resize_chat {
     flex: 0 0 auto;
     width: 90%;
+  }
+}*/
+
+.MY_DIV2_SIZE_960 {
+  width: 528px;
+}
+@media screen and (max-width: 1520px) {
+  .MY_DIV2_SIZE_960 {
+    width: 910px;
   }
 }

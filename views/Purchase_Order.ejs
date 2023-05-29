@@ -18,7 +18,10 @@
       integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
       crossorigin="anonymous"
     ></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"
+    />
     <!-- 커스텀 스크립트 -->
     <script src="/js/main.js"></script>
     <!-- 커스텀 CSS -->
@@ -26,27 +29,30 @@
     <link href="/css/font.css" rel="stylesheet" />
     <link href="/css/div.css" rel="stylesheet" />
     <link href="/css/class.css" rel="stylesheet" />
-    <style>
-      html {
-        width: 100vw;
-        height: 100vh;
-      }
-    </style>
   </head>
   <body>
     <!-- Nav Bar -->
 
-    <div class="d-flex flex-warp justify-content-center" style="justify-content: center">
-      <div id="Purchase_Order" class="col-10" style="text-align: center">
+    <div
+      class="d-flex flex-warp justify-content-center"
+      style="justify-content: center"
+    >
+      <div id="Purchase_Order" style="text-align: center; min-width: 1080px">
         <div
-          style="text-align: center; font-size: 3vmax; border-top: 1px solid #444444; border-left: 1px solid #444444; border-right: 1px solid #444444"
+          style="
+            text-align: center;
+            font-size: 32px;
+            border-top: 1px solid #444444;
+            border-left: 1px solid #444444;
+            border-right: 1px solid #444444;
+          "
         >
           발&nbsp;&nbsp;주&nbsp;&nbsp;서
         </div>
         <div
           style="
             text-align: center;
-            font-size: 1vw;
+            font-size: 16px;
             border-bottom: 1px solid #444444;
             border-left: 1px solid #444444;
             border-right: 1px solid #444444;
@@ -54,18 +60,46 @@
         ></div>
         <div
           class="d-flex border_B border_L border_R"
-          style="align-items: center; justify-content: center; text-align: center; height: calc(20vmax + 6px)"
+          style="
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            height: 250px;
+          "
         >
-          <div id="company-1" class="col-017 d-flex flex-wrap" style="height: 100%">
-            <div class="col-12 d-flex flex-wrap border_B" style="align-items: center; justify-content: center">
+          <div
+            id="company-1"
+            class="col-017 d-flex flex-wrap"
+            style="height: 100%"
+          >
+            <div
+              class="col-12 d-flex flex-wrap border_B"
+              style="align-items: center; justify-content: center"
+            >
               <div class="col-07 Poc_main_font">본사명</div>
-              <div class="col-08 11 Poc_main_font border_L" style="height: 100%">
-                <input type="text" id="Comp_NAME" name="Comp_NAME" value="Comp_NAME" required style="width: 100%; height: 100%; text-align: center" />
+              <div
+                class="col-08 11 Poc_main_font border_L"
+                style="height: 100%"
+              >
+                <input
+                  type="text"
+                  id="Comp_NAME"
+                  name="Comp_NAME"
+                  value="Comp_NAME"
+                  required
+                  style="width: 100%; height: 100%; text-align: center"
+                />
               </div>
             </div>
-            <div class="col-12 d-flex flex-wrap border_B" style="align-items: center; justify-content: center">
+            <div
+              class="col-12 d-flex flex-wrap border_B"
+              style="align-items: center; justify-content: center"
+            >
               <div class="col-07 Poc_main_font">대표자 성명</div>
-              <div class="col-08 11 Poc_main_font border_L" style="height: 100%">
+              <div
+                class="col-08 11 Poc_main_font border_L"
+                style="height: 100%"
+              >
                 <input
                   type="text"
                   id="President_NAME"
@@ -76,9 +110,15 @@
                 />
               </div>
             </div>
-            <div class="col-12 d-flex flex-wrap border_B" style="align-items: center; justify-content: center">
+            <div
+              class="col-12 d-flex flex-wrap border_B"
+              style="align-items: center; justify-content: center"
+            >
               <div class="col-07 Poc_main_font">주소</div>
-              <div class="col-08 11 Poc_main_font border_L" style="height: 100%">
+              <div
+                class="col-08 11 Poc_main_font border_L"
+                style="height: 100%"
+              >
                 <input
                   type="text"
                   id="Business_Address"
@@ -89,29 +129,70 @@
                 />
               </div>
             </div>
-            <div class="col-12 d-flex flex-wrap border_B" style="align-items: center; justify-content: center">
+            <div
+              class="col-12 d-flex flex-wrap border_B"
+              style="align-items: center; justify-content: center"
+            >
               <div class="col-07 Poc_main_font">Tel.</div>
-              <div class="col-08 11 Poc_main_font border_L" style="height: 100%">
-                <input type="text" id="TEL" name="TEL" value="TEL" required style="width: 100%; height: 100%; text-align: center" />
+              <div
+                class="col-08 11 Poc_main_font border_L"
+                style="height: 100%"
+              >
+                <input
+                  type="text"
+                  id="TEL"
+                  name="TEL"
+                  value="TEL"
+                  required
+                  style="width: 100%; height: 100%; text-align: center"
+                />
               </div>
             </div>
-            <div class="col-12 d-flex flex-wrap" style="align-items: center; justify-content: center">
+            <div
+              class="col-12 d-flex flex-wrap"
+              style="align-items: center; justify-content: center"
+            >
               <div class="col-07 Poc_main_font">Fax.</div>
-              <div class="col-08 11 Poc_main_font border_L" style="height: 100%">
-                <input type="text" id="FAX" name="FAX" value="FAX" required style="width: 100%; height: 100%; text-align: center" />
+              <div
+                class="col-08 11 Poc_main_font border_L"
+                style="height: 100%"
+              >
+                <input
+                  type="text"
+                  id="FAX"
+                  name="FAX"
+                  value="FAX"
+                  required
+                  style="width: 100%; height: 100%; text-align: center"
+                />
               </div>
             </div>
           </div>
 
-          <div class="col-04 d-flex flex-wrap" style="font-size: 1vmax; border-left: 1px solid black; border-right: 1px solid black; height: 100%">
+          <div
+            class="col-04 d-flex flex-wrap"
+            style="
+              font-size: 16px;
+              border-left: 1px solid black;
+              border-right: 1px solid black;
+              height: 100%;
+            "
+          >
             <div calss="col-12" style="width: 100%">공</div>
             <div calss="col-12" style="width: 100%">급</div>
             <div calss="col-12" style="width: 100%">자</div>
           </div>
 
           <!--공급자-->
-          <div id="company-2" class="col-017 d-flex flex-wrap" style="height: 100%">
-            <div class="col-12 d-flex flex-wrap border_B" style="align-items: center; justify-content: center">
+          <div
+            id="company-2"
+            class="col-017 d-flex flex-wrap"
+            style="height: 100%"
+          >
+            <div
+              class="col-12 d-flex flex-wrap border_B"
+              style="align-items: center; justify-content: center"
+            >
               <div class="col-07 Poc_main_font">본사명</div>
               <div class="col-08 Poc_main_font border_L" style="height: 100%">
                 <input
@@ -124,7 +205,10 @@
                 />
               </div>
             </div>
-            <div class="col-12 d-flex flex-wrap border_B" style="align-items: center; justify-content: center">
+            <div
+              class="col-12 d-flex flex-wrap border_B"
+              style="align-items: center; justify-content: center"
+            >
               <div class="col-07 Poc_main_font">대표자 성명</div>
               <div class="col-08 Poc_chat_font border_L" style="height: 100%">
                 <input
@@ -137,7 +221,10 @@
                 />
               </div>
             </div>
-            <div class="col-12 d-flex flex-wrap border_B" style="align-items: center; justify-content: center">
+            <div
+              class="col-12 d-flex flex-wrap border_B"
+              style="align-items: center; justify-content: center"
+            >
               <div class="col-07 Poc_main_font">사업자 번호</div>
               <div class="col-08 Poc_chat_font border_L" style="height: 100%">
                 <input
@@ -150,7 +237,10 @@
                 />
               </div>
             </div>
-            <div class="col-12 d-flex flex-wrap border_B" style="align-items: center; justify-content: center">
+            <div
+              class="col-12 d-flex flex-wrap border_B"
+              style="align-items: center; justify-content: center"
+            >
               <div class="col-07 Poc_main_font">주소</div>
               <div class="col-08 Poc_chat_font border_L" style="height: 100%">
                 <input
@@ -163,7 +253,10 @@
                 />
               </div>
             </div>
-            <div class="col-12 d-flex flex-wrap border_B" style="align-items: center; justify-content: center">
+            <div
+              class="col-12 d-flex flex-wrap border_B"
+              style="align-items: center; justify-content: center"
+            >
               <div class="col-07 Poc_main_font">공장 주소</div>
               <div class="col-08 Poc_chat_font border_L" style="height: 100%">
                 <input
@@ -176,29 +269,68 @@
                 />
               </div>
             </div>
-            <div class="col-12 d-flex flex-wrap border_B" style="align-items: center; justify-content: center">
+            <div
+              class="col-12 d-flex flex-wrap border_B"
+              style="align-items: center; justify-content: center"
+            >
               <div class="col-07 Poc_main_font">발주 담당자</div>
               <div class="col-08 Poc_chat_font border_L" style="height: 100%">
-                <input type="text" id="Manager" name="Manager" value="Manager" required style="width: 100%; height: 100%; text-align: center" />
+                <input
+                  type="text"
+                  id="Manager"
+                  name="Manager"
+                  value="Manager"
+                  required
+                  style="width: 100%; height: 100%; text-align: center"
+                />
               </div>
             </div>
-            <div class="col-12 d-flex flex-wrap border_B" style="align-items: center; justify-content: center">
+            <div
+              class="col-12 d-flex flex-wrap border_B"
+              style="align-items: center; justify-content: center"
+            >
               <div class="col-07 Poc_main_font">Tel.</div>
               <div class="col-08 Poc_chat_font border_L" style="height: 100%">
-                <input type="text" id="TEL2" name="TEL2" value="TEL2" required style="width: 100%; height: 100%; text-align: center" />
+                <input
+                  type="text"
+                  id="TEL2"
+                  name="TEL2"
+                  value="TEL2"
+                  required
+                  style="width: 100%; height: 100%; text-align: center"
+                />
               </div>
             </div>
-            <div class="col-12 d-flex flex-wrap" style="align-items: center; justify-content: center">
+            <div
+              class="col-12 d-flex flex-wrap"
+              style="align-items: center; justify-content: center"
+            >
               <div class="col-07 Poc_main_font">Fax.</div>
               <div class="col-08 Poc_chat_font border_L" style="height: 100%">
-                <input type="text" id="Fax2" name="Fax2" value="Fax2" required style="width: 100%; height: 100%; text-align: center" />
+                <input
+                  type="text"
+                  id="Fax2"
+                  name="Fax2"
+                  value="Fax2"
+                  required
+                  style="width: 100%; height: 100%; text-align: center"
+                />
               </div>
             </div>
           </div>
         </div>
-        <div class="col-12" style="height: 10wh">&nbsp;</div>
+        <div class="col-12" style="height: 30px">&nbsp;</div>
         <!-- 테이블 -->
-        <table id="tableId" class="col-12 pc" style="width: 100%; text-align: center; font-size: 1vmax; border-top: 1px solid #444444">
+        <table
+          id="tableId"
+          class="col-12 pc"
+          style="
+            width: 100%;
+            text-align: center;
+            font-size: 1vmax;
+            border-top: 1px solid #444444;
+          "
+        >
           <thead>
             <tr>
               <th scope="col">No.</th>
@@ -222,7 +354,13 @@
                   name="Cannes_1_1"
                   value="Cannes_1_1"
                   required
-                  style="width: 100%; height: 100%; text-align: center; outline: none; border: none"
+                  style="
+                    width: 100%;
+                    height: 100%;
+                    text-align: center;
+                    outline: none;
+                    border: none;
+                  "
                 />
               </td>
               <td>
@@ -232,7 +370,13 @@
                   name="Products_1"
                   value="Products_1"
                   required
-                  style="width: 100%; height: 100%; outline: none; border: none; text-align: center"
+                  style="
+                    width: 100%;
+                    height: 100%;
+                    outline: none;
+                    border: none;
+                    text-align: center;
+                  "
                 />
               </td>
               <td>
@@ -242,7 +386,13 @@
                   name="B_1"
                   value="B_1"
                   required
-                  style="width: 100%; height: 100%; outline: none; border: none; text-align: center"
+                  style="
+                    width: 100%;
+                    height: 100%;
+                    outline: none;
+                    border: none;
+                    text-align: center;
+                  "
                 />
               </td>
               <td>
@@ -252,7 +402,13 @@
                   name="SI_1"
                   value="SI_1"
                   required
-                  style="width: 100%; height: 100%; outline: none; border: none; text-align: center"
+                  style="
+                    width: 100%;
+                    height: 100%;
+                    outline: none;
+                    border: none;
+                    text-align: center;
+                  "
                 />
               </td>
               <td>
@@ -262,7 +418,13 @@
                   name="Q_1"
                   value="Q_1"
                   required
-                  style="width: 100%; height: 100%; outline: none; border: none; text-align: center"
+                  style="
+                    width: 100%;
+                    height: 100%;
+                    outline: none;
+                    border: none;
+                    text-align: center;
+                  "
                 />
               </td>
               <td>
@@ -272,7 +434,13 @@
                   name="P_1"
                   value="P_1"
                   required
-                  style="width: 100%; height: 100%; outline: none; border: none; text-align: center"
+                  style="
+                    width: 100%;
+                    height: 100%;
+                    outline: none;
+                    border: none;
+                    text-align: center;
+                  "
                 />
               </td>
               <td>
@@ -282,7 +450,13 @@
                   name="V_1"
                   value="V_1"
                   required
-                  style="width: 100%; height: 100%; outline: none; border: none; text-align: center"
+                  style="
+                    width: 100%;
+                    height: 100%;
+                    outline: none;
+                    border: none;
+                    text-align: center;
+                  "
                 />
               </td>
               <td>
@@ -292,7 +466,13 @@
                   name="N_1"
                   value="N_1"
                   required
-                  style="width: 100%; height: 100%; outline: none; border: none; text-align: center"
+                  style="
+                    width: 100%;
+                    height: 100%;
+                    outline: none;
+                    border: none;
+                    text-align: center;
+                  "
                 />
               </td>
             </tr>

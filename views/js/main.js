@@ -100,6 +100,7 @@ function newReceiveDiv(id, text) {
 }
 
 // 메세지 발신
+
 function sendMessage(event, key, UserID, UserName, chat_room, div_id) {
   const textarea = document.getElementById("txt_on_" + key);
   if (event != undefined && textarea.value != undefined) {

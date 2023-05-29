@@ -5,24 +5,6 @@
 
     <script src="/js/Purchase_Order_M_Button.js"></script>
     <style>
-      table {
-        width: 100%;
-        border-top: 1px solid #444444;
-        border-collapse: collapse;
-      }
-      th {
-        border-bottom: 1px solid #444444;
-        border-left: 1px solid #444444;
-        border-right: 1px solid #444444;
-        font-size: 24px;
-      }
-      td {
-        border-bottom: 1px solid #444444;
-        border-left: 1px solid #444444;
-        border-right: 1px solid #444444;
-        font-size: 16px;
-      }
-
       input {
         outline: none;
         border: none;
@@ -120,13 +102,13 @@
 
       <!--세금계산서-->
       <div id="PO1" class="col-10" style="text-align: center; display: none">
-        1
+        <%- include ('Trading_statement.ejs') %>
       </div>
       <div id="PO2" class="col-10" style="text-align: center; display: none">
         <%- include ('Bill.ejs') %>
       </div>
       <div id="PO3" class="col-10" style="text-align: center; display: none">
-        <%- include ('Purchase_Order.ejs') %>
+        <%- include ('Purchase_Order_Table.ejs') %>
       </div>
       <div id="PO4" class="col-10" style="text-align: center; display: none">
         <%- include ('Tax_Bill.ejs') %>

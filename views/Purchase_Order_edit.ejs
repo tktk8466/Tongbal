@@ -35,6 +35,10 @@
         width: 1920px;
         height: 1080px;
       }
+      .file {
+        width: 200px;
+        height: 200px;
+      }
       input {
         outline: none;
         border: none;
@@ -69,19 +73,30 @@
         border-radius: 6px;
         cursor: pointer;
       }
-      .file {
-        display: none;
-      }
     </style>
   </head>
   <body>
     <!-- Nav Bar -->
-
+    <div style="height: 50px"></div>
     <div
       class="d-flex flex-warp justify-content-center"
-      style="justify-content: center"
+      style="justify-content: center; margin: auto"
     >
       <div id="Purchase_Order" class="col-10" style="text-align: center">
+        <div class="col-12" style="justify-content: end; text-align: right">
+          <button
+            type="input"
+            style="
+              border: none;
+              outline: none;
+              width: 75px;
+              height: 50px;
+              font-size: 16px;
+            "
+          >
+            수정
+          </button>
+        </div>
         <div
           style="
             text-align: center;
@@ -522,6 +537,7 @@
             </tr>
           </tbody>
         </table>
+
         <textarea
           id="remarks"
           class="border_A"
@@ -532,26 +548,55 @@
             height: 100%;
           "
         ></textarea>
-        <div class="upload">사진 업로드</div>
-        <input
-          style="color: #444444"
-          value="File"
-          type="file"
-          class="real-upload"
-          accept="image/*"
-          required
-          multiple
-        />
-
-        <div
-          id="editor"
-          class="image-preview"
-          style="border-radius: 0; justify-self: cneter"
-        ></div>
-
-        <label class="file-label" for="chooseFile">Choose File</label>
-        <input class="file" id="chooseFile" type="file" multiple />
+        <input type="file" id="file-input" multiple />
+        <div id="preview"></div>
       </div>
     </div>
+
+    <script>
+      const handler = {
+        init() {
+          const fileInput = document.querySelector("#file-input");
+          const preview = document.querySelector("#preview");
+          fileInput.addEventListener("change", () => {
+            console.dir(fileInput);
+            const files = Array.from(fileInput.files);
+            files.forEach((file) => {
+              preview.innerHTML += `
+                        <p id="${file.lastModified}">
+                            ${file.name}
+                            <button data-index='${file.lastModified}' class='file-remove' style = "background-color : white; outline:none; border:none">X</button>
+                        </p>`;
+            });
+          });
+        },
+
+        removeFile: () => {
+          document.addEventListener("click", (e) => {
+            if (e.target.className !== "file-remove") return;
+            const removeTargetId = e.target.dataset.index;
+            const removeTarget = document.getElementById(removeTargetId);
+            const files = document.querySelector("#file-input").files;
+            const dataTranster = new DataTransfer();
+
+            // document.querySelector('#file-input').files =
+            //             Array.from(files).filter(file => file.lastModified !== removeTarget);
+
+            Array.from(files)
+              .filter((file) => file.lastModified != removeTargetId)
+              .forEach((file) => {
+                dataTranster.items.add(file);
+              });
+
+            document.querySelector("#file-input").files = dataTranster.files;
+
+            removeTarget.remove();
+          });
+        },
+      };
+
+      handler.init();
+      handler.removeFile();
+    </script>
   </body>
 </html>

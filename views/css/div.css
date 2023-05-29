@@ -82,6 +82,10 @@
   flex: 0 0 auto;
   width: 30%;
 }
+.col-022 {
+  flex: 0 0 auto;
+  width: 17.5%;
+}
 
 @media screen and (max-width: 991px) {
   .dropdown-menu-end {

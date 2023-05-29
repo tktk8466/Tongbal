@@ -94,6 +94,30 @@
               font-size: 16px;
             "
           >
+            제품삭제
+          </button>
+          <button
+            type="input"
+            style="
+              border: none;
+              outline: none;
+              width: 75px;
+              height: 50px;
+              font-size: 16px;
+            "
+          >
+            제품추가
+          </button>
+          <button
+            type="input"
+            style="
+              border: none;
+              outline: none;
+              width: 75px;
+              height: 50px;
+              font-size: 16px;
+            "
+          >
             수정
           </button>
         </div>
@@ -380,6 +404,34 @@
         </div>
         <div class="col-12" style="height: 10wh">&nbsp;</div>
         <!-- 테이블 -->
+        <div class="col-12" style="justify-content: end; text-align: left">
+          <button
+            type="input"
+            style="
+              border: none;
+              outline: none;
+              width: 25px;
+              height: 25px;
+              font-size: 16px;
+            "
+            onclick="delete_row()"
+          >
+            -
+          </button>
+          <button
+            type="input"
+            style="
+              border: none;
+              outline: none;
+              width: 25px;
+              height: 25px;
+              font-size: 16px;
+            "
+            onclick="add_row()"
+          >
+            <i class="bi bi-plus-lg"></i>
+          </button>
+        </div>
         <table
           id="tableId"
           class="col-12 pc"
@@ -403,15 +455,15 @@
               <th scope="col">비고</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="PO_item_body">
             <tr>
               <th scope="row">1</th>
               <td>
                 <input
                   type="text"
-                  id="Cannes_1_1"
-                  name="Cannes_1_1"
-                  value="Cannes_1_1"
+                  id="Cannes_1"
+                  name="Cannes_1"
+                  value="Cannes_1"
                   required
                   style="
                     width: 100%;

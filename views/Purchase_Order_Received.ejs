@@ -126,21 +126,15 @@
           </tr>
         </thead>
         <tbody>
-          <%if (typeof(req.session.Received_Order) !== 'undefined') { for (var
-          key in req.session.Received_Order) { %>
+          <%if (typeof(req.session.Received_Order) !== 'undefined') { for (var key in req.session.Received_Order) { %>
           <tr
             onclick="toggleDiv(myDIV),toggleDiv(myDIV2_<%=key%>),toggleDiv(POtable),toggleDiv(Purchase_Order_<%=key%>), 
             chat_room_<%=key%> = `<%= req.session.Received_Order[key]['TB_CHAT_ROOM_ID'] %>`, scrollBottom(`chat_tables_<%=key%>`);"
           >
             <th scope="row"><%= req.session.Received_Order[key]["Title"] %></th>
             <td><%= req.session.R_CompanyInfo[key]["Comp_NAME"] %></td>
-            <td>
-              <%= req.session.Received_Order[key]["Order_Date"].split(' ')[0] %>
-            </td>
-            <td>
-              <%= req.session.Received_Order[key]["Delivery_Date"].split(' ')[0]
-              %>
-            </td>
+            <td><%= req.session.Received_Order[key]["Order_Date"].split(' ')[0] %></td>
+            <td><%= req.session.Received_Order[key]["Delivery_Date"].split(' ')[0] %></td>
           </tr>
           <%}}%>
         </tbody>
@@ -152,14 +146,7 @@
         <div style="width: 10px"></div>
         <div
           class="col_resize"
-          style="
-            text-align: center;
-            background-color: white;
-            display: none;
-            min-width: 900px;
-            max-height: 900px;
-            height: 700px;
-          "
+          style="text-align: center; background-color: white; display: none; min-width: 900px; max-height: 900px; height: 700px"
           id="myDIV"
         >
           <button
@@ -170,41 +157,19 @@
                 Display_none(myDIV2_<%=key%>),
                 Display_none(Purchase_Order_<%=key%>),
               <%}%> toggleDiv(POtable)"
-            style="
-              float: left;
-              background-color: transparent;
-              border: transparent;
-            "
+            style="float: left; background-color: transparent; border: transparent"
           >
             <i class="bi bi-x-lg"></i>
           </button>
-          <button
-            onclick="window.open('/PO_edit','_blank')"
-            style="font-size: 2vmin; justify-items: end"
-            class="btn btn-light"
-          >
-            수정
-          </button>
+          <button onclick="window.open('/PO_edit','_blank')" style="font-size: 2vmin; justify-items: end" class="btn btn-light">수정</button>
           <div><%- include ('Purchase_Order_Received_form.ejs') %></div>
         </div>
         <div style="width: 10px"></div>
         <div class="col_resize_empty_2">&nbsp;</div>
 
         <% for (var key in req.session.Received_Order) { %>
-        <div
-          class="col_resize_chat content MY_DIV2_SIZE_960"
-          id="myDIV2_<%=key%>"
-          style="text-align: center; font-size: 1.75vw; display: none"
-        >
-          <div
-            id="CHAT"
-            style="
-              background-color: #d2e9f2;
-              border: var(--bs-border-color-translucent) 1px solid;
-            "
-          >
-            <%=key%>
-          </div>
+        <div class="col_resize_chat content MY_DIV2_SIZE_960" id="myDIV2_<%=key%>" style="text-align: center; font-size: 1.75vw; display: none">
+          <div id="CHAT" style="background-color: #d2e9f2; border: var(--bs-border-color-translucent) 1px solid"><%=key%></div>
           <div
             id="chat_tables_<%=key%>"
             class="col-12 test"
@@ -231,10 +196,7 @@
               type="button"
               onclick="sendMessage(undefined, <%=key%>, uid, uname, chat_room_<%=key%>, chat_tables_<%=key%>), scrollBottom(`chat_tables_<%=key%>`)"
               class="btn btn-secondary"
-              style="
-                border: var(--bs-border-color-translucent) 1px solid;
-                border-radius: 0;
-              "
+              style="border: var(--bs-border-color-translucent) 1px solid; border-radius: 0"
             >
               <i class="bi bi-send"></i>
             </button>

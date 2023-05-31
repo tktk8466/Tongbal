@@ -13,15 +13,13 @@
       crossorigin="anonymous"
     />
     <!-- JavaScript Bundle with Popper -->
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
       crossorigin="anonymous"
     ></script>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"
-    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
     <!-- 커스텀 스크립트 -->
     <script src="/js/main.js"></script>
     <!-- 커스텀 CSS -->
@@ -48,19 +46,10 @@
   <body>
     <!-- Nav Bar -->
 
-    <div
-      class="d-flex flex-warp justify-content-center"
-      style="justify-content: center"
-    >
+    <div class="d-flex flex-warp justify-content-center" style="justify-content: center">
       <div id="Purchase_Order" style="text-align: center; min-width: 1080px">
         <div
-          style="
-            text-align: center;
-            font-size: 32px;
-            border-top: 1px solid #444444;
-            border-left: 1px solid #444444;
-            border-right: 1px solid #444444;
-          "
+          style="text-align: center; font-size: 32px; border-top: 1px solid #444444; border-left: 1px solid #444444; border-right: 1px solid #444444"
         >
           발&nbsp;&nbsp;주&nbsp;&nbsp;서
         </div>
@@ -124,27 +113,13 @@
                     <tr>
                       <th style="height: 40px">Tel.</th>
                       <th>
-                        <input
-                          type="text"
-                          id="TEL"
-                          name="TEL"
-                          value="TEL"
-                          required
-                          style="width: 100%; height: 100%; text-align: center"
-                        />
+                        <input type="text" id="TEL" name="TEL" value="TEL" required style="width: 100%; height: 100%; text-align: center" />
                       </th>
                     </tr>
                     <tr>
                       <th style="height: 40px">Fax.</th>
                       <th>
-                        <input
-                          type="text"
-                          id="FAX"
-                          name="FAX"
-                          value="FAX"
-                          required
-                          style="width: 100%; height: 100%; text-align: center"
-                        />
+                        <input type="text" id="FAX" name="FAX" value="FAX" required style="width: 100%; height: 100%; text-align: center" />
                       </th>
                     </tr>
                   </tbody>
@@ -163,7 +138,7 @@
                       <th>
                         <input
                           type="text"
-                          id="Comp_NAM2"
+                          id="Comp_NAME_2"
                           name="Comp_NAME2"
                           value="Comp_NAME2"
                           required
@@ -239,27 +214,13 @@
                     <tr>
                       <th>Tel.</th>
                       <th>
-                        <input
-                          type="text"
-                          id="TEL2"
-                          name="TEL2"
-                          value="TEL2"
-                          required
-                          style="width: 100%; height: 100%; text-align: center"
-                        />
+                        <input type="text" id="TEL2" name="TEL2" value="TEL2" required style="width: 100%; height: 100%; text-align: center" />
                       </th>
                     </tr>
                     <tr>
                       <th>Fax.</th>
                       <th>
-                        <input
-                          type="text"
-                          id="Fax2"
-                          name="Fax2"
-                          value="Fax2"
-                          required
-                          style="width: 100%; height: 100%; text-align: center"
-                        />
+                        <input type="text" id="Fax2" name="Fax2" value="Fax2" required style="width: 100%; height: 100%; text-align: center" />
                       </th>
                     </tr>
                   </tbody>
@@ -268,16 +229,13 @@
             </tr>
           </tbody>
         </table>
-        <table
-          id="tableId"
-          class="col-12 pc"
-          style="
-            width: 100%;
-            text-align: center;
-            font-size: 1vmax;
-            border-top: 1px solid #444444;
-          "
-        >
+        <div class="col-12" style="justify-content: end; text-align: left">
+          <button type="input" style="border: none; outline: none; width: 25px; height: 25px; font-size: 16px" onclick="delete_row()">-</button>
+          <button type="input" style="border: none; outline: none; width: 25px; height: 25px; font-size: 16px" onclick="add_row()">
+            <i class="bi bi-plus-lg"></i>
+          </button>
+        </div>
+        <table id="tableId" class="col-12 pc" style="width: 100%; text-align: center; font-size: 1vmax; border-top: 1px solid #444444">
           <thead>
             <tr>
               <th scope="col">No.</th>
@@ -291,7 +249,7 @@
               <th scope="col">비고</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="PO_item_body">
             <tr>
               <th scope="row">1</th>
               <td>
@@ -301,13 +259,7 @@
                   name="Cannes_1_1"
                   value="Cannes_1_1"
                   required
-                  style="
-                    width: 100%;
-                    height: 100%;
-                    text-align: center;
-                    outline: none;
-                    border: none;
-                  "
+                  style="width: 100%; height: 100%; text-align: center; outline: none; border: none"
                 />
               </td>
               <td>
@@ -317,13 +269,7 @@
                   name="Products_1"
                   value="Products_1"
                   required
-                  style="
-                    width: 100%;
-                    height: 100%;
-                    outline: none;
-                    border: none;
-                    text-align: center;
-                  "
+                  style="width: 100%; height: 100%; outline: none; border: none; text-align: center"
                 />
               </td>
               <td>
@@ -333,13 +279,7 @@
                   name="B_1"
                   value="B_1"
                   required
-                  style="
-                    width: 100%;
-                    height: 100%;
-                    outline: none;
-                    border: none;
-                    text-align: center;
-                  "
+                  style="width: 100%; height: 100%; outline: none; border: none; text-align: center"
                 />
               </td>
               <td>
@@ -349,13 +289,7 @@
                   name="SI_1"
                   value="SI_1"
                   required
-                  style="
-                    width: 100%;
-                    height: 100%;
-                    outline: none;
-                    border: none;
-                    text-align: center;
-                  "
+                  style="width: 100%; height: 100%; outline: none; border: none; text-align: center"
                 />
               </td>
               <td>
@@ -365,13 +299,7 @@
                   name="Q_1"
                   value="Q_1"
                   required
-                  style="
-                    width: 100%;
-                    height: 100%;
-                    outline: none;
-                    border: none;
-                    text-align: center;
-                  "
+                  style="width: 100%; height: 100%; outline: none; border: none; text-align: center"
                 />
               </td>
               <td>
@@ -381,13 +309,7 @@
                   name="P_1"
                   value="P_1"
                   required
-                  style="
-                    width: 100%;
-                    height: 100%;
-                    outline: none;
-                    border: none;
-                    text-align: center;
-                  "
+                  style="width: 100%; height: 100%; outline: none; border: none; text-align: center"
                 />
               </td>
               <td>
@@ -397,13 +319,7 @@
                   name="V_1"
                   value="V_1"
                   required
-                  style="
-                    width: 100%;
-                    height: 100%;
-                    outline: none;
-                    border: none;
-                    text-align: center;
-                  "
+                  style="width: 100%; height: 100%; outline: none; border: none; text-align: center"
                 />
               </td>
               <td>
@@ -413,32 +329,53 @@
                   name="N_1"
                   value="N_1"
                   required
-                  style="
-                    width: 100%;
-                    height: 100%;
-                    outline: none;
-                    border: none;
-                    text-align: center;
-                  "
+                  style="width: 100%; height: 100%; outline: none; border: none; text-align: center"
                 />
               </td>
             </tr>
           </tbody>
         </table>
-        <textarea
-          id="remarks"
-          class="border_A"
-          style="
-            border-radius: 0;
-            justify-self: cneter;
-            width: 100%;
-            height: 100%;
-          "
-        ></textarea>
+        <textarea id="remarks" class="border_A" style="border-radius: 0; justify-self: cneter; width: 100%; height: 300px"></textarea>
         <input type="file" id="file-input" multiple />
-        <div id="preview"></div>
+        <div id="preview" class="d-flex flex-wrap"></div>
 
         <script>
+          let fileNo = 0; // 첨부된 이미지 총 갯수 (삭제되도 줄어들지않음). 이미지마다 다른 id를 지정하기 위함
+          let filesArr = []; // 첨부된 모든 파일 리스트 (삭제되도 제거되지않음)
+
+          let maxFileCnt = 10; // 첨부파일 최대 개수
+          let attFileCnt = document.querySelectorAll("#preview").length; // 기존 추가된 첨부파일 개수
+          // 업로드를 하면 바디에 생성된 태그 갯수로 계산
+          let remainFileCnt = maxFileCnt - attFileCnt; // 추가로 첨부가능한 개수
+
+          // 첨부파일 개수 확인
+          // 최대 개수 초과 시
+
+          $("input[id=file-input]")
+            .off()
+            .on("change", function () {
+              if (parseInt($("input[id='file-input']")[0].files.length) > maxFileCnt) {
+                alert("You can only upload a maximum of" + maxFileCnt + "files");
+                $(this).val("");
+              }
+              maxFileCnt = maxFileCnt - parseInt($("input[id='file-input']")[0].files.length);
+              alert("1");
+              for (var i = 0; i < parseInt($("input[id='file-input']")[0].files.length); i++) {
+                alert(i);
+                if (this.files[i] && this.files[i]) {
+                  var maxSize = 100 * 1024 * 1024;
+                  var fileSize = this.files[i].size;
+
+                  if (fileSize > maxSize) {
+                    maxFileCnt = maxFileCnt + parseInt($("input[id='file-input']")[0].files.length);
+                    alert("첨부파일 사이즈는 100MB 이내로 등록 가능합니다.");
+                    $(this).val("");
+                    return false;
+                  }
+                }
+              }
+            });
+
           const handler = {
             init() {
               const fileInput = document.querySelector("#file-input");
@@ -448,10 +385,10 @@
                 const files = Array.from(fileInput.files);
                 files.forEach((file) => {
                   preview.innerHTML += `
-                        <p id="${file.lastModified}">
-                            ${file.name}
-                            <button data-index='${file.lastModified}' class='file-remove' style = "background-color : white; outline:none; border:none">X</button>
-                        </p>`;
+                              <div id="${file.lastModified}">
+                                  ${file.name}
+                                  <button data-index='${file.lastModified}' class='file-remove' style = "background-color : white; outline:none; border:none">X</button>
+                              </div>`;
                 });
               });
             },
@@ -473,9 +410,8 @@
                     dataTranster.items.add(file);
                   });
 
-                document.querySelector("#file-input").files =
-                  dataTranster.files;
-
+                document.querySelector("#file-input").files = dataTranster.files;
+                maxFileCnt++;
                 removeTarget.remove();
               });
             },

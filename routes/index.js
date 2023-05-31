@@ -151,6 +151,18 @@ router.get("/PO_edit", (req, res) => {
   }
 });
 
+router.get("/Bill", (req, res) => {
+  res.render("../views/Page_Bills.ejs");
+});
+
+router.get("/Tax", (req, res) => {
+  res.render("../views/Page_Tax_Bill.ejs");
+});
+
+router.get("/Trading", (req, res) => {
+  res.render("../views/Page_Trading_statement.ejs");
+});
+
 // 마이페이지
 router.get("/MYPAGE", (req, res) => {
   if (req.session.isLogin == true) {

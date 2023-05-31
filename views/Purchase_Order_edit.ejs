@@ -83,6 +83,7 @@
   </head>
   <body>
     <div style="height: 50px"></div>
+    
     <% if (type == 'R'){ %>
     <div class="d-flex flex-warp justify-content-center" style="justify-content: center">
       <div id="Purchase_Order" class="col-10" style="text-align: center">
@@ -404,7 +405,9 @@
         </form>
       </div>
     </div>
-    <% } %> <% if (type == 'S'){ %>
+    <% } %> 
+    
+    <% if (type == 'S'){ %>
     <div class="d-flex flex-warp justify-content-center" style="justify-content: center">
       <div id="Purchase_Order" class="col-10" style="text-align: center">
         <div class="col-12" style="justify-content: end; text-align: right">
@@ -718,7 +721,6 @@
               </tr>
             </tbody>
           </table>
-
           <textarea id="remarks" class="border_A" style="border-radius: 0; justify-self: cneter; width: 100%; height: 50%; padding: 10px"></textarea>
           <input type="file" id="file-input" multiple />
           <div id="preview"></div>
@@ -736,10 +738,10 @@
             const files = Array.from(fileInput.files);
             files.forEach((file) => {
               preview.innerHTML += `
-                        <p id="${file.lastModified}">
+                        <div id="${file.lastModified}">
                             ${file.name}
                             <button data-index='${file.lastModified}' class='file-remove' style = "background-color : white; outline:none; border:none">X</button>
-                        </p>`;
+                        </div>`;
             });
           });
         },

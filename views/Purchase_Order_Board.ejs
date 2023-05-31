@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script src="/js/Board_Table.js"></script>
     <style>
       table {
         width: 100%;
@@ -17,15 +18,10 @@
   </head>
   <body>
     <!-- Nav Bar -->
-
-    <div
-      id="Purchase_Order_Board"
-      class="d-flex flex-wrap justify-content-center"
-      style="justify-content: center"
-    >
-      <div class="col-014"></div>
+    <button onclick="Save_PO()">티</button>
+    <div id="Purchase_Order_Board_Div" class="d-flex flex-wrap justify-content-center" style="justify-content: center">
       <div class="col-08 d-flex flex-wrap justify-content-center">
-        <table>
+        <table id="Purchase_Order_Board">
           <thead>
             <th scope="col">번호</th>
             <th scope="col">제목</th>
@@ -48,7 +44,6 @@
           </tbody>
         </table>
       </div>
-      <div class="col-014"></div>
     </div>
   </body>
 </html>

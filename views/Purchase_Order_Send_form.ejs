@@ -1,5 +1,8 @@
 <% for(var key in req.session.Send_Order) { %>
 <div id="Purchase_Order_<%=key%>" class="col-12" style="text-align: center; display: none">
+  <button onclick="window.open('/PO_edit?type=S&key=<%=key%>','_blank')" style="font-size: 2vmin; justify-items: end" class="btn btn-light">
+    수정
+  </button>
   <div style="text-align: center; font-size: 3vmax; border-top: 1px solid #444444; border-left: 1px solid #444444; border-right: 1px solid #444444">
     발&nbsp;&nbsp;주&nbsp;&nbsp;서
   </div>
@@ -298,7 +301,9 @@
     </tbody>
   </table>
   <div class="col-12" style="height: 10wh">&nbsp;</div>
-  <div class="col-12 border_A">DB연결 시켜 주세요</div>
+  <textarea readonly class="col-12 border_A" style="overflow-y: scroll; height: 240px; padding: 10px" rows="8">
+    <%= req.session.Send_Order[key]['Content'] %></textarea
+  >
 </div>
 
 <%}%>

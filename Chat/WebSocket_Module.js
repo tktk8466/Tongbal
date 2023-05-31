@@ -22,6 +22,7 @@ class WebSocketServer {
           //console.log("WebSocket :: message : " + data.msg);
           //console.log("WebSocket :: uid : " + data.user_id);
           //console.log("WebSocket :: uname : " + data.user_name);
+          //console.log("WebSocket :: compname : " + data.comp_name);
           //console.log("WebSocket :: chatroom : " + data.chat_room_id);
 
           if (data.type === "chatMessage") {
@@ -31,12 +32,17 @@ class WebSocketServer {
               type: "BroadCast",
               msg: data.msg,
               user_id: data.user_id,
+              user_name: data.user_name,
+              comp_name: data.comp_name,
               chat_room_id: data.chat_room_id,
             });
 
             this.wss.clients.forEach((client) => {
               client.send(BroadCast_Message);
             });
+          } else {
+            // got broadcast message
+            // do nothing
           }
         } catch (error) {
           console.error("Error handling message :", error);

@@ -5,35 +5,23 @@
 
     <%- include ('header_login.ejs') %>
 
-    <!-- 웹소켓 클라이언트 접속 -->
-    <script>
-      const ws = new WebSocket("ws://localhost:8080");
-      ws.onopen = () => {
-        console.log("connected at server");
-      };
-      ws.onclose = () => {
-        console.log("disconnected from server");
-      };
-      ws.onerror = () => {
-        console.log("connection error");
-      };
-      //ws.onmessage = chat_reload(chat_tables_<%=key%>); //웹 소켓에서 메세지가 날아오면 실행되는 함수
-    </script>
-
     <!--비정상 접근 차단-->
     <% if(typeof(pass) === 'undefined') { %>
     <script type="text/javascript">
       alert("비정상적인 접근입니다.");
+      window.location.href = "/";
     </script>
     <% } else if(pass == 'NONE') { %>
     <script type="text/javascript">
       alert("로그인이 필요합니다.");
+      window.location.href = "/";
     </script>
     <% } else if(typeof(req) === 'undefined') { %>
     <script type="text/javascript">
-      //location.reload();
+      alert("비정상적인 접근입니다.");
+      window.location.href = "/";
     </script>
-    <% }%>
+    <% } %>
   </head>
 
   <body>

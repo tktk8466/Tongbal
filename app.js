@@ -26,7 +26,6 @@ app.use(express.json());
 app.use("/image", express.static("./views/image"));
 app.use("/css", express.static("./views/css"));
 app.use("/js", express.static("./views/js"));
-// For Jquery
 app.use("/node_modules", express.static("./node_modules"));
 app.use("/", indexRouter);
 app.use((req, res, next) => {

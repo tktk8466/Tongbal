@@ -7,8 +7,6 @@ const time = require("../views/js/time.js");
 // MYSQL CONNECTION
 const dbConfig = {
   // mysql 접속 설정
-  //host: "localhost",
-  //port: "3306",
   host: "34.64.226.169",
   port: "3306",
   user: "root",

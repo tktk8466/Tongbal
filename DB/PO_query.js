@@ -10,7 +10,7 @@ module.exports = {
         const sql_text_2 = " SELECT * FROM tb_purchase_order WHERE OrderComp_ID = (SELECT Company_ID FROM tb_user WHERE tb_user.UUID = ?)"; // 보낸 발주서
         const sql_text_3 = " SELECT * FROM tb_company WHERE UUID = (SELECT Company_ID FROM tb_user WHERE UUID = ?)"; // 내 회사 정보
         const sql_text_4 = " SELECT * FROM tb_company WHERE UUID = ?";
-        const sql_text_5 = " SELECT id, message, sent_at, sent_user_id FROM tb_chatting WHERE TB_CHAT_ROOM_ID = ?";
+        const sql_text_5 = " SELECT message, sent_at, sent_user_id, sent_user_name, comp_name FROM tb_chatting WHERE TB_CHAT_ROOM_ID = ?";
 
         console.log(time.timeString() + " getPO :: DB 접속");
         let connection = await database.conn();

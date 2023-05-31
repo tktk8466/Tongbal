@@ -169,7 +169,10 @@ a {
 .chat {
   display: flex;
   align-items: flex-start;
-  padding: 20px;
+  padding-top: 0px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .chat .icon {
@@ -207,27 +210,27 @@ a {
   font-size: 1.5rem;
 }
 
-.ch1 .textbox {
+.optext .textbox {
   margin-left: 20px;
   background-color: #ddd;
 }
 
-.ch1 .textbox::before {
+.optext .textbox::before {
   left: -15px;
   content: "◀";
   color: #ddd;
 }
 
-.ch2 {
+.mytext {
   flex-direction: row-reverse;
 }
 
-.ch2 .textbox {
+.mytext .textbox {
   margin-right: 20px;
   background-color: #f9eb54;
 }
 
-.ch2 .textbox::before {
+.mytext .textbox::before {
   right: -15px;
   content: "▶";
   color: #f9eb54;

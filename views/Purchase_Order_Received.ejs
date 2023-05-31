@@ -54,6 +54,7 @@
       const uuid = "<%= req.session.UUID%>";
       const uid = "<%= req.session.UserID%>";
       const uname = "<%= req.session.UserName%>";
+      const comp = "<%= req.session.MyCompanyInfo[0]['Comp_NAME']%>";
       let chat_room = "";
     </script>
 
@@ -75,15 +76,19 @@
         ///웹 소켓에서 메세지가 날아오면 실행되는 함수
 
         var MSG = JSON.parse(message.data);
-        console.log("onmessage :: Chat message Received = " + MSG.msg);
+        //console.log("onmessage :: Chat message Received = " + MSG.msg);
         <% for (var key in req.session.Received_Order) { %>
           if(MSG.chat_room_id == `<%= req.session.Received_Order[key]['TB_CHAT_ROOM_ID'] %>`){
             if (MSG.user_id != uid) {
-              newReceiveDiv(chat_tables_<%=key%>, MSG.msg);
+              newReceiveDiv(chat_tables_<%=key%>, MSG.msg, MSG.user_name, MSG.comp_name);
             } else {
-              //newSendDiv(chat_tables_<%=key%>, MSG.msg);
-              console.log("MSG was mine.");
+              //console.log("MSG was mine.");
+              //do nothing
             }
+          }
+          else
+          {
+            //do nothing
           }
           scrollBottom(`chat_tables_<%=key%>`)
         <% } %>
@@ -97,7 +102,7 @@
       function Enter_Check(div_id, chat_room, key) {
         // 엔터키의 코드는 13
         if (event.keyCode == 13) {
-          sendMessage(event, key, uid, uname, chat_room, div_id);
+          sendMessage(event, key, uid, uname, comp, chat_room, div_id);
           return;
         }
       }
@@ -105,30 +110,30 @@
       function chat_load(div_id, MSG) {
         for (i = 0; i < MSG.length; i++) {
           if (MSG[i].sent_user_id != uid) {
-            newReceiveDiv(div_id, MSG[i].message);
+            newReceiveDiv(div_id, MSG[i].message, MSG[i].sent_user_name, MSG[i].comp_name);
           } else {
-            newSendDiv(div_id, MSG[i].message);
+            newSendDiv(div_id, MSG[i].message, MSG[i].sent_user_name, MSG[i].comp_name);
           }
         }
       }
     </script>
 
+    <!---------- 목록 파트 ------------>
     <div style="height: 50px"></div>
-    <div class="d-flex flex-wrap" style="margin: auto; width: 900px">
+    <div class="d-flex flex-wrap" style="margin: auto; width: 900px; text-align: center">
       <table class="table table-hover" id="POtable">
         <thead>
           <tr>
-            <th scope="col">제목</th>
-            <th scope="col">보낸 업체</th>
-
-            <th scope="col">발주일</th>
-            <th scope="col">납품기한</th>
+            <th scope="col" style="width: 300px">제목</th>
+            <th scope="col" style="width: 300px">보낸 업체</th>
+            <th scope="col" style="width: 300px">발주일</th>
+            <th scope="col" style="width: 300px">납품기한</th>
           </tr>
         </thead>
         <tbody>
           <%if (typeof(req.session.Received_Order) !== 'undefined') { for (var key in req.session.Received_Order) { %>
           <tr
-            onclick="toggleDiv(myDIV),toggleDiv(myDIV2_<%=key%>),toggleDiv(POtable),toggleDiv(Purchase_Order_<%=key%>), 
+            onclick="toggleDiv(PO_DIV),toggleDiv(PO_CHAT_DIV_<%=key%>),toggleDiv(POtable),toggleDiv(Purchase_Order_<%=key%>), 
             chat_room_<%=key%> = `<%= req.session.Received_Order[key]['TB_CHAT_ROOM_ID'] %>`, scrollBottom(`chat_tables_<%=key%>`);"
           >
             <th scope="row"><%= req.session.Received_Order[key]["Title"] %></th>
@@ -140,36 +145,40 @@
         </tbody>
       </table>
     </div>
-    <!---------- 채팅창 파트 ------------>
+
+    <!---------- 발주서 파트 ------------>
     <div class="d-flex flex-wrap justify-content-center">
       <div id="BIG_DIV" class="d-flex flex-wrap justify-content-center">
         <div style="width: 10px"></div>
         <div
           class="col_resize"
           style="text-align: center; background-color: white; display: none; min-width: 900px; max-height: 900px; height: 700px"
-          id="myDIV"
+          id="PO_DIV"
         >
           <button
             type="button"
             onclick="
-              toggleDiv(myDIV), 
-              <% for(var key in req.session.Received_Order) {%>
-                Display_none(myDIV2_<%=key%>),
+              toggleDiv(PO_DIV), 
+              <%if (typeof(req.session.Received_Order) !== 'undefined') for(var key in req.session.Received_Order) {%>
+                Display_none(PO_CHAT_DIV_<%=key%>),
                 Display_none(Purchase_Order_<%=key%>),
-              <%}%> toggleDiv(POtable)"
+              <%}%>
+              toggleDiv(POtable)"
             style="float: left; background-color: transparent; border: transparent"
           >
             <i class="bi bi-x-lg"></i>
           </button>
-          <button onclick="window.open('/PO_edit','_blank')" style="font-size: 2vmin; justify-items: end" class="btn btn-light">수정</button>
           <div><%- include ('Purchase_Order_Received_form.ejs') %></div>
         </div>
         <div style="width: 10px"></div>
         <div class="col_resize_empty_2">&nbsp;</div>
 
+        <!---------- 채팅창 파트 ------------>
         <% for (var key in req.session.Received_Order) { %>
-        <div class="col_resize_chat content MY_DIV2_SIZE_960" id="myDIV2_<%=key%>" style="text-align: center; font-size: 1.75vw; display: none">
+        
+        <div class="col_resize_chat content MY_DIV2_SIZE_960" id="PO_CHAT_DIV_<%=key%>" style="text-align: center; font-size: 1.75vw; display: none">
           <div id="CHAT" style="background-color: #d2e9f2; border: var(--bs-border-color-translucent) 1px solid"><%=key%></div>
+          
           <div
             id="chat_tables_<%=key%>"
             class="col-12 test"
@@ -183,18 +192,18 @@
               overflow-y: scroll;
             "
           ></div>
-
+          
           <div id="BUTTON_DIV" class="d-flex">
             <input
               type="text"
               rows="3"
               id="txt_on_<%=key%>"
-              style="width: 100%; border: transparent; outline: none"
+              style="padding-left: 5px; width: 100%; border: var(--bs-border-color-translucent) 1px solid; border-radius: 0; font-size: 18px"
               onkeydown="Enter_Check(chat_tables_<%=key%>, chat_room_<%=key%>, <%=key%>), scrollBottom(`chat_tables_<%=key%>`)"
             />
             <button
               type="button"
-              onclick="sendMessage(undefined, <%=key%>, uid, uname, chat_room_<%=key%>, chat_tables_<%=key%>), scrollBottom(`chat_tables_<%=key%>`)"
+              onclick="sendMessage(undefined, <%=key%>, uid, uname, comp, chat_room_<%=key%>, chat_tables_<%=key%>), scrollBottom(`chat_tables_<%=key%>`)"
               class="btn btn-secondary"
               style="border: var(--bs-border-color-translucent) 1px solid; border-radius: 0"
             >
@@ -209,6 +218,7 @@
         </script>
         <%}%>
       </div>
+      <div class="col-12" style="height: 30px"></div>
     </div>
   </body>
 </html>

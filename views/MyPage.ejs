@@ -2,6 +2,23 @@
 <html lang="en">
   <head>
     <%- include ('header_login.ejs') %>
+    <!--비정상 접근 차단-->
+    <% if(typeof(pass) === 'undefined') { %>
+    <script type="text/javascript">
+      alert("비정상적인 접근입니다.");
+      window.location.href = "/";
+    </script>
+    <% } else if(pass == 'NONE') { %>
+    <script type="text/javascript">
+      alert("로그인이 필요합니다.");
+      window.location.href = "/";
+    </script>
+    <% } else if(typeof(req) === 'undefined') { %>
+    <script type="text/javascript">
+      alert("비정상적인 접근입니다.");
+      window.location.href = "/";
+    </script>
+    <% } %>
   </head>
 
   <body>

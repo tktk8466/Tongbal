@@ -63,24 +63,36 @@
                 <input class="nav-link active" type="submit" style="font-size: 30px; border: none; background: transparent" value="보낸 발주서" />
               </form>
             </li>
-            <li class="nav-item">
-              <form class="d-flex" action="/" method="post">
-                <input type="hidden" name="Page" value="Login" />
-                <input class="nav-link active" type="submit" style="font-size: 30px; border: none; background: transparent" value="증빙서" />
-              </form>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                style="font-size: 30px; border: none; background: transparent"
+                >매출매입
+                <ul class="dropdown-menu" style="width: 30px; height: 150px">
+                  <li><a class="dropdown-item" href="/Trading">거래명세서</a></li>
+                  <li><a class="dropdown-item" href="/Bill">영수증</a></li>
+                  <li><a class="dropdown-item" href="/Tax">세금영수증</a></li>
+                </ul>
+              </a>
             </li>
           </ul>
           <!--로그인 되어 있을 경우 (세션 있음)-->
 
           <form class="d-flex">
+            &nbsp;
             <button class="btn btn btn-outline-dark" type="button" style="border-radius: 30px; border: transparent">
               <li class="nav-item dropdown" style="list-style: none">
                 <a class="nav-link active" role="button" data-bs-toggle="dropdown" aria-expanded="false"
                   ><i class="bi bi-person-lines-fill" style="font-size: 30px"></i>
                   <ul class="dropdown-menu dropdown-menu-end" style="width: 5vw; height: 30vh">
                     <li><a class="dropdown-item" href="/MYPAGE">내정보</a></li>
-                    <li><a class="dropdown-item" href="#">1</a></li>
-                    <li><a class="dropdown-item" href="#">2</a></li>
+                    <li><a class="dropdown-item" href="#"></a></li>
+                    <li><a class="dropdown-item" href="#"></a></li>
+                    <li><a class="dropdown-item" href="#"></a></li>
+                    <li><a class="dropdown-item" href="#"></a></li>
                     <li>
                       <a class="dropdown-item" href="./logout">로그아웃</a>
                     </li>

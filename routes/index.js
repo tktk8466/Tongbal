@@ -154,6 +154,17 @@ router.get("/logout", (req, res) => {
 router.get("/PO_edit", (req, res) => {
   res.render(path.join(__dirname, "../views/Purchase_Order_edit.ejs"));
 });
+router.get("/Bill", (req, res) => {
+  res.render(path.join(__dirname, "../views/Page_Bills.ejs"));
+});
+
+router.get("/Tax", (req, res) => {
+  res.render(path.join(__dirname, "../views/Page_Tax_Bill.ejs"));
+});
+
+router.get("/Trading", (req, res) => {
+  res.render(path.join(__dirname, "../views/Page_Trading_statement.ejs"));
+});
 
 /*
 // 로그인 페이지

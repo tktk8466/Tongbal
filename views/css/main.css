@@ -30,8 +30,7 @@
 
 @font-face {
   font-family: "GangwonEdu_OTFBoldA";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff")
-    format("woff");
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }
@@ -119,67 +118,36 @@
 /*그라데이션 배너*/
 
 .jbGrad011 {
-  background-image: linear-gradient(to right, #44b1e9, #44b1e9),
-    linear-gradient(to right, #44b1e9, #44b1e9);
+  background-image: linear-gradient(to right, #44b1e9, #44b1e9), linear-gradient(to right, #44b1e9, #44b1e9);
 }
 .jbGrad012 {
-  background-image: linear-gradient(to right, #44b1e9 60%, #fbfaf5),
-    linear-gradient(to right, #44b1e9, #fbfaf5);
+  background-image: linear-gradient(to right, #44b1e9 60%, #fbfaf5), linear-gradient(to right, #44b1e9, #fbfaf5);
 }
 .jbGrad012_1 {
-  background-image: linear-gradient(to right, #c7e5f1 60%, #fbfaf5),
-    linear-gradient(to right, #c7e5f1 60%, #fbfaf5);
+  background-image: linear-gradient(to right, #c7e5f1 60%, #fbfaf5), linear-gradient(to right, #c7e5f1 60%, #fbfaf5);
 }
 
 .jbGrad013 {
-  background-image: linear-gradient(to right, #44b1e9 60%, #f7cb82),
-    linear-gradient(to right, #44b1e9, #f7cb82);
+  background-image: linear-gradient(to right, #44b1e9 60%, #f7cb82), linear-gradient(to right, #44b1e9, #f7cb82);
 }
 .jbGrad014 {
-  background-image: linear-gradient(
-      to right,
-      #44b1e9,
-      #fbfaf5,
-      #f7cb82,
-      #fae4bd
-    ),
-    linear-gradient(to right, #44b1e9, #fbfaf5, #f7cb82, #fae4bd);
+  background-image: linear-gradient(to right, #44b1e9, #fbfaf5, #f7cb82, #fae4bd), linear-gradient(to right, #44b1e9, #fbfaf5, #f7cb82, #fae4bd);
 }
 .jbGrad016 {
-  background-image: linear-gradient(
-      to right,
-      #44b1e9,
-      #5fbceb,
-      #8eceed,
-      #fbfaf5,
-      #f7cb82,
-      #fae4bd
-    ),
-    linear-gradient(
-      to right,
-      #44b1e9,
-      #5fbceb,
-      #8eceed,
-      #fbfaf5,
-      #f7cb82,
-      #fae4bd
-    );
+  background-image: linear-gradient(to right, #44b1e9, #5fbceb, #8eceed, #fbfaf5, #f7cb82, #fae4bd),
+    linear-gradient(to right, #44b1e9, #5fbceb, #8eceed, #fbfaf5, #f7cb82, #fae4bd);
 }
 .jbGrad023 {
-  background-image: linear-gradient(to right, #fbfaf5, #f7cb82),
-    linear-gradient(to right, #fbfaf5, #f7cb82);
+  background-image: linear-gradient(to right, #fbfaf5, #f7cb82), linear-gradient(to right, #fbfaf5, #f7cb82);
 }
 .jbGrad024 {
-  background-image: linear-gradient(to righ, t #fbfaf5, #fae4bd),
-    linear-gradient(to right, #fbfaf5, #fae4bd);
+  background-image: linear-gradient(to righ, t #fbfaf5, #fae4bd), linear-gradient(to right, #fbfaf5, #fae4bd);
 }
 .jbGrad034 {
-  background-image: linear-gradient(to right, #f7cb82, #fae4bd),
-    linear-gradient(to right, #f7cb82, #fae4bd);
+  background-image: linear-gradient(to right, #f7cb82, #fae4bd), linear-gradient(to right, #f7cb82, #fae4bd);
 }
 .jbGrad044 {
-  background-image: linear-gradient(to right, #fae4bd, #fae4bd),
-    linear-gradient(to right, #fae4bd, #fae4bd);
+  background-image: linear-gradient(to right, #fae4bd, #fae4bd), linear-gradient(to right, #fae4bd, #fae4bd);
 }
 
 /* 카카오톡 테마*/

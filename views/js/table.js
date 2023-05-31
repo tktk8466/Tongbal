@@ -93,7 +93,6 @@ function resizableGrid(table) {
 function addRow_Purchase_Order_Post() {
   // table element 찾기
   const table = document.getElementById("Purchase_Order_Post"); //여기에 테이블 이름 들어가야합니다.
-
   // 새 행(Row) 추가
   const newRow = table.insertRow();
 

@@ -61,11 +61,20 @@
                 <input class="nav-link active" type="submit" style="font-size: 30px; border: none; background: transparent" value="보낸 발주서" />
               </form>
             </li>
-            <li class="nav-item">
-              <form class="d-flex" action="/" method="post">
-                <input type="hidden" name="Page" value="Login" />
-                <input class="nav-link active" type="submit" style="font-size: 30px; border: none; background: transparent" value="증빙서" />
-              </form>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                style="font-size: 30px; border: none; background: transparent"
+                >매출매입
+                <ul class="dropdown-menu" style="width: 30px; height: 150px">
+                  <li><a class="dropdown-item" href="/Trading">거래명세서</a></li>
+                  <li><a class="dropdown-item" href="/Bill">영수증</a></li>
+                  <li><a class="dropdown-item" href="/Tax">세금영수증</a></li>
+                </ul>
+              </a>
             </li>
           </ul>
 

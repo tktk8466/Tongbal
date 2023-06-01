@@ -19,93 +19,53 @@
       window.location.href = "/";
     </script>
     <% } %>
+    <style>
+      ul,
+      li {
+        font-size: 30px;
+        list-style-type: none;
+      }
+    </style>
+    <script>
+      function my_Company() {
+        F_company.style.display = "block";
+        F_item.style.display = "none";
+        F_My_imf.style.display = "none";
+      }
+      function my_Item() {
+        F_company.style.display = "none";
+        F_item.style.display = "block";
+        F_My_imf.style.display = "none";
+      }
+      function my_INF() {
+        F_company.style.display = "none";
+        F_item.style.display = "none";
+        F_My_imf.style.display = "block";
+      }
+    </script>
   </head>
 
   <body>
-    <div class="d-flex flex-wrap justify-content-center" style="margin: auto 0">
-      <div class="col-2" style="text-align: center; font-size: 30px">
+    <div class="d-flex flex-wrap" style="margin: auto 0; height: 900px">
+      <div class="col-011"></div>
+      <div class="col-07" style="text-align: center; font-size: 30px">
         <div style="height: 40%"></div>
         <ul>
-          <li>회사 정보 수정</li>
-          <li>회사</li>
-          <li>내 정보</li>
-          <li>로그인 이력</li>
+          <li><button class="btn btn-light" onclick="my_INF()" style="font-size: 30px">내 정보</button></li>
+          <li><button class="btn btn-light" onclick="my_Company()" style="font-size: 30px">회사 정보 수정</button></li>
+          <li><button class="btn btn-light" onclick="my_Item()" style="font-size: 30px">상품 추가/관리</button></li>
         </ul>
       </div>
-      <div class="col-4" id="" style="text-align: center; font-size: 30px; min-width: 576px">
-        <div style="height: 30%"></div>
-        <div style="max-height: 300px; overflow-y: scroll" class="test">
-          <table id="" class="col-12">
-            <tbody>
-              <tr>
-                <th scope="row">회사명</th>
-                <td></td>
-                <td>
-                  <input type="text " id="Company_Name" value="Company_Name" style="text-align: center; width: 100%" />
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">대표자 성명</th>
-                <td></td>
-                <td>
-                  <input type="text" id="CEO" value="CEO" style="text-align: center; width: 100%" />
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">사업자 번호</th>
-                <td></td>
-                <td>
-                  <input type="text" id="Company_Address" value="Company_Address" style="text-align: center; width: 100%" />
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">사업장 주소지</th>
-                <td></td>
-                <td>
-                  <input type="text" id="Business_Address" value="Business_Address" style="text-align: center; width: 100%" />
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">업 태</th>
-                <td></td>
-                <td>
-                  <input type="text" id="Business" value="Business" style="text-align: center; width: 100%" />
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">업 종</th>
-                <td></td>
-                <td>
-                  <input type="text" id="Business_Kind" value="Business_Kind" style="text-align: center; width: 100%" />
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">전화번호</th>
-                <td></td>
-                <td>
-                  <input type="text" id="Company_Number" value="Company_Number" style="text-align: center; width: 100%" />
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">팩 스</th>
-                <td></td>
-                <td>
-                  <input type="text" id="Fax" value="Fax" style="text-align: center; width: 100%" />
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+      <div class="col-016" id="" style="text-align: center; font-size: 30px; margin: auto">
+        <div id="F_company" style="display: none"><%- include ('My_Company.ejs') %></div>
+        <div id="F_item" style="display: none"><%- include ('Item_add.ejs') %></div>
+        <div id="F_My_imf" style="display: none"><%- include ('my_inf.ejs') %></div>
 
         <!-- -->
-        <div style="height: 5%"></div>
-        <div id="" class="d-flex" style="height: 10%">
-          <div style="width: 79%"></div>
-          <button type="button" onclick="SetInput()" class="btn btn-secondary" style="width: 20%; height: 100%; border-radius: 25">수 정</button>
-          <div style="width: 1%; height: 20%"></div>
-        </div>
+
         <!-- -->
       </div>
+      <div class="col-011"></div>
     </div>
   </body>
 </html>

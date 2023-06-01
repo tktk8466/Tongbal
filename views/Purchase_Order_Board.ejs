@@ -18,10 +18,9 @@
   </head>
   <body>
     <!-- Nav Bar -->
-    <button onclick="Save_PO()">티</button>
     <div id="Purchase_Order_Board_Div" class="d-flex flex-wrap justify-content-center" style="justify-content: center">
       <div class="col-08 d-flex flex-wrap justify-content-center">
-        <table id="Purchase_Order_Board">
+        <table>
           <thead>
             <th scope="col">번호</th>
             <th scope="col">제목</th>
@@ -31,17 +30,7 @@
             <th scope="col">작성일</th>
             <th scope="col">수정일</th>
           </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>SH0002-AD</td>
-              <td>비타민 리프레시(주)</td>
-              <td>(주)비비드 뷰티</td>
-              <td>임시저장</td>
-              <td>2023-01-01</td>
-              <td>2023-01-02</td>
-            </tr>
-          </tbody>
+          <tbody onclick="Change_PO" id="Purchase_Order_Board"></tbody>
         </table>
       </div>
     </div>

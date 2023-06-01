@@ -163,6 +163,10 @@ router.get("/Trading", (req, res) => {
   res.render("../views/Page_Trading_statement.ejs");
 });
 
+router.get("/Serach", (req, res) => {
+  res.render("../views/Find_CP.ejs");
+});
+
 // 마이페이지
 router.get("/MYPAGE", (req, res) => {
   if (req.session.isLogin == true) {

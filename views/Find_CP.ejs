@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      table,
+      th,
+      td,
+      tr {
+        border: 1px solid black;
+        text-align: center;
+      }
+    </style>
+    <script>
+      function Search_Company_Q() {
+        const table = document.getElementById("Search_Output_tbody"); //여기에 테이블 이름 들어가야합니다.
+
+        /* const input2 = document.createElement("input");
+        const input3 = document.createElement("input");
+        const input4 = document.createElement("input");
+        const input5 = document.createElement("input");
+        const input6 = document.createElement("input");
+        const input7 = document.createElement("input");
+        const input8 = document.createElement("input");
+        const input9 = document.createElement("input");*/
+
+        const newRow = table.insertRow();
+        // 새 행(Row)에 Cell 추가
+        const newCell1 = newRow.insertCell(0);
+        const newCell2 = newRow.insertCell(1);
+        const newCell3 = newRow.insertCell(2);
+        const newCell4 = newRow.insertCell(3);
+        const newCell5 = newRow.insertCell(4);
+        const newCell6 = newRow.insertCell(5);
+        const newCell7 = newRow.insertCell(6);
+
+        // Cell에 텍스트 추가
+        newCell1.innerText = "DB";
+        newCell2.innerText = "DB";
+        newCell3.innerText = "DBlllll";
+        newCell4.innerText = "DBfffffffffffffffffffffffffffffffffffffffffffffffffffffff";
+        newCell5.innerText = "DBffffsss";
+        newCell6.innerText = "DB";
+        newCell7.innerText = "DB";
+      }
+      function Select_result() {}
+    </script>
+  </head>
+  <body>
+    <div style="height: 10px"></div>
+    <div>회사검색</div>
+    <div style="height: 10px"></div>
+    <input type="search" id="Search_Input" />
+    <button onClick="Search_Company_Q()">검색</button>
+    <div style="height: 10px"></div>
+    <div style="width: 820px; height: 500px">
+      <table id="Search_Output" style="border: 1px solid black">
+        <thead>
+          <tr>
+            <th>본사명</th>
+            <th>대표자 성명</th>
+            <th>사업자 번호</th>
+            <th>본사 주소</th>
+            <th>공장 주소</th>
+            <th>Tel</th>
+            <th>Fax</th>
+          </tr>
+        </thead>
+        <tbody id="Search_Output_tbody" onclick=" Select_result()"></tbody>
+      </table>
+    </div>
+  </body>
+</html>

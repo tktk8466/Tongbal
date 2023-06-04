@@ -13,6 +13,9 @@
     <link href="/css/class.css" rel="stylesheet" />
 
     <style>
+      input {
+        border: none;
+      }
       table {
         width: 100%;
         padding: 0px;
@@ -38,11 +41,18 @@
     </button>
     <div class="d-flex flex-warp justify-content-center" style="justify-content: center">
       <div id="Purchase_Order" style="text-align: center; min-width: 1080px">
-        <input id = "title_PO"
-         value="제목을 입력해 주세요" style="width: 100%;text-align: center; font-size: 32px; border-top: 1px solid #444444; border-left: 1px solid #444444; border-right: 1px solid #444444"
-        >
-          
-      </input>
+        <input
+          id="title_PO"
+          value="제목을 입력해 주세요"
+          style="
+            width: 100%;
+            text-align: center;
+            font-size: 32px;
+            border-top: 1px solid #444444;
+            border-left: 1px solid #444444;
+            border-right: 1px solid #444444;
+          "
+        />
         <div
           style="
             text-align: center;

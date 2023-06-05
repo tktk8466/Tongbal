@@ -30,7 +30,7 @@ module.exports = {
     })
       .then(async (resolved) => {
         if (resolved) {
-          console.log(time.timeString() + "ChatMsg :: DB INSERT DONE ");
+          //console.log(time.timeString() + "ChatMsg :: DB INSERT DONE ");
         }
       })
       .catch((err) => {

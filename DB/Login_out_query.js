@@ -10,13 +10,13 @@ module.exports = {
         if (ID && PW) {
           var sql_text = "SELECT UUID, UserName FROM tb_user WHERE BINARY(UserID) = ? AND BINARY(Passwd) = ?;";
 
-          console.log(time.timeString() + "[1] auth :: DB 연결");
+          //console.log(time.timeString() + "[1] auth :: DB 연결");
           let connection = await database.conn();
-          console.log(time.timeString() + "[1] auth :: DB 연결...Done");
+          //console.log(time.timeString() + "[1] auth :: DB 연결...Done");
 
-          console.log(time.timeString() + "[3] auth :: DB 쿼리");
+          //console.log(time.timeString() + "[3] auth :: DB 쿼리");
           let [rows, fields] = await connection.query(sql_text, [ID, PW]);
-          console.log(time.timeString() + "[3] auth :: DB 쿼리..Done");
+          //console.log(time.timeString() + "[3] auth :: DB 쿼리..Done");
 
           if (rows.length > 0) {
             req.session.UUID = rows[0]["UUID"];

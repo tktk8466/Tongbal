@@ -3,11 +3,10 @@ const express_session = require("express-session");
 const database = require("./DB/Database.js");
 const time = require("./views/js/time.js");
 const indexRouter = require("./routes/index.js");
-const app = express();
 const WebSocketServer = require("./Chat/WebSocket_Module.js");
 
 //---------------세션 미들웨어----------------------
-//app.use(cookieparser);
+const app = express();
 app.use(
   express_session({
     secret: "awkfdsdnrqwrhfhwekykuyrsefq",

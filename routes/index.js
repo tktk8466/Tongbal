@@ -4,7 +4,6 @@ const path = require("path");
 const time = require("../views/js/time.js");
 const db_query = require("../DB/login_out_query.js");
 const po_query = require("../DB/PO_query.js");
-const chat_query = require("../Chat/ChatMsg_query.js");
 
 // Bootstrap
 router.use("/bootstrap", express.static(path.join(__dirname, "../node_modules/bootstrap/dist")));
@@ -106,8 +105,8 @@ router.post("/", async (req, res) => {
       });
       //
     } else if (Page == "Login_attempt") {
-      let ID = req.body.userID;
-      let PW = req.body.userPW;
+      const ID = req.body.userID;
+      const PW = req.body.userPW;
       try {
         if (await db_query.login(req, res, ID, PW)) {
           await po_query.getPO(req, res);
@@ -146,6 +145,40 @@ router.get("/PO_edit", (req, res) => {
       var key = req.query.key;
       res.render("../views/Purchase_Order_edit.ejs", { req, type, key });
     }
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+router.post("/PO_save", async (req, res) => {
+  try {
+    let count = req.body.count;
+    let CP_UUID = req.body.CP_UUID;
+    let PO_UUID = req.body.PO_UUID;
+    let Content = req.body.Content;
+    let P_Code = req.body.P_Code;
+    let P_Name = req.body.P_Name;
+    let P_Width = req.body.P_Width;
+    let P_Height = req.body.P_Height;
+    let P_Unit = req.body.P_Unit;
+    let P_Quan = req.body.P_Quan;
+    let P_Price = req.body.P_Price;
+    let P_VAT = req.body.P_VAT;
+
+    await po_query.updatePO_content(PO_UUID, Content);
+    await po_query.clearPO_item(PO_UUID);
+    if (count != 0) {
+      for (var i = 0; i < count; i++) {
+        if (count == 1) {
+          await po_query.savePO_item(CP_UUID, PO_UUID, P_Code, P_Name, P_Width, P_Height, P_Unit, P_Quan, P_Price, P_VAT);
+        } else {
+          await po_query.savePO_item(CP_UUID, PO_UUID, P_Code[i], P_Name[i], P_Width[i], P_Height[i], P_Unit[i], P_Quan[i], P_Price[i], P_VAT[i]);
+        }
+      }
+    }
+    await po_query.getPO(req, res);
+    //res.redirect(req.get("referer"));
+    res.send("<script>window.close();</script >");
   } catch (err) {
     console.log(err);
   }

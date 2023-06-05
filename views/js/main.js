@@ -33,21 +33,25 @@ function newSendDiv(id, text, username, compname) {
   const chat = document.createElement("div");
   const icon = document.createElement("div");
   const textbox = document.createElement("div");
-  const userinfo = document.createElement("div");
+  const user_c = document.createElement("div");
+  const user_n = document.createElement("div");
 
   // 2. <div>에 들어갈 text node 만들기
   chat.className = "chat mytext";
   icon.className = "icon";
   textbox.className = "textbox";
-  userinfo.style = "width:100%; text-align:right; padding-right:25px";
-  userinfo.append("[" + compname + "] " + username);
+  user_c.style = "width:100%; text-align: right; padding-right:25px; font-size: 15px;";
+  user_c.append(compname);
+  user_n.style = "width:100%; text-align: right; padding-right:28px; font-size: 20px;";
+  user_n.append(username);
 
   // 3. <div>에 text node 붙이기
   textbox.append(text);
 
   // 4. <body>에 1에서 만든 <div> element 붙이기
   chat.append(textbox);
-  id.append(userinfo);
+  id.append(user_c);
+  id.append(user_n);
   id.append(chat);
 }
 
@@ -57,21 +61,24 @@ function newReceiveDiv(id, text, username, compname) {
   const chat = document.createElement("div");
   const icon = document.createElement("div");
   const textbox = document.createElement("div");
-  const userinfo = document.createElement("div");
-
+  const user_c = document.createElement("div");
+  const user_n = document.createElement("div");
   // 2. <div>에 들어갈 text node 만들기
   chat.className = "chat optext";
   icon.className = "icon";
   textbox.className = "textbox";
-  userinfo.style = "width:100%; text-align: left; padding-left:25px";
-  userinfo.append("[" + compname + "] " + username);
+  user_c.style = "width:100%; text-align: left; padding-left:25px; font-size: 15px;";
+  user_c.append(compname);
+  user_n.style = "width:100%; text-align: left; padding-left:28px; font-size: 20px;";
+  user_n.append(username);
 
   // 3. <div>에 text node 붙이기
   textbox.append(text);
 
   // 4. <body>에 1에서 만든 <div> element 붙이기
   chat.append(textbox);
-  id.append(userinfo);
+  id.append(user_c);
+  id.append(user_n);
   id.append(chat);
 }
 
@@ -81,7 +88,7 @@ function sendMessage(event, key, UserID, UserName, CompName, chat_room, div_id) 
   const textarea = document.getElementById("txt_on_" + key);
   if (event != undefined && textarea.value != undefined) {
     let key = event.key || event.keyCode;
-    if (key == "Enter") {
+    if (key == "Enter" && textarea.value != "") {
       const fullMessage = JSON.stringify({
         type: "chatMessage",
         msg: textarea.value,
@@ -94,8 +101,8 @@ function sendMessage(event, key, UserID, UserName, CompName, chat_room, div_id) 
       newSendDiv(div_id, textarea.value, UserName, CompName);
       textarea.value = "";
     }
-  } else if (event == undefined && textarea.value != undefined) {
-    console.log("event == undefined");
+  } else if (event == undefined && textarea.value != "") {
+    //console.log("event == undefined");
     const fullMessage = JSON.stringify({
       type: "chatMessage",
       msg: textarea.value,
@@ -122,7 +129,6 @@ function scrollBottom(div_id) {
   }
 }
 
-var tmp_num = 2;
 function add_row() {
   var my_tbody = document.getElementById("PO_item_body");
   // var row = my_tbody.insertRow(0); // 상단에 추가
@@ -134,6 +140,7 @@ function add_row() {
   const input7 = document.createElement("input");
   const input8 = document.createElement("input");
   const input9 = document.createElement("input");
+
   input2.className = "input_PO_item";
   input3.className = "input_PO_item";
   input4.className = "input_PO_item";
@@ -142,27 +149,37 @@ function add_row() {
   input7.className = "input_PO_item";
   input8.className = "input_PO_item";
   input9.className = "input_PO_item";
-  input2.id = "Cannes_" + tmp_num;
-  input3.id = "Products_" + tmp_num;
-  input4.id = "B_" + tmp_num;
-  input5.id = "SI_" + tmp_num;
-  input6.id = "Q_" + tmp_num;
-  input7.id = "P_" + tmp_num;
-  input8.id = "V_" + tmp_num;
-  input9.id = "N_" + tmp_num;
-  var row = my_tbody.insertRow(PO_item_body.rows.length); // 하단에 추가
-  var cell1 = row.insertCell(0);
-  var cell2 = row.insertCell(1);
-  var cell3 = row.insertCell(2);
-  var cell4 = row.insertCell(3);
-  var cell5 = row.insertCell(4);
-  var cell6 = row.insertCell(5);
-  var cell7 = row.insertCell(6);
-  var cell8 = row.insertCell(7);
-  var cell9 = row.insertCell(8);
 
-  cell1.innerHTML = tmp_num;
-  tmp_num++;
+  input2.name = "P_Code";
+  input3.name = "P_Name";
+  input4.name = "P_Width";
+  input5.name = "P_Height";
+  input6.name = "P_Unit";
+  input7.name = "P_Quan";
+  input8.name = "P_Price";
+  input9.name = "P_VAT";
+
+  input2.placeholder = "제품코드";
+  input3.placeholder = "제품명";
+  input4.placeholder = "가로";
+  input5.placeholder = "세로";
+  input6.placeholder = "단위";
+  input7.placeholder = "수량";
+  input8.placeholder = "단가";
+  input9.placeholder = "부가세";
+
+  const row = my_tbody.insertRow(PO_item_body.rows.length); // 하단에 추가
+  const cell1 = row.insertCell(0);
+  const cell2 = row.insertCell(1);
+  const cell3 = row.insertCell(2);
+  const cell4 = row.insertCell(3);
+  const cell5 = row.insertCell(4);
+  const cell6 = row.insertCell(5);
+  const cell7 = row.insertCell(6);
+  const cell8 = row.insertCell(7);
+  const cell9 = row.insertCell(8);
+
+  cell1.innerHTML = PO_item_body.rows.length;
   cell2.append(input2);
   cell3.append(input3);
   cell4.append(input4);
@@ -171,12 +188,16 @@ function add_row() {
   cell7.append(input7);
   cell8.append(input8);
   cell9.append(input9);
+
+  var count = document.getElementById("count");
+  count.value = PO_item_body.rows.length;
 }
 
 function delete_row() {
   var my_tbody = document.getElementById("PO_item_body");
   if (my_tbody.rows.length < 1) return;
   // my_tbody.deleteRow(0); // 상단부터 삭제
-  tmp_num--;
   my_tbody.deleteRow(my_tbody.rows.length - 1); // 하단부터 삭제
+  var count = document.getElementById("count");
+  count.value = PO_item_body.rows.length;
 }

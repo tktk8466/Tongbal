@@ -31,21 +31,14 @@
     </style>
   </head>
   <body>
-    <button
-      class="btn btn-light"
-      onclick="window.open('/Serach','Serach_Company','width =900 ,height = 600')"
-      style="font-size: 20px; text-align: end; justify-items: end; border: 1px solid black"
-    >
-      회사찾기
-    </button>
-    <button class="btn btn-light" type="submit" style="font-size: 20px; text-align: end; justify-items: end; border: 1px solid black">저장</button>
-
     <form action="/PO_save" method="POST">
+      <button class="btn btn-light" type="submit" style="font-size: 20px; text-align: end; justify-items: end; border: 1px solid black">저장</button>
       <div class="col-12" style="height: 10wh">&nbsp;</div>
       <div class="d-flex flex-warp justify-content-center" style="justify-content: center">
         <div id="Purchase_Order" style="text-align: center; min-width: 1080px">
           <input
             id="title_PO"
+            name="title_PO"
             value=""
             placeholder="제목을 입력해 주세요"
             style="
@@ -77,55 +70,66 @@
                   <table>
                     <tbody>
                       <tr>
-                        <th style="height: 40px">회사명</th>
+                        <th style="height: 36px">회사명</th>
                         <th>
                           <input
                             type="text"
                             id="Comp_NAME"
                             name="Comp_NAME"
-                            placeholder="회사명"
-                            required
+                            value="<%= req.session.MyCompanyInfo[0]['Comp_NAME'] %>"
                             readonly
                             style="width: 100%; height: 100%; text-align: center"
                           />
                         </th>
                       </tr>
                       <tr>
-                        <th style="height: 40px">대표자 성명</th>
+                        <th style="height: 36px">대표자 성명</th>
                         <th>
                           <input
                             type="text"
                             id="President_NAME"
                             name="President_NAME"
-                            placeholder="대표자 성명"
-                            required
+                            value="<%= req.session.MyCompanyInfo[0]['President_NAME'] %>"
                             readonly
                             style="width: 100%; height: 100%; text-align: center"
                           />
                         </th>
                       </tr>
                       <tr>
-                        <th style="height: 40px">주소</th>
+                        <th style="height: 32px">사업자 번호</th>
                         <th>
                           <input
                             type="text"
-                            id="Business_Address"
-                            name="Business_Address"
-                            placeholder="주소"
-                            required
+                            id="Business_NUM"
+                            name="Business_NUM"
+                            value="<%= req.session.MyCompanyInfo[0]['Business_NUM'] %>"
+                            readonly
+                            style="width: 100%; height: 100%; text-align: center"
+                          />
+                        </th>
+                      </tr>
+                      <tr></tr>
+                      <tr>
+                        <th style="height: 32px">주소</th>
+                        <th>
+                          <input
+                            type="text"
+                            id="Business_ADDR"
+                            name="Business_ADDR"
+                            value="<%= req.session.MyCompanyInfo[0]['Business_ADDR'] %>"
                             readonly
                             style="width: 100%; height: 100%; text-align: center"
                           />
                         </th>
                       </tr>
                       <tr>
-                        <th style="height: 40px">Tel.</th>
+                        <th style="height: 32px">TEL</th>
                         <th>
                           <input
                             type="text"
                             id="TEL"
                             name="TEL"
-                            placeholder="TEL"
+                            value="<%= req.session.MyCompanyInfo[0]['TEL'] %>"
                             required
                             readonly
                             style="width: 100%; height: 100%; text-align: center"
@@ -133,13 +137,13 @@
                         </th>
                       </tr>
                       <tr>
-                        <th style="height: 40px">Fax.</th>
+                        <th style="height: 32px">FAX</th>
                         <th>
                           <input
                             type="text"
                             id="FAX"
                             name="FAX"
-                            placeholder="FAX"
+                            value="<%= req.session.MyCompanyInfo[0]['FAX'] %>"
                             required
                             readonly
                             style="width: 100%; height: 100%; text-align: center"
@@ -164,9 +168,10 @@
                             type="text"
                             id="Comp_NAME_2"
                             name="Comp_NAME2"
-                            placeholder="본사명"
-                            value="<%= req.session.MyCompanyInfo[0]['Comp_NAME'] %>"
+                            placeholder="회사명"
+                            value="<%= rows[0] %>"
                             required
+                            readonly
                             style="width: 100%; height: 100%; text-align: center"
                           />
                         </th>
@@ -179,8 +184,9 @@
                             id="President_NAME_2"
                             name="President_NAME_2"
                             placeholder="대표자 성명"
-                            value="<%= req.session.MyCompanyInfo[0]['President_NAME'] %>"
+                            value="<%= rows[1] %>"
                             required
+                            readonly
                             style="width: 100%; height: 100%; text-align: center"
                           />
                         </th>
@@ -190,11 +196,12 @@
                         <th>
                           <input
                             type="text"
-                            id="Business_NUM"
-                            name="Business_NUM"
+                            id="Business_NUM2"
+                            name="Business_NUM2"
                             placeholder="사업자 번호"
-                            value="<%= req.session.MyCompanyInfo[0]['Business_NUM'] %>"
+                            value="<%= rows[2] %>"
                             required
+                            readonly
                             style="width: 100%; height: 100%; text-align: center"
                           />
                         </th>
@@ -204,11 +211,12 @@
                         <th>
                           <input
                             type="text"
-                            id="Business_Address_2"
-                            name="Business_Address_2"
+                            id="Business_ADDR2"
+                            name="Business_ADDR2"
                             placeholder="본사 주소"
-                            value="<%= req.session.MyCompanyInfo[0]['Business_ADDR'] %>"
-                            requiredun
+                            value="<%= rows[3] %>"
+                            required
+                            readonly
                             style="width: 100%; height: 100%; text-align: center"
                           />
                         </th>
@@ -221,50 +229,53 @@
                             id="Business_Address_F"
                             name="Business_Address_F"
                             placeholder="공장 주소"
-                            value="<%=req.session.MyCompanyInfo[0]['Factory_ADDR(OPTIONAL)']%>"
+                            value="<%= rows[4] %>"
                             required
+                            readonly
                             style="width: 100%; height: 100%; text-align: center"
                           />
                         </th>
                       </tr>
                       <tr>
-                        <th>발주 담당자</th>
+                        <th>업종</th>
                         <th>
                           <input
                             type="text"
-                            id="Manager"
-                            name="Manager"
-                            placeholder="발주 담당자"
-                            value=""
-                            required
+                            id="Sectors"
+                            name="Sectors"
+                            placeholder="업종"
+                            value="<%= rows[5] %>"
+                            readonly
                             style="width: 100%; height: 100%; text-align: center"
                           />
                         </th>
                       </tr>
                       <tr>
-                        <th>Tel.</th>
+                        <th>TEL</th>
                         <th>
                           <input
                             type="text"
                             id="TEL2"
                             name="TEL2"
                             placeholder="TEL"
-                            value="<%=req.session.MyCompanyInfo[0]['TEL']%>"
+                            value="<%= rows[6] %>"
                             required
+                            readonly
                             style="width: 100%; height: 100%; text-align: center"
                           />
                         </th>
                       </tr>
                       <tr>
-                        <th>Fax.</th>
+                        <th>FAX</th>
                         <th>
                           <input
                             type="text"
                             id="Fax2"
                             name="Fax2"
                             placeholder="FAX"
-                            value="<%=req.session.MyCompanyInfo[0]['FAX']%>"
+                            value="<%= rows[7] %>"
                             required
+                            readonly
                             style="width: 100%; height: 100%; text-align: center"
                           />
                         </th>
@@ -278,8 +289,6 @@
           <div class="col-12" style="height: 10wh">&nbsp;</div>
 
           <input type="hidden" id="count" name="count" value="0" />
-          <input type="hidden" name="CP_UUID" value="" />
-          <input type="hidden" name="PO_UUID" value="" />
 
           <div class="col-12" style="justify-content: end; text-align: left">
             <button type="input" style="border: none; outline: none; width: 25px; height: 25px; font-size: 16px" onclick="delete_row()">-</button>
@@ -299,7 +308,7 @@
                 <th scope="col">세로</th>
                 <th scope="col">단위</th>
                 <th scope="col">수량</th>
-                <th scope="col">공급가액</th>
+                <th scope="col">단가</th>
                 <th scope="col">부가세</th>
               </tr>
             </thead>
@@ -396,6 +405,7 @@
             <input type="file" id="file-input" multiple />
             <div id="preview" class="d-flex flex-wrap"></div>
           </form>
+          <!--
           <script>
             let fileNo = 0; // 첨부된 이미지 총 갯수 (삭제되도 줄어들지않음). 이미지마다 다른 id를 지정하기 위함
             let filesArr = []; // 첨부된 모든 파일 리스트 (삭제되도 제거되지않음)
@@ -474,7 +484,7 @@
 
             handler.init();
             handler.removeFile();
-          </script>
+          </script>-->
         </div>
       </div>
     </form>

@@ -4,6 +4,11 @@ const path = require("path");
 const time = require("../views/js/time.js");
 const db_query = require("../DB/login_out_query.js");
 const po_query = require("../DB/PO_query.js");
+const { v4 } = require("uuid");
+const uuid = () => {
+  const tokens = v4().split("-");
+  return tokens[2] + tokens[1] + tokens[0] + tokens[3] + tokens[4];
+};
 
 // Bootstrap
 router.use("/bootstrap", express.static(path.join(__dirname, "../node_modules/bootstrap/dist")));
@@ -23,7 +28,16 @@ router.get("/", async (req, res) => {
             pass: "NONE",
           });
         } else {
-          res.render("../views/Purchase_Order_M.ejs", { req, pass: true });
+          if (req.query.rows != undefined) {
+            const rows = req.query.rows.split(",");
+            res.render("../views/Purchase_Order_M.ejs", { req, rows, pass: true });
+            console.log(rows);
+          } else {
+            await po_query.getCompInfo(req);
+            res.render("../views/Find_CP.ejs", { req, pass: true });
+            //res.render("../views/Purchase_Order_M.ejs", { req, pass: true });
+            console.log("안 넘어옴");
+          }
         }
       } else if (Page == "PO_R") {
         if (req.session.isLogin != true) {
@@ -153,7 +167,7 @@ router.get("/PO_edit", (req, res) => {
 router.post("/PO_items_save", async (req, res) => {
   try {
     let count = req.body.count;
-    let CP_UUID = req.body.CP_UUID;
+
     let PO_UUID = req.body.PO_UUID;
     let Content = req.body.Content;
     let P_Code = req.body.P_Code;
@@ -170,9 +184,9 @@ router.post("/PO_items_save", async (req, res) => {
     if (count != 0) {
       for (var i = 0; i < count; i++) {
         if (count == 1) {
-          await po_query.savePO_item(CP_UUID, PO_UUID, P_Code, P_Name, P_Width, P_Height, P_Unit, P_Quan, P_Price, P_VAT);
+          await po_query.savePO_item(PO_UUID, P_Code, P_Name, P_Width, P_Height, P_Unit, P_Quan, P_Price, P_VAT);
         } else {
-          await po_query.savePO_item(CP_UUID, PO_UUID, P_Code[i], P_Name[i], P_Width[i], P_Height[i], P_Unit[i], P_Quan[i], P_Price[i], P_VAT[i]);
+          await po_query.savePO_item(PO_UUID, P_Code[i], P_Name[i], P_Width[i], P_Height[i], P_Unit[i], P_Quan[i], P_Price[i], P_VAT[i]);
         }
       }
     }
@@ -187,10 +201,18 @@ router.post("/PO_items_save", async (req, res) => {
 router.post("/PO_save", async (req, res) => {
   // 작성된 발주서 저장
   try {
-    let count = req.body.count;
-    let CP_UUID = req.body.CP_UUID;
-    let PO_UUID = req.body.PO_UUID;
+    let PO_UUID = uuid(); // PO_UUID 직접 생성
+    let title = req.body.title_PO;
     let Content = req.body.Content;
+    let Business_NUM = req.body.Business_NUM; // 내 회사 이름
+    let Business_NUM2 = req.body.Business_NUM2; // 상대 회사 이름
+    // Business_NUM으로 "SELECT UUID FROM tb_company WHERE Business_NUM = ?" 에 넣어서 서브쿼리로 사용
+    let Chat_Room_Id = uuid(); // Chat_Room_Id 직접 생성
+
+    await po_query.savePO(PO_UUID, title, Content, Business_NUM, Business_NUM2, Chat_Room_Id);
+
+    // tb_prd_info 삽입
+    let count = req.body.count;
     let P_Code = req.body.P_Code;
     let P_Name = req.body.P_Name;
     let P_Width = req.body.P_Width;
@@ -203,15 +225,18 @@ router.post("/PO_save", async (req, res) => {
     if (count != 0) {
       for (var i = 0; i < count; i++) {
         if (count == 1) {
-          await po_query.savePO_item(CP_UUID, PO_UUID, P_Code, P_Name, P_Width, P_Height, P_Unit, P_Quan, P_Price, P_VAT);
+          await po_query.savePO_item(PO_UUID, P_Code, P_Name, P_Width, P_Height, P_Unit, P_Quan, P_Price, P_VAT);
         } else {
-          await po_query.savePO_item(CP_UUID, PO_UUID, P_Code[i], P_Name[i], P_Width[i], P_Height[i], P_Unit[i], P_Quan[i], P_Price[i], P_VAT[i]);
+          await po_query.savePO_item(PO_UUID, P_Code[i], P_Name[i], P_Width[i], P_Height[i], P_Unit[i], P_Quan[i], P_Price[i], P_VAT[i]);
         }
       }
     }
+
+    // 세션에서 임시저장 정보 지움
+    req.session.result = "";
+    req.session.save();
     await po_query.getPO(req, res);
-    //res.redirect(req.get("referer"));
-    res.send("<script>window.close();</script >");
+    res.render("../views/main_login.ejs", { req, pass: true });
   } catch (err) {
     console.log(err);
   }
@@ -250,14 +275,15 @@ router.get("/Trading", (req, res) => {
   }
 });
 
-router.get("/Serach", (req, res) => {
+router.get("/Serach", async (req, res) => {
   if (req.session.isLogin != true) {
     // 로그인 세션 없을 때
     res.render("../views/login.ejs", {
       pass: "NONE",
     });
   } else {
-    res.render("../views/Find_CP.ejs", { pass: true });
+    await po_query.getCompInfo(req);
+    res.render("../views/Find_CP.ejs", { req, pass: true });
   }
 });
 

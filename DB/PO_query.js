@@ -87,14 +87,39 @@ module.exports = {
       });
   },
 
-  savePO_item: async (CP_UUID, PO_UUID, P_Code, P_Name, P_Width, P_Height, P_Unit, P_Quan, P_Price, P_VAT) => {
+  savePO: async (PO_UUID, title_PO, Content, B_NUM, B_NUM2, Chat_Room_ID) => {
     return new Promise(async (resolved, rejected) => {
       try {
         const sql_text =
-          "INSERT INTO tb_prd_info(Company_UUID, PO_UUID, Product_CODE, Product_NAME, Quantity, Width, Height, unit, Unit_Price, VAT) VALUES (?,?,?,?,?,?,?,?,?,?)";
+          "INSERT INTO tb_purchase_order(UUID, Title, Content, FirstOrder_Date, Order_Date, Delivery_Date, OrderComp_ID, Contractor_ID, TB_CHAT_ROOM_ID) VALUES (?, ?, ?, now(), now(), now(), (SELECT UUID FROM tb_company WHERE Business_NUM = ?),(SELECT UUID FROM tb_company WHERE Business_NUM = ?),?)";
 
         let connection = await database.conn();
-        await connection.query(sql_text, [CP_UUID, PO_UUID, P_Code, P_Name, P_Quan, P_Width, P_Height, P_Unit, P_Price, P_VAT]);
+        await connection.query(sql_text, [PO_UUID, title_PO, Content, B_NUM, B_NUM2, Chat_Room_ID]);
+        resolved(connection);
+      } catch (err) {
+        console.log(time.timeString() + " PO_Query.js :: savePO_item 쿼리 오류 : " + err);
+      }
+    })
+      .then((resolved) => {
+        if (resolved != undefined) {
+          resolved.release();
+        } else {
+          console.log(time.timeString() + " PO_Query :: DB 연결 유실 at savePO_item()");
+        }
+      })
+      .catch((err) => {
+        console.log(time.timeString() + " savePO_item :: err ::" + err);
+      });
+  },
+
+  savePO_item: async (PO_UUID, P_Code, P_Name, P_Width, P_Height, P_Unit, P_Quan, P_Price, P_VAT) => {
+    return new Promise(async (resolved, rejected) => {
+      try {
+        const sql_text =
+          "INSERT INTO tb_prd_info(PO_UUID, Product_CODE, Product_NAME, Quantity, Width, Height, unit, Unit_Price, VAT) VALUES (?,?,?,?,?,?,?,?,?)";
+
+        let connection = await database.conn();
+        await connection.query(sql_text, [PO_UUID, P_Code, P_Name, P_Quan, P_Width, P_Height, P_Unit, P_Price, P_VAT]);
         resolved(connection);
       } catch (err) {
         console.log(time.timeString() + " PO_Query.js :: savePO_item 쿼리 오류 : " + err);
@@ -180,6 +205,34 @@ module.exports = {
       })
       .catch((err) => {
         console.log(time.timeString() + " UPLOAD_FILE:: err ::" + err);
+      });
+  },
+
+  getCompInfo: async (req) => {
+    return new Promise(async (resolved, rejected) => {
+      try {
+        const sql_text = "SELECT * FROM tb_company;";
+        let connection = await database.conn();
+        let [rows, fields] = await connection.query(sql_text);
+        if (rows != undefined) {
+          req.session.result = rows;
+          req.session.save();
+        }
+
+        resolved(connection);
+      } catch (err) {
+        console.log(time.timeString() + " PO_Query.js :: getCompInfo 쿼리 오류 : " + err);
+      }
+    })
+      .then((resolved) => {
+        if (resolved != undefined) {
+          resolved.release();
+        } else {
+          console.log(time.timeString() + " PO_Query.js :: DB 연결 유실 at getCompInfo()");
+        }
+      })
+      .catch((err) => {
+        console.log(time.timeString() + " getCompInfo:: err ::" + err);
       });
   },
 };

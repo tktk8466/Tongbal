@@ -38,7 +38,19 @@
           />
         </div>
       </div>
-
+      <div class="col-12 d-flex flex-wrap border_R border_B" style="align-items: center; justify-content: center">
+        <div class="col-07 Poc_chat_font">사업자 번호</div>
+        <div class="col-08 Poc_chat_font border_L" style="height: 100%">
+          <input
+            type="text"
+            id="Business_NUM"
+            name="Business_NUM"
+            value="<%=req.session.R_CompanyInfo[key]['Business_NUM']%>"
+            style="width: 100%; height: 100%; text-align: center"
+            readonly
+          />
+        </div>
+      </div>
       <div class="col-12 d-flex flex-wrap border_R border_B" style="align-items: center; justify-content: center">
         <div class="col-07 Poc_chat_font">주소</div>
         <div class="col-08 Poc_chat_font border_L" style="height: 100%">
@@ -53,7 +65,7 @@
         </div>
       </div>
       <div class="col-12 d-flex flex-wrap border_R border_B" style="align-items: center; justify-content: center">
-        <div class="col-07 Poc_chat_font">Tel.</div>
+        <div class="col-07 Poc_chat_font">TEL</div>
         <div class="col-08 Poc_chat_font border_L" style="height: 100%">
           <input
             type="text"
@@ -66,7 +78,7 @@
         </div>
       </div>
       <div class="col-12 d-flex flex-wrap border_R border_B" style="align-items: center; justify-content: center">
-        <div class="col-07 Poc_chat_font">Fax.</div>
+        <div class="col-07 Poc_chat_font">FAX</div>
         <div class="col-08 Poc_chat_font border_L" style="height: 100%">
           <input
             type="text"
@@ -117,8 +129,8 @@
         <div class="col-08 Poc_chat_font border_L" style="height: 100%">
           <input
             type="text"
-            id="Business_NUM"
-            name="Business_NUM"
+            id="Business_NUM2"
+            name="Business_NUM2"
             value="<%=req.session.MyCompanyInfo[0]['Business_NUM']%>"
             style="width: 100%; height: 100%; text-align: center"
             readonly
@@ -152,20 +164,20 @@
         </div>
       </div>
       <div class="col-12 d-flex flex-wrap border_B" style="align-items: center; justify-content: center">
-        <div class="col-07 Poc_chat_font">발주 담당자</div>
+        <div class="col-07 Poc_chat_font">업종</div>
         <div class="col-08 Poc_chat_font border_L" style="height: 100%">
           <input
             type="text"
-            id="Manager"
-            name="Manager"
-            value="<%=req.session.UserName%>"
+            id="Sectors"
+            name="Sectors"
+            value="<%=req.session.MyCompanyInfo[0]['Sectors']%>"
             style="width: 100%; height: 100%; text-align: center"
             readonly
           />
         </div>
       </div>
       <div class="col-12 d-flex flex-wrap border_B" style="align-items: center; justify-content: center">
-        <div class="col-07 Poc_chat_font">Tel.</div>
+        <div class="col-07 Poc_chat_font">TEL</div>
         <div class="col-08 Poc_chat_font border_L" style="height: 100%">
           <input
             type="text"
@@ -178,7 +190,7 @@
         </div>
       </div>
       <div class="col-12 d-flex flex-wrap border_B" style="align-items: center; justify-content: center">
-        <div class="col-07 Poc_chat_font">Fax.</div>
+        <div class="col-07 Poc_chat_font">FAX</div>
         <div class="col-08 Poc_chat_font border_L" style="height: 100%">
           <input
             type="text"

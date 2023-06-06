@@ -1,7 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <%- include ('header_login.ejs') %>
+
+    <!--비정상 접근 차단-->
+    <% if(typeof(pass) === 'undefined') { %>
+    <script type="text/javascript">
+      alert("비정상적인 접근입니다.");
+      window.location.href = "/";
+    </script>
+    <% } else if(pass == 'NONE') { %>
+    <script type="text/javascript">
+      alert("로그인이 필요합니다.");
+      window.location.href = "/";
+    </script>
+    <% } else if(typeof(req) === 'undefined') { %>
+    <script type="text/javascript">
+      alert("비정상적인 접근입니다.");
+      window.location.href = "/";
+    </script>
+    <% } %>
+
     <style>
+      .hidden-col {
+        display: none;
+      }
+
       table,
       th,
       td,
@@ -13,60 +37,99 @@
     <script>
       function Search_Company_Q() {
         const table = document.getElementById("Search_Output_tbody"); //여기에 테이블 이름 들어가야합니다.
+        <% for(var len in req.session.result) { %>
 
-        /* const input2 = document.createElement("input");
-        const input3 = document.createElement("input");
-        const input4 = document.createElement("input");
-        const input5 = document.createElement("input");
-        const input6 = document.createElement("input");
-        const input7 = document.createElement("input");
-        const input8 = document.createElement("input");
-        const input9 = document.createElement("input");*/
 
-        const newRow = table.insertRow();
+        var newRow = table.insertRow();
         // 새 행(Row)에 Cell 추가
-        const newCell1 = newRow.insertCell(0);
-        const newCell2 = newRow.insertCell(1);
-        const newCell3 = newRow.insertCell(2);
-        const newCell4 = newRow.insertCell(3);
-        const newCell5 = newRow.insertCell(4);
-        const newCell6 = newRow.insertCell(5);
-        const newCell7 = newRow.insertCell(6);
+        var newCell0 = newRow.insertCell(0);
+        var newCell1 = newRow.insertCell(1);
+        var newCell2 = newRow.insertCell(2);
+        var newCell3 = newRow.insertCell(3);
+        var newCell4 = newRow.insertCell(4);
+        var newCell5 = newRow.insertCell(5);
+        var newCell6 = newRow.insertCell(6);
+        var newCell7 = newRow.insertCell(7);
 
         // Cell에 텍스트 추가
-        newCell1.innerText = "DB";
-        newCell2.innerText = "DB";
-        newCell3.innerText = "DBlllll";
-        newCell4.innerText = "DBfffffffffffffffffffffffffffffffffffffffffffffffffffffff";
-        newCell5.innerText = "DBffffsss";
-        newCell6.innerText = "DB";
-        newCell7.innerText = "DB";
+        newCell0.innerText = "<%= req.session.result[len]['Comp_NAME'] %>"; //본사명
+        newCell1.innerText = "<%= req.session.result[len]['President_NAME'] %>"; // 대표
+        newCell2.innerText = "<%= req.session.result[len]['Business_NUM'] %>"; // 사업자번호
+        newCell3.innerText = "<%= req.session.result[len]['Business_ADDR'] %>"; // 본사주소
+        newCell4.innerText = "<%= req.session.result[len]['Factory_ADDR(OPTIONAL)'] %>"; // 공장주소
+        newCell5.innerText = "<%= req.session.result[len]['Sectors'] %>"; // 업종
+        newCell6.innerText = "<%= req.session.result[len]['TEL'] %>"; // TEL
+        newCell7.innerText = "<%= req.session.result[len]['FAX'] %>"; // FAX
+        <% } %>
+
       }
-      function Select_result() {}
+
+      function Select_result() {
+
+        var table =document.getElementById('Search_Output');
+        var rowList = table.rows; // *1)rows collection
+
+        for (i=1; i<rowList.length; i++) {//thead부분 제외.
+
+            var row = rowList[i];
+            var tdsNum = row.childElementCount;// 자식요소 갯수 구하기.
+
+            row.onclick = function(){
+                return function(){
+
+
+                var str = "선택된 회사 : ";
+                var row_value = this.cells[0].innerHTML; //*2)cells collection
+                str += row_value;//값을 하나의 text값으로 만듦
+                var rows = Array();
+                for (var j = 0; j < tdsNum; j++){//row안에 있는 값 순차대로 가져오기.
+
+                  rows.push(this.cells[j].innerHTML); //*2)cells collection
+                  //str += row_value+' ';//값을 하나의 text값으로 만듦
+
+                };//td for
+                console.log(rows);
+
+                document.querySelector('p').innerText =str;//p태그 안에 값 대입.
+                document.querySelector('p').innerHTML += '<form action="/" method="GET"><input type="hidden" name="Page" value="PO_M" /><input type="hidden" id="rows" name="rows" value="" />&nbsp<input type="submit" text-align:center" value="확인" /></form>';
+                document.getElementById('rows').value = rows;
+             };//return
+          }(row);//onclick
+        }//for
+
+       }//function
     </script>
   </head>
   <body>
     <div style="height: 10px"></div>
-    <div>회사검색</div>
+    <div style="margin-left: 50px">
+      <input value="회사검색 : " readonly style="outline: none; border: none; width: 60px" />
+      <input type="search" id="Search_Input" />
+      <button onClick="">검색</button>
+    </div>
     <div style="height: 10px"></div>
-    <input type="search" id="Search_Input" />
-    <button onClick="Search_Company_Q()">검색</button>
-    <div style="height: 10px"></div>
-    <div style="width: 820px; height: 500px">
-      <table id="Search_Output" style="border: 1px solid black">
+    <div style="width: 1200px; height: 500px; margin-left: 50px">
+      <table id="Search_Output" style="border: 1px solid black; font-size: 16px">
         <thead>
           <tr>
+            <th style="display: none"></th>
             <th>본사명</th>
             <th>대표자 성명</th>
             <th>사업자 번호</th>
             <th>본사 주소</th>
             <th>공장 주소</th>
-            <th>Tel</th>
-            <th>Fax</th>
+            <th>업종</th>
+            <th>TEL</th>
+            <th>FAX</th>
           </tr>
         </thead>
-        <tbody id="Search_Output_tbody" onclick=" Select_result()"></tbody>
+        <tbody id="Search_Output_tbody"></tbody>
+        <script>
+          Search_Company_Q();
+          window.onload = Select_result();
+        </script>
       </table>
+      <p style="text-align: center; font-size: 25px"></p>
     </div>
   </body>
 </html>

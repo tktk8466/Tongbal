@@ -25,7 +25,7 @@ function Reset_PO() {
   document.getElementById("Business_NUM").value = "";
   document.getElementById("Business_Address_2").value = "";
   document.getElementById("Business_Address_F").value = "";
-  document.getElementById("Manager").value = "";
+  document.getElementById("Sectors").value = "";
   document.getElementById("TEL2").value = "";
   document.getElementById("Fax2").value = "";
 }

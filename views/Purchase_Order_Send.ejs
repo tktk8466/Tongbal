@@ -172,7 +172,9 @@
         <!---------- 채팅창 파트 ------------>
         <% for (var key in req.session.Send_Order) { %>
         <div class="col_resize_chat content MY_DIV2_SIZE_960" id="PO_CHAT_DIV_<%=key%>" style="text-align: center; font-size: 1.75vw; display: none">
-          <div id="CHAT" style="background-color: #d2e9f2; border: var(--bs-border-color-translucent) 1px solid"><%=key%></div>
+          <div id="CHAT" style="background-color: #d2e9f2; border: var(--bs-border-color-translucent) 1px solid">
+            수신 : <%=req.session.S_CompanyInfo[key]['Comp_NAME']%> - [<%=req.session.Send_Order[key]['Title']%>]
+          </div>
           <div
             id="chat_tables_<%=key%>"
             class="col-12 test"

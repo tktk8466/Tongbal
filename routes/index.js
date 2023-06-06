@@ -311,10 +311,9 @@ const upload = multer({ storage: storage });
 // 파일 업로드 라우팅
 router.post("/uploads", upload.array("filearray"), async (req, res, next) => {
   try {
-    console.log(req.files);
     let PO_UUID = req.body.PO_UUID;
     let f_array = new Array();
-    console.log("파일업로드했습니다");
+
     for (var i = 0; i < req.files.length; i++) {
       f_array[i] = JSON.stringify({
         UUID: uuid(),

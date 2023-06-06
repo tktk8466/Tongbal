@@ -24,6 +24,9 @@
 
     <!-- 커스텀 스크립트 -->
     <script src="/js/main.js"></script>
+    <script src="/js/Board_Table.js"></script>
+    <script src="/node_modules/jquery/dist/jquery.js"></script>
+
     <script>
       var referrer = document.referrer;
       if (referrer == "") {
@@ -795,7 +798,6 @@
           const fileInput = document.querySelector("#file-input");
           const preview = document.querySelector("#preview");
           fileInput.addEventListener("change", () => {
-            console.dir(fileInput);
             const files = Array.from(fileInput.files);
             files.forEach((file) => {
               preview.innerHTML += `

@@ -1,17 +1,6 @@
-function Save_PO() {
-  if (PO3.style.display === "block") {
-    addRow_Purchase_Order_Board();
-    Reset_PO();
-    F_Board();
-  }
-}
-
-function Change_PO() {
-  PO3.style.display = "block";
-  addRow_Purchase_Order_Board();
-}
-
 function Reset_PO() {
+  window.history.back();
+  /*
   PO3.style.display = "block";
   document.getElementById("title_PO").value = "";
   document.getElementById("Comp_NAME").value = "";
@@ -28,6 +17,7 @@ function Reset_PO() {
   document.getElementById("Sectors").value = "";
   document.getElementById("TEL2").value = "";
   document.getElementById("Fax2").value = "";
+  */
 }
 
 function addRow_Purchase_Order_Board() {

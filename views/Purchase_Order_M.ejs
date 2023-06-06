@@ -23,29 +23,17 @@
     </script>
     <% } %>
 
-    <script src="/js/Purchase_Order_M_Button.js"></script>
-
     <script src="/js/table.js"></script>
+    <script src="/js/Board_Table.js"></script>
+    <script src="/node_modules/jquery/dist/jquery.js"></script>
   </head>
   <body>
     <div class="d-flex flex-wrap justify-content-center" style="margin: 50px 0px; justify-content: center">
       <div class="col-1 d-flex flex-wrap" style="justify-content: left; height: 20px">&nbsp;</div>
-      <div class="col-5 d-flex flex-wrap" style="justify-content: left; height: 20px" class="btn btn-light">
-        <button class="btn btn-light" onclick="F_Purchase_Order()" style="font-size: 20px; border: 1px solid black">발 주 서</button>
-      </div>
-
-      <div class="d-flex flex-wrap" style="justify-content: right; height: 20px">
-        <button class="btn btn-light" onclick="Reset_PO()" style="font-size: 20px; border: 1px solid black">취소</button>
-        &nbsp;
-        <button type="submit" class="btn btn-light" onclick="F_Board()" style="font-size: 20px; border: 1px solid black">목록</button>
-        &nbsp;
-        <button class="btn btn-light" onclick="onclick=window.print()" style="font-size: 20px; border: 1px solid black">인쇄</button>
-      </div>
       <div class="col-1 d-flex flex-wrap" style="justify-content: left">&nbsp;</div>
       <!--발주서-->
       <div class="col-12" style="height: 50px; z-index: -20"></div>
-      <div id="PO3" class="col-10" style="text-align: center; display: none"><%- include ('Purchase_Order_Table.ejs') %></div>
-      <div id="PO5" class="col-10" style="text-align: center; display: none"><%- include ('Purchase_Order_Board.ejs') %></div>
+      <div id="PO3" class="col-10" style="text-align: center; display: block"><%- include ('Purchase_Order_Table.ejs') %></div>
     </div>
   </body>
 </html>

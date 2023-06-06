@@ -18,10 +18,7 @@ module.exports = {
         var sql_text =
           "INSERT INTO tb_chatting(message, sent_at, sent_user_id, sent_user_name, comp_name, TB_CHAT_ROOM_ID) VALUES(?, NOW(), ?, ?, ?, ?)";
 
-        //console.log(time.timeString() + "ChatMsg :: DB 연결");
         let connection = await database.conn();
-        //console.log(time.timeString() + "ChatMsg :: DB 연결...Done");
-        //console.log(time.timeString() + "ChatMsg :: DB 쿼리");
         await connection.query(sql_text, [data.msg, data.user_id, data.user_name, data.comp_name, data.chat_room_id]);
         resolved(true);
       } catch (err) {
@@ -30,7 +27,6 @@ module.exports = {
     })
       .then(async (resolved) => {
         if (resolved) {
-          //console.log(time.timeString() + "ChatMsg :: DB INSERT DONE ");
         }
       })
       .catch((err) => {

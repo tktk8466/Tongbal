@@ -13,20 +13,21 @@ function Change_PO() {
 
 function Reset_PO() {
   PO3.style.display = "block";
-  document.getElementById("title_PO").value = "제목을 입력해 주세요.";
-  document.getElementById("Comp_NAME").value = "Comp_NAME";
-  document.getElementById("Comp_NAME_2").value = "Comp_NAME_2";
-  document.getElementById("President_NAME").value = "President_NAME";
-  document.getElementById("Business_Address").value = "Business_Address";
-  document.getElementById("TEL").value = "TEL";
-  document.getElementById("FAX").value = "FAX";
-  document.getElementById("President_NAME_2").value = "President_NAME_2";
-  document.getElementById("Business_NUM").value = "Business_NUM";
-  document.getElementById("Business_Address_2").value = "Business_Address_2";
-  document.getElementById("Business_Address_F").value = "Business_Address_F";
-  document.getElementById("Manager").value = "Manager";
-  document.getElementById("TEL2").value = "TEL2";
-  document.getElementById("Fax2").value = "Fax2";
+  document.getElementById("title_PO").value = "";
+  document.getElementById("Comp_NAME").value = "";
+  document.getElementById("President_NAME").value = "";
+  document.getElementById("Business_Address").value = "";
+  document.getElementById("TEL").value = "";
+  document.getElementById("FAX").value = "";
+
+  document.getElementById("Comp_NAME_2").value = "";
+  document.getElementById("President_NAME_2").value = "";
+  document.getElementById("Business_NUM").value = "";
+  document.getElementById("Business_Address_2").value = "";
+  document.getElementById("Business_Address_F").value = "";
+  document.getElementById("Manager").value = "";
+  document.getElementById("TEL2").value = "";
+  document.getElementById("Fax2").value = "";
 }
 
 function addRow_Purchase_Order_Board() {

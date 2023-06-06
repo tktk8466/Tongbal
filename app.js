@@ -1,11 +1,11 @@
 const express = require("express");
 const express_session = require("express-session");
+const WebSocketServer = require("./Chat/WebSocket_Module.js");
+const indexRouter = require("./routes/index.js");
 const database = require("./DB/Database.js");
 const time = require("./views/js/time.js");
-const indexRouter = require("./routes/index.js");
-const WebSocketServer = require("./Chat/WebSocket_Module.js");
 
-//---------------세션 미들웨어----------------------
+//---------------미들웨어----------------------
 const app = express();
 app.use(
   express_session({
@@ -25,6 +25,7 @@ app.use(express.json());
 app.use("/image", express.static("./views/image"));
 app.use("/css", express.static("./views/css"));
 app.use("/js", express.static("./views/js"));
+app.use("/uploads", express.static("./uploads"));
 app.use("/node_modules", express.static("./node_modules"));
 app.use("/", indexRouter);
 app.use((req, res, next) => {

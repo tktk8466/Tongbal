@@ -23,7 +23,7 @@ router.get("/", async (req, res) => {
             pass: "NONE",
           });
         } else {
-          res.render("../views/Purchase_Order_M.ejs");
+          res.render("../views/Purchase_Order_M.ejs", { req, pass: true });
         }
       } else if (Page == "PO_R") {
         if (req.session.isLogin != true) {
@@ -150,7 +150,7 @@ router.get("/PO_edit", (req, res) => {
   }
 });
 
-router.post("/PO_save", async (req, res) => {
+router.post("/PO_items_save", async (req, res) => {
   try {
     let count = req.body.count;
     let CP_UUID = req.body.CP_UUID;
@@ -184,33 +184,121 @@ router.post("/PO_save", async (req, res) => {
   }
 });
 
+router.post("/PO_save", async (req, res) => {
+  // 작성된 발주서 저장
+  try {
+    let count = req.body.count;
+    let CP_UUID = req.body.CP_UUID;
+    let PO_UUID = req.body.PO_UUID;
+    let Content = req.body.Content;
+    let P_Code = req.body.P_Code;
+    let P_Name = req.body.P_Name;
+    let P_Width = req.body.P_Width;
+    let P_Height = req.body.P_Height;
+    let P_Unit = req.body.P_Unit;
+    let P_Quan = req.body.P_Quan;
+    let P_Price = req.body.P_Price;
+    let P_VAT = req.body.P_VAT;
+
+    if (count != 0) {
+      for (var i = 0; i < count; i++) {
+        if (count == 1) {
+          await po_query.savePO_item(CP_UUID, PO_UUID, P_Code, P_Name, P_Width, P_Height, P_Unit, P_Quan, P_Price, P_VAT);
+        } else {
+          await po_query.savePO_item(CP_UUID, PO_UUID, P_Code[i], P_Name[i], P_Width[i], P_Height[i], P_Unit[i], P_Quan[i], P_Price[i], P_VAT[i]);
+        }
+      }
+    }
+    await po_query.getPO(req, res);
+    //res.redirect(req.get("referer"));
+    res.send("<script>window.close();</script >");
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 router.get("/Bill", (req, res) => {
-  res.render("../views/Page_Bills.ejs");
+  if (req.session.isLogin != true) {
+    // 로그인 세션 없을 때
+    res.render("../views/login.ejs", {
+      pass: "NONE",
+    });
+  } else {
+    res.render("../views/Page_Bills.ejs", { pass: true });
+  }
 });
 
 router.get("/Tax", (req, res) => {
-  res.render("../views/Page_Tax_Bill.ejs");
+  if (req.session.isLogin != true) {
+    // 로그인 세션 없을 때
+    res.render("../views/login.ejs", {
+      pass: "NONE",
+    });
+  } else {
+    res.render("../views/Page_Tax_Bill.ejs", { pass: true });
+  }
 });
 
 router.get("/Trading", (req, res) => {
-  res.render("../views/Page_Trading_statement.ejs");
+  if (req.session.isLogin != true) {
+    // 로그인 세션 없을 때
+    res.render("../views/login.ejs", {
+      pass: "NONE",
+    });
+  } else {
+    res.render("../views/Page_Trading_statement.ejs", { pass: true });
+  }
 });
 
 router.get("/Serach", (req, res) => {
-  res.render("../views/Find_CP.ejs");
+  if (req.session.isLogin != true) {
+    // 로그인 세션 없을 때
+    res.render("../views/login.ejs", {
+      pass: "NONE",
+    });
+  } else {
+    res.render("../views/Find_CP.ejs", { pass: true });
+  }
 });
 
 // 마이페이지
 router.get("/MYPAGE", (req, res) => {
-  if (req.session.isLogin == true) {
+  if (req.session.isLogin != true) {
+    // 로그인 세션 없을 때
+    res.render("../views/login.ejs", { pass: "NONE" });
+  } else {
     res.render("../views/MyPage.ejs", {
       req,
       pass: true,
     });
-  } else {
-    // 로그인 세션 없을 때
-    res.render("../views/login.ejs", { pass: "NONE" });
-    console.log(time.timeString() + " get'/' :: 로그인 세션 없음, 로그인 페이지 연계");
+  }
+});
+
+// 파일 업로드 처리를 위한 multer 미들웨어
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+  destination: (req, file, callback) => {
+    callback(null, "./uploads");
+  },
+  filename: (req, file, callback) => {
+    callback(null, file.originalname);
+  },
+});
+
+const upload = multer({ storage: storage });
+
+// 파일 업로드 라우팅
+router.post("/uploads", upload.array("filearray"), async (req, res, next) => {
+  try {
+    var array = new Array();
+    console.log("파일업로드했습니다");
+    for (var i = 0; i < req.files.length; i++) {
+      array[i] = req.path + "/" + req.files[i].originalname;
+    }
+    await po_query.UPLOAD_FILE(array, res);
+  } catch (err) {
+    console.log(err);
   }
 });
 

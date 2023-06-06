@@ -13,7 +13,6 @@ module.exports = {
         const sql_text_5 = " SELECT * FROM tb_chatting WHERE TB_CHAT_ROOM_ID = ?"; // 대화내용
         const sql_text_6 = " SELECT * FROM tb_prd_info WHERE PO_UUID = ?"; // 발주서 제품목록
 
-        console.log(time.timeString() + " getPO :: DB 접속");
         let connection = await database.conn();
 
         let [Received_Order, fields_1] = await connection.query(sql_text_1, req.session.UUID);
@@ -71,7 +70,6 @@ module.exports = {
 
         req.session.NextQueryTime = time.nextQueryTime(time.getNow());
         req.session.save();
-        // console.log(req.session);
         resolved(connection);
       } catch (err) {
         console.log(time.timeString() + " PO_Query.js :: getPO 쿼리 오류 : " + err);
@@ -80,7 +78,6 @@ module.exports = {
       .then((resolved) => {
         if (resolved != undefined) {
           resolved.release();
-          console.log(time.timeString() + " getPO :: DB 접속 종료");
         } else {
           console.log(time.timeString() + " PO_Query :: DB 연결 유실 at getPO()");
         }
@@ -106,7 +103,6 @@ module.exports = {
       .then((resolved) => {
         if (resolved != undefined) {
           resolved.release();
-          console.log(time.timeString() + " savePO_item :: DB 접속 종료");
         } else {
           console.log(time.timeString() + " PO_Query :: DB 연결 유실 at savePO_item()");
         }
@@ -130,7 +126,6 @@ module.exports = {
       .then((resolved) => {
         if (resolved != undefined) {
           resolved.release();
-          console.log(time.timeString() + " savePO_item :: DB 접속 종료");
         } else {
           console.log(time.timeString() + " PO_Query :: DB 연결 유실 at savePO_item()");
         }
@@ -154,13 +149,37 @@ module.exports = {
       .then((resolved) => {
         if (resolved != undefined) {
           resolved.release();
-          console.log(time.timeString() + " updatePO_content :: DB 접속 종료");
         } else {
           console.log(time.timeString() + " PO_Query :: DB 연결 유실 at updatePO_content()");
         }
       })
       .catch((err) => {
         console.log(time.timeString() + " updatePO_content :: err ::" + err);
+      });
+  },
+
+  UPLOAD_FILE: async (Files, content) => {
+    return new Promise(async (resolved, rejected) => {
+      try {
+        console.log("PO_query.UPLOAD_FILE : ");
+        console.log(Files);
+        // const sql_text = "";
+        let connection = await database.conn();
+        await connection.query(sql_text, [content, Files]);
+        resolved(connection);
+      } catch (err) {
+        console.log(time.timeString() + " PO_Query.js :: UPLOAD_FILE 쿼리 오류 : " + err);
+      }
+    })
+      .then((resolved) => {
+        if (resolved != undefined) {
+          resolved.release();
+        } else {
+          console.log(time.timeString() + " PO_Query.js :: DB 연결 유실 at UPLOAD_FILE()");
+        }
+      })
+      .catch((err) => {
+        console.log(time.timeString() + " UPLOAD_FILE:: err ::" + err);
       });
   },
 };

@@ -23,10 +23,8 @@ var sessionStore = new MySQLStore(dbConfig);
 module.exports = {
   conn: async () => {
     return new Promise((resolve, reject) => {
-      //console.log(time.timeString() + "database :: DB 접속 부여중...");
       try {
         resolve(DB.getConnection());
-        //console.log(time.timeString() + "database :: DB 접속 부여중...DONE");
       } catch (err) {
         reject();
         console.log(time.timeString() + "database :: DB 접속 부여중...FAILED");

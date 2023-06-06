@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <%- include ('header_login.ejs') %>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!--비정상 접근 차단-->
     <% if(typeof(pass) === 'undefined') { %>
     <script type="text/javascript">
@@ -22,10 +22,6 @@
     <% } %>
 
     <style>
-      .hidden-col {
-        display: none;
-      }
-
       table,
       th,
       td,
@@ -99,14 +95,26 @@
 
        }//function
     </script>
+
+    <script>
+      $(document).ready(function () {
+        $("#mykeyword").keyup(function () {
+          var value = $(this).val().toLowerCase();
+          $("#Search_Output_tbody tr").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+          });
+        });
+      });
+    </script>
   </head>
   <body>
     <div style="height: 10px"></div>
     <div style="margin-left: 50px">
-      <input value="회사검색 : " readonly style="outline: none; border: none; width: 60px" />
-      <input type="search" id="Search_Input" />
-      <button onClick="">검색</button>
+      <input value="회사검색 : " style="outline: none; border: none; width: 60px" readonly />
+      <input type="text" id="mykeyword" placeholder="검색어를 입력하세요" />
+      <button onClick="filter()">검색</button>
     </div>
+
     <div style="height: 10px"></div>
     <div style="width: 1200px; height: 500px; margin-left: 50px">
       <table id="Search_Output" style="border: 1px solid black; font-size: 16px">

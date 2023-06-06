@@ -400,93 +400,103 @@
           <div class="col-12" style="height: 10wh">&nbsp;</div>
 
           <textarea id="Content" name="Content" class="border_A col-12" style="overflow-y: scroll; height: 240px; padding: 10px" rows="8"></textarea>
+        </div>
+      </div>
+    </form>
+    <form action="/uploads" method="post" name="form2" enctype="multipart/form-data" target="2">
+      <input type="file" name="filearray" id="file-input" multiple />
+      <button onlick="TwoSubmit2()">파일 입력</button>
+      <div id="preview" class="d-flex flex-wrap"></div>
+    </form>
 
-          <form action="/uploads" method="post" enctype="multipart/form-data">
-            <input type="file" id="file-input" multiple />
-            <div id="preview" class="d-flex flex-wrap"></div>
-          </form>
-          <!--
-          <script>
-            let fileNo = 0; // 첨부된 이미지 총 갯수 (삭제되도 줄어들지않음). 이미지마다 다른 id를 지정하기 위함
-            let filesArr = []; // 첨부된 모든 파일 리스트 (삭제되도 제거되지않음)
+    <script>
+      let fileNo = 0; // 첨부된 이미지 총 갯수 (삭제되도 줄어들지않음). 이미지마다 다른 id를 지정하기 위함
+      let filesArr = []; // 첨부된 모든 파일 리스트 (삭제되도 제거되지않음)
 
-            let maxFileCnt = 10; // 첨부파일 최대 개수
-            let attFileCnt = document.querySelectorAll("#preview").length; // 기존 추가된 첨부파일 개수
-            // 업로드를 하면 바디에 생성된 태그 갯수로 계산
-            let remainFileCnt = maxFileCnt - attFileCnt; // 추가로 첨부가능한 개수
+      let maxFileCnt = 10; // 첨부파일 최대 개수
+      let attFileCnt = document.querySelectorAll("#preview").length; // 기존 추가된 첨부파일 개수
+      // 업로드를 하면 바디에 생성된 태그 갯수로 계산
+      let remainFileCnt = maxFileCnt - attFileCnt; // 추가로 첨부가능한 개수
 
-            // 첨부파일 개수 확인
-            // 최대 개수 초과 시
+      // 첨부파일 개수 확인
+      // 최대 개수 초과 시
 
-            $("input[id=file-input]")
-              .off()
-              .on("change", function () {
-                if (parseInt($("input[id='file-input']")[0].files.length) > maxFileCnt) {
-                  alert("You can only upload a maximum of" + maxFileCnt + "files");
-                  $(this).val("");
-                }
-                maxFileCnt = maxFileCnt - parseInt($("input[id='file-input']")[0].files.length);
-                for (var i = 0; i < parseInt($("input[id='file-input']")[0].files.length); i++) {
-                  if (this.files[i] && this.files[i]) {
-                    var maxSize = 100 * 1024 * 1024;
-                    var fileSize = this.files[i].size;
+      $("input[id=file-input]")
+        .off()
+        .on("change", function () {
+          if (parseInt($("input[id='file-input']")[0].files.length) > maxFileCnt) {
+            alert("You can only upload a maximum of" + maxFileCnt + "files");
+            $(this).val("");
+          }
+          maxFileCnt = maxFileCnt - parseInt($("input[id='file-input']")[0].files.length);
+          for (var i = 0; i < parseInt($("input[id='file-input']")[0].files.length); i++) {
+            if (this.files[i] && this.files[i]) {
+              var maxSize = 100 * 1024 * 1024;
+              var fileSize = this.files[i].size;
 
-                    if (fileSize > maxSize) {
-                      maxFileCnt = maxFileCnt + parseInt($("input[id='file-input']")[0].files.length);
-                      alert("첨부파일 사이즈는 100MB 이내로 등록 가능합니다.");
-                      $(this).val("");
-                      return false;
-                    }
-                  }
-                }
-              });
+              if (fileSize > maxSize) {
+                maxFileCnt = maxFileCnt + parseInt($("input[id='file-input']")[0].files.length);
+                alert("첨부파일 사이즈는 100MB 이내로 등록 가능합니다.");
+                $(this).val("");
+                return false;
+              }
+            }
+          }
+        });
 
-            const handler = {
-              init() {
-                const fileInput = document.querySelector("#file-input");
-                const preview = document.querySelector("#preview");
-                fileInput.addEventListener("change", () => {
-                  console.dir(fileInput);
-                  const files = Array.from(fileInput.files);
-                  files.forEach((file) => {
-                    preview.innerHTML += `
+      const handler = {
+        init() {
+          const fileInput = document.querySelector("#file-input");
+          const preview = document.querySelector("#preview");
+          fileInput.addEventListener("change", () => {
+            console.dir(fileInput);
+            const files = Array.from(fileInput.files);
+            files.forEach((file) => {
+              preview.innerHTML += `
                               <div id="${file.lastModified}">
                                   ${file.name}
                                   <button data-index='${file.lastModified}' class='file-remove' style = "background-color : white; outline:none; border:none">X</button>
                               </div>`;
-                  });
-                });
-              },
+            });
+          });
+        },
 
-              removeFile: () => {
-                document.addEventListener("click", (e) => {
-                  if (e.target.className !== "file-remove") return;
-                  const removeTargetId = e.target.dataset.index;
-                  const removeTarget = document.getElementById(removeTargetId);
-                  const files = document.querySelector("#file-input").files;
-                  const dataTranster = new DataTransfer();
+        removeFile: () => {
+          document.addEventListener("click", (e) => {
+            if (e.target.className !== "file-remove") return;
+            const removeTargetId = e.target.dataset.index;
+            const removeTarget = document.getElementById(removeTargetId);
+            const files = document.querySelector("#file-input").files;
+            const dataTranster = new DataTransfer();
 
-                  // document.querySelector('#file-input').files =
-                  //             Array.from(files).filter(file => file.lastModified !== removeTarget);
+            // document.querySelector('#file-input').files =
+            //             Array.from(files).filter(file => file.lastModified !== removeTarget);
 
-                  Array.from(files)
-                    .filter((file) => file.lastModified != removeTargetId)
-                    .forEach((file) => {
-                      dataTranster.items.add(file);
-                    });
+            Array.from(files)
+              .filter((file) => file.lastModified != removeTargetId)
+              .forEach((file) => {
+                dataTranster.items.add(file);
+              });
 
-                  document.querySelector("#file-input").files = dataTranster.files;
-                  maxFileCnt++;
-                  removeTarget.remove();
-                });
-              },
-            };
+            document.querySelector("#file-input").files = dataTranster.files;
+            maxFileCnt++;
+            removeTarget.remove();
+          });
+        },
+      };
 
-            handler.init();
-            handler.removeFile();
-          </script>-->
-        </div>
-      </div>
-    </form>
+      handler.init();
+      handler.removeFile();
+    </script>
+
+    <script>
+      function TwoSubmit() {
+        console.log("실행됨");
+        form1.submit();
+      }
+      function TwoSubmit2() {
+        form2.submit();
+      }
+    </script>
   </body>
 </html>

@@ -183,12 +183,12 @@ module.exports = {
       });
   },
 
-  UPLOAD_FILE: async (Files, content) => {
+  UPLOAD_FILE: async (f_path, f_name) => {
     return new Promise(async (resolved, rejected) => {
       try {
         console.log("PO_query.UPLOAD_FILE : ");
-        console.log(Files);
         // const sql_text = "";
+        console.log(f_path + f_name);
         let connection = await database.conn();
         await connection.query(sql_text, [content, Files]);
         resolved(connection);

@@ -8,19 +8,24 @@ module.exports = {
     return new Promise(async (resolved, rejected) => {
       try {
         if (ID && PW) {
-          var sql_text = "SELECT UUID, UserName FROM tb_user WHERE BINARY(UserID) = ? AND BINARY(Passwd) = ?;";
+          var sql_text =
+            "SELECT UserID, UserName, Job_Position, Email, Company_ID, (SELECT Comp_NAME FROM tb_company WHERE UUID = Company_ID) as Comp_NAME FROM tb_user WHERE BINARY(UserID) = ? AND BINARY(Passwd) = ?;";
 
           let connection = await database.conn();
 
           let [rows, fields] = await connection.query(sql_text, [ID, PW]);
 
           if (rows.length > 0) {
-            req.session.UUID = rows[0]["UUID"];
-            req.session.UserID = ID;
+            req.session.UserID = rows[0]["UserID"];
             req.session.UserName = rows[0]["UserName"];
+            req.session.JobPosition = rows[0]["Job_Position"];
+            req.session.Email = rows[0]["Email"];
+            req.session.Comp_NAME = rows[0]["Comp_NAME"];
+            req.session.Comp_UUID = rows[0]["Company_ID"];
+
             req.session.isLogin = true;
             req.session.save();
-            console.log(time.timeString() + "auth :: 유저 " + ID + " 가 로그인 성공함, 세션 저장함");
+            //console.log(time.timeString() + "auth :: 유저 " + ID + " 가 로그인 성공함, 세션 저장함");
             resolved(connection);
           } else {
             console.log(time.timeString() + "[4] auth :: DB 쿼리 실패");

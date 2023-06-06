@@ -31,12 +31,8 @@ router.get("/", async (req, res) => {
           if (req.query.rows != undefined) {
             const rows = req.query.rows.split(",");
             res.render("../views/Purchase_Order_M.ejs", { req, rows, pass: true });
-            console.log(rows);
           } else {
-            await po_query.getCompInfo(req);
-            res.render("../views/Find_CP.ejs", { req, pass: true });
-            //res.render("../views/Purchase_Order_M.ejs", { req, pass: true });
-            console.log("안 넘어옴");
+            await po_query.getCompInfo(req, res);
           }
         }
       } else if (Page == "PO_R") {
@@ -54,7 +50,7 @@ router.get("/", async (req, res) => {
                 pass: true,
               });
             } else {
-              console.log(time.timeString() + "Next Query will execute at " + req.session.NextQueryTime);
+              //console.log(time.timeString() + "Next Query will execute at " + req.session.NextQueryTime);
               res.render("../views/Purchase_Order_Received.ejs", {
                 req,
                 pass: true,
@@ -79,7 +75,7 @@ router.get("/", async (req, res) => {
                 pass: true,
               });
             } else {
-              console.log(time.timeString() + "Next Query will execute at " + req.session.NextQueryTime);
+              //console.log(time.timeString() + "Next Query will execute at " + req.session.NextQueryTime);
               res.render("../views/Purchase_Order_Send.ejs", {
                 req,
                 pass: true,
@@ -96,7 +92,7 @@ router.get("/", async (req, res) => {
           //console.log(req.session);
           res.render("../views/main_login.ejs", { req, pass: true });
         } else {
-          console.log(time.timeString() + "Already Queried at " + req.session.LastQueryTime);
+          //console.log(time.timeString() + "Already Queried at " + req.session.LastQueryTime);
           res.render("../views/main_login.ejs", { req, pass: true });
         }
       }
@@ -232,9 +228,6 @@ router.post("/PO_save", async (req, res) => {
       }
     }
 
-    // 세션에서 임시저장 정보 지움
-    req.session.result = "";
-    req.session.save();
     await po_query.getPO(req, res);
     res.render("../views/main_login.ejs", { req, pass: true });
   } catch (err) {
@@ -308,7 +301,8 @@ const storage = multer.diskStorage({
     callback(null, "./uploads");
   },
   filename: (req, file, callback) => {
-    callback(null, file.originalname);
+    req.files.filename = uuid();
+    callback(null, req.files.filename);
   },
 });
 
@@ -317,12 +311,21 @@ const upload = multer({ storage: storage });
 // 파일 업로드 라우팅
 router.post("/uploads", upload.array("filearray"), async (req, res, next) => {
   try {
-    var array = new Array();
+    console.log(req.files);
+    let PO_UUID = req.body.PO_UUID;
+    let f_array = new Array();
     console.log("파일업로드했습니다");
     for (var i = 0; i < req.files.length; i++) {
-      array[i] = req.path + "/" + req.files[i].originalname;
+      f_array[i] = JSON.stringify({
+        UUID: uuid(),
+        f_name: req.files[i].originalname,
+        f_path: req.path + "/" + req.files[i].filename,
+        PO_UUID: PO_UUID,
+      });
     }
-    await po_query.UPLOAD_FILE(array, res);
+    await po_query.UPLOAD_FILE(f_array);
+
+    res.send("<script>window.close();</script >");
   } catch (err) {
     console.log(err);
   }

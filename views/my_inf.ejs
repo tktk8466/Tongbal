@@ -10,64 +10,28 @@
               <th scope="row">ID</th>
               <td></td>
               <td>
-                <input type="text" id="Company_Name" value="<%=req.session.MyCompanyInfo[0]['Comp_NAME']%>" style="text-align: center; width: 100%" />
+                <input type="text" id="UserID" value="<%= req.session.UserID %>" style="text-align: center; width: 100%" />
               </td>
             </tr>
             <tr>
-              <th scope="row">대표자 성명</th>
+              <th scope="row">이름</th>
               <td></td>
               <td>
-                <input
-                  type="text"
-                  id="President_NAME"
-                  value="<%=req.session.MyCompanyInfo[0]['President_NAME']%>"
-                  style="text-align: center; width: 100%"
-                />
+                <input type="text" id="UserName" value="<%= req.session.UserName %>" style="text-align: center; width: 100%" />
               </td>
             </tr>
             <tr>
-              <th scope="row">사업자 번호</th>
+              <th scope="row">직위</th>
               <td></td>
               <td>
-                <input
-                  type="text"
-                  id="Business_NUM"
-                  value="<%=req.session.MyCompanyInfo[0]['Business_NUM']%>"
-                  style="text-align: center; width: 100%"
-                />
+                <input type="text" id="JobPosition" value="<%= req.session.JobPosition %>" style="text-align: center; width: 100%" />
               </td>
             </tr>
             <tr>
-              <th scope="row">사업장 주소지</th>
+              <th scope="row">이메일</th>
               <td></td>
               <td>
-                <input
-                  type="text"
-                  id="Business_ADDR"
-                  value="<%=req.session.MyCompanyInfo[0]['Business_ADDR']%>"
-                  style="text-align: center; width: 100%"
-                />
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">업 종</th>
-              <td></td>
-              <td>
-                <input type="text" id="Sectors" value="<%=req.session.MyCompanyInfo[0]['Sectors']%>" style="text-align: center; width: 100%" />
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">전화번호</th>
-              <td></td>
-              <td>
-                <input type="text" id="TEL" value="<%=req.session.MyCompanyInfo[0]['TEL']%>" style="text-align: center; width: 100%" />
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">팩 스</th>
-              <td></td>
-              <td>
-                <input type="text" id="FAX" value="<%=req.session.MyCompanyInfo[0]['FAX']%>" style="text-align: center; width: 100%" />
+                <input type="text" id="Email" value="<%=req.session.Email%>" style="text-align: center; width: 100%" />
               </td>
             </tr>
           </tbody>

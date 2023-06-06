@@ -37,7 +37,7 @@
     <script>
       function Search_Company_Q() {
         const table = document.getElementById("Search_Output_tbody"); //여기에 테이블 이름 들어가야합니다.
-        <% for(var len in req.session.result) { %>
+        <% for(var len in results) { %>
 
 
         var newRow = table.insertRow();
@@ -52,14 +52,14 @@
         var newCell7 = newRow.insertCell(7);
 
         // Cell에 텍스트 추가
-        newCell0.innerText = "<%= req.session.result[len]['Comp_NAME'] %>"; //본사명
-        newCell1.innerText = "<%= req.session.result[len]['President_NAME'] %>"; // 대표
-        newCell2.innerText = "<%= req.session.result[len]['Business_NUM'] %>"; // 사업자번호
-        newCell3.innerText = "<%= req.session.result[len]['Business_ADDR'] %>"; // 본사주소
-        newCell4.innerText = "<%= req.session.result[len]['Factory_ADDR(OPTIONAL)'] %>"; // 공장주소
-        newCell5.innerText = "<%= req.session.result[len]['Sectors'] %>"; // 업종
-        newCell6.innerText = "<%= req.session.result[len]['TEL'] %>"; // TEL
-        newCell7.innerText = "<%= req.session.result[len]['FAX'] %>"; // FAX
+        newCell0.innerText = "<%= results[len]['Comp_NAME'] %>"; //본사명
+        newCell1.innerText = "<%= results[len]['President_NAME'] %>"; // 대표
+        newCell2.innerText = "<%= results[len]['Business_NUM'] %>"; // 사업자번호
+        newCell3.innerText = "<%= results[len]['Business_ADDR'] %>"; // 본사주소
+        newCell4.innerText = "<%= results[len]['Factory_ADDR(OPTIONAL)'] %>"; // 공장주소
+        newCell5.innerText = "<%= results[len]['Sectors'] %>"; // 업종
+        newCell6.innerText = "<%= results[len]['TEL'] %>"; // TEL
+        newCell7.innerText = "<%= results[len]['FAX'] %>"; // FAX
         <% } %>
 
       }

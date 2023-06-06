@@ -748,8 +748,9 @@
     </div>
     <% } } %>
 
-    <form action="/uploads" method="post" name="form2" enctype="multipart/form-data" target="2">
+    <form action="/uploads" method="POST" name="form2" enctype="multipart/form-data" target="2">
       <input type="file" name="filearray" id="file-input" multiple />
+      <input type="hidden" name="PO_UUID" value="<%= req.session.Received_Order[key]['UUID'] %>" />
       <button onlick="TwoSubmit2()">파일 입력</button>
       <div id="preview" class="d-flex flex-wrap"></div>
     </form>

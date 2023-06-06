@@ -28,19 +28,19 @@
     </style>
     <script>
       function my_Company() {
-        F_company.style.display = "block";
-        F_item.style.display = "none";
         F_My_imf.style.display = "none";
+        F_company.style.display = "block";
+        //F_item.style.display = "none";
       }
-      function my_Item() {
+      /*function my_Item() {
+        F_My_imf.style.display = "none";
         F_company.style.display = "none";
         F_item.style.display = "block";
-        F_My_imf.style.display = "none";
-      }
+      }*/
       function my_INF() {
-        F_company.style.display = "none";
-        F_item.style.display = "none";
         F_My_imf.style.display = "block";
+        F_company.style.display = "none";
+        //F_item.style.display = "none";
       }
     </script>
   </head>
@@ -51,19 +51,16 @@
       <div class="col-07" style="text-align: center; font-size: 30px">
         <div style="height: 40%"></div>
         <ul>
-          <li><button class="btn btn-light" onclick="my_INF()" style="font-size: 30px">내 정보</button></li>
-          <li><button class="btn btn-light" onclick="my_Company()" style="font-size: 30px">회사 정보 수정</button></li>
-          <li><button class="btn btn-light" onclick="my_Item()" style="font-size: 30px">상품 추가/관리</button></li>
+          <li><button class="btn btn-light" onclick="my_INF()" style="font-size: 30px; border: 1px solid black">내 정보</button></li>
+          &nbsp;
+          <li><button class="btn btn-light" onclick="my_Company()" style="font-size: 30px; border: 1px solid black">회사 정보 수정</button></li>
+          <!--<li><button class="btn btn-light" onclick="my_Item()" style="font-size: 30px">상품 추가/관리</button></li>-->
         </ul>
       </div>
       <div class="col-016" id="" style="text-align: center; font-size: 30px; margin: auto">
+        <div id="F_My_imf" style="display: block"><%- include ('my_inf.ejs') %></div>
         <div id="F_company" style="display: none"><%- include ('My_Company.ejs') %></div>
-        <div id="F_item" style="display: none"><%- include ('Item_add.ejs') %></div>
-        <div id="F_My_imf" style="display: none"><%- include ('my_inf.ejs') %></div>
-
-        <!-- -->
-
-        <!-- -->
+        <!--<div id="F_item" style="display: none"><%- include ('Item_add.ejs') %></div>-->
       </div>
       <div class="col-011"></div>
     </div>

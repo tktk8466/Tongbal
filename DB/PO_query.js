@@ -6,16 +6,16 @@ module.exports = {
     return new Promise(async (resolved, rejected) => {
       // 동기 처리
       try {
-        const sql_text_1 = " SELECT * FROM tb_purchase_order WHERE Contractor_ID = (SELECT Company_ID FROM tb_user WHERE tb_user.UUID = ?)"; // 받은 발주서
-        const sql_text_2 = " SELECT * FROM tb_purchase_order WHERE OrderComp_ID = (SELECT Company_ID FROM tb_user WHERE tb_user.UUID = ?)"; // 보낸 발주서
-        const sql_text_3 = " SELECT * FROM tb_company WHERE UUID = (SELECT Company_ID FROM tb_user WHERE UUID = ?)"; // 내 회사 정보
+        const sql_text_1 = " SELECT * FROM tb_purchase_order WHERE Contractor_ID = ?"; // 받은 발주서
+        const sql_text_2 = " SELECT * FROM tb_purchase_order WHERE OrderComp_ID = ?"; // 보낸 발주서
+        const sql_text_3 = " SELECT * FROM tb_company WHERE UUID = ?"; // 내 회사 정보
         const sql_text_4 = " SELECT * FROM tb_company WHERE UUID = ?"; // 상대방 회사 정보
         const sql_text_5 = " SELECT * FROM tb_chatting WHERE TB_CHAT_ROOM_ID = ?"; // 대화내용
         const sql_text_6 = " SELECT * FROM tb_prd_info WHERE PO_UUID = ?"; // 발주서 제품목록
 
         let connection = await database.conn();
 
-        let [Received_Order, fields_1] = await connection.query(sql_text_1, req.session.UUID);
+        let [Received_Order, fields_1] = await connection.query(sql_text_1, req.session.Comp_UUID);
         if (Received_Order != undefined) {
           req.session.Received_Order = Received_Order;
           req.session.R_CompanyInfo = [];
@@ -38,7 +38,7 @@ module.exports = {
           console.log("getPO :: Query Failed");
         }
 
-        let [Send_Order, fields_2] = await connection.query(sql_text_2, req.session.UUID);
+        let [Send_Order, fields_2] = await connection.query(sql_text_2, req.session.Comp_UUID);
         if (Send_Order != undefined) {
           req.session.Send_Order = Send_Order;
           req.session.S_CompanyInfo = [];
@@ -61,7 +61,7 @@ module.exports = {
           console.log("getPO :: Query Failed");
         }
 
-        let [MyCompanyInfo, fields_3] = await connection.query(sql_text_3, req.session.UUID);
+        let [MyCompanyInfo, fields_3] = await connection.query(sql_text_3, req.session.Comp_UUID);
         if (MyCompanyInfo != undefined) {
           req.session.MyCompanyInfo = MyCompanyInfo;
         } else {
@@ -183,14 +183,18 @@ module.exports = {
       });
   },
 
-  UPLOAD_FILE: async (f_path, f_name) => {
+  UPLOAD_FILE: async (f_array) => {
     return new Promise(async (resolved, rejected) => {
       try {
         console.log("PO_query.UPLOAD_FILE : ");
-        // const sql_text = "";
-        console.log(f_path + f_name);
+
+        const sql_text = "INSERT INTO tb_attachment(UUID, File_Name, File_Path, PO_UUID) VALUES (?, ?, ?, ?)";
         let connection = await database.conn();
-        await connection.query(sql_text, [content, Files]);
+        for (var len in f_array) {
+          var data = JSON.parse(f_array[len]);
+          await connection.query(sql_text, [data.UUID, data.f_name, data.f_path, data.PO_UUID]);
+        }
+
         resolved(connection);
       } catch (err) {
         console.log(time.timeString() + " PO_Query.js :: UPLOAD_FILE 쿼리 오류 : " + err);
@@ -208,15 +212,38 @@ module.exports = {
       });
   },
 
-  getCompInfo: async (req) => {
+  DOWNLOAD_FILE: async (PO_UUID, f_path, f_name) => {
+    return new Promise(async (resolved, rejected) => {
+      try {
+        const sql_text = "SELECT * FROM tb_attachment WHERE PO_UUID = ?";
+        console.log(f_path + f_name);
+        let connection = await database.conn();
+        //await connection.query(sql_text, PO_UUID);
+        resolved(connection);
+      } catch (err) {
+        console.log(time.timeString() + " PO_Query.js :: DOWNLOAD_FILE 쿼리 오류 : " + err);
+      }
+    })
+      .then((resolved) => {
+        if (resolved != undefined) {
+          resolved.release();
+        } else {
+          console.log(time.timeString() + " PO_Query.js :: DB 연결 유실 at DOWNLOAD_FILE()");
+        }
+      })
+      .catch((err) => {
+        console.log(time.timeString() + " DOWNLOAD_FILE:: err ::" + err);
+      });
+  },
+
+  getCompInfo: async (req, res) => {
     return new Promise(async (resolved, rejected) => {
       try {
         const sql_text = "SELECT * FROM tb_company;";
         let connection = await database.conn();
-        let [rows, fields] = await connection.query(sql_text);
-        if (rows != undefined) {
-          req.session.result = rows;
-          req.session.save();
+        let [results, fields] = await connection.query(sql_text);
+        if (results != undefined) {
+          res.render("../views/Find_CP.ejs", { req, results, pass: true });
         }
 
         resolved(connection);

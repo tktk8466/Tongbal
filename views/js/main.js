@@ -132,62 +132,61 @@ function scrollBottom(div_id) {
 function add_row() {
   var my_tbody = document.getElementById("PO_item_body");
   // var row = my_tbody.insertRow(0); // 상단에 추가
+  const input0 = document.createElement("input");
+  const input1 = document.createElement("input");
   const input2 = document.createElement("input");
   const input3 = document.createElement("input");
   const input4 = document.createElement("input");
   const input5 = document.createElement("input");
   const input6 = document.createElement("input");
   const input7 = document.createElement("input");
-  const input8 = document.createElement("input");
-  const input9 = document.createElement("input");
 
+  input0.className = "input_PO_item";
+  input1.className = "input_PO_item";
   input2.className = "input_PO_item";
   input3.className = "input_PO_item";
   input4.className = "input_PO_item";
   input5.className = "input_PO_item";
   input6.className = "input_PO_item";
   input7.className = "input_PO_item";
-  input8.className = "input_PO_item";
-  input9.className = "input_PO_item";
 
-  input2.name = "P_Code";
-  input3.name = "P_Name";
-  input4.name = "P_Width";
-  input5.name = "P_Height";
-  input6.name = "P_Unit";
-  input7.name = "P_Quan";
-  input8.name = "P_Price";
-  input9.name = "P_VAT";
+  input0.name = "P_Code";
+  input1.name = "P_Name";
+  input2.name = "P_Width";
+  input3.name = "P_Height";
+  input4.name = "P_Unit";
+  input5.name = "P_Quan";
+  input6.name = "P_Price";
+  input7.name = "P_VAT";
 
-  input2.placeholder = "제품코드";
-  input3.placeholder = "제품명";
-  input4.placeholder = "가로";
-  input5.placeholder = "세로";
-  input6.placeholder = "단위";
-  input7.placeholder = "수량";
-  input8.placeholder = "단가";
-  input9.placeholder = "부가세";
+  input0.placeholder = "제품코드";
+  input1.placeholder = "제품명";
+  input2.placeholder = "가로";
+  input3.placeholder = "세로";
+  input4.placeholder = "단위";
+  input5.placeholder = "수량";
+  input6.placeholder = "단가";
+  input7.placeholder = "부가세";
 
   const row = my_tbody.insertRow(PO_item_body.rows.length); // 하단에 추가
-  const cell1 = row.insertCell(0);
-  const cell2 = row.insertCell(1);
-  const cell3 = row.insertCell(2);
-  const cell4 = row.insertCell(3);
-  const cell5 = row.insertCell(4);
-  const cell6 = row.insertCell(5);
-  const cell7 = row.insertCell(6);
-  const cell8 = row.insertCell(7);
-  const cell9 = row.insertCell(8);
 
-  cell1.innerHTML = PO_item_body.rows.length;
+  const cell0 = row.insertCell(0);
+  const cell1 = row.insertCell(1);
+  const cell2 = row.insertCell(2);
+  const cell3 = row.insertCell(3);
+  const cell4 = row.insertCell(4);
+  const cell5 = row.insertCell(5);
+  const cell6 = row.insertCell(6);
+  const cell7 = row.insertCell(7);
+
+  cell0.append(input0);
+  cell1.append(input1);
   cell2.append(input2);
   cell3.append(input3);
   cell4.append(input4);
   cell5.append(input5);
   cell6.append(input6);
   cell7.append(input7);
-  cell8.append(input8);
-  cell9.append(input9);
 
   var count = document.getElementById("count");
   count.value = PO_item_body.rows.length;

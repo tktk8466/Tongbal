@@ -18,14 +18,11 @@
       integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
       crossorigin="anonymous"
     ></script>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"
-    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
     <!-- 커스텀 스크립트 -->
     <script src="/js/main.js"></script>
     <script>
-      const ws = new WebSocket("ws://localhost:8080");
+      const ws = new WebSocket("ws://" + window.location.hostname + ":8080");
       ws.onmessage = receiveMessage;
     </script>
     <!-- 커스텀 CSS -->
@@ -57,49 +54,18 @@
   <body>
     <!-- Nav Bar -->
 
-    <div
-      class="d-flex flex-wrap justify-content-center Poc_main_font"
-      style="justify-content: center"
-    >
+    <div class="d-flex flex-wrap justify-content-center Poc_main_font" style="justify-content: center">
       <!--세금계산서-->
       <div id="TAX_BILL" class="col-8" style="min-width: 1064px">
-        <div
-          class="border_R border_L border_T"
-          style="
-            text-align: center;
-            font-size: 32px;
-            border-bottom: 1px solid #444444;
-          "
-        >
-          세금계산서
-        </div>
+        <div class="border_R border_L border_T" style="text-align: center; font-size: 32px; border-bottom: 1px solid #444444">세금계산서</div>
         <div
           class="d-flex"
-          style="
-            align-items: center;
-            justify-content: start;
-            vertical-align: middle;
-            text-align: center;
-            height: 55%;
-            border: 1px solid #444444;
-          "
+          style="align-items: center; justify-content: start; vertical-align: middle; text-align: center; height: 55%; border: 1px solid #444444"
         >
-          <div
-            class="col-04 d-flex flex-wrap"
-            style="
-              font-size: 16px;
-              border-left: 1px solid black;
-              border-right: 1px solid black;
-              height: 100%;
-            "
-          >
+          <div class="col-04 d-flex flex-wrap" style="font-size: 16px; border-left: 1px solid black; border-right: 1px solid black; height: 100%">
             <div>공급자</div>
           </div>
-          <div
-            id="company_sk_1"
-            class="col-06 d-flex flex-wrap"
-            style="height: 100%"
-          >
+          <div id="company_sk_1" class="col-06 d-flex flex-wrap" style="height: 100%">
             <div class="col-07 border_R border_B font_vmax">사업자 번호</div>
             <div class="col-08 border_B font_vmax">
               <input
@@ -111,9 +77,7 @@
                 style="width: 100%; height: 100%; text-align: center"
               />
             </div>
-            <div class="col-07 border_R border_B font_vmax">
-              상호<br />(법인명)
-            </div>
+            <div class="col-07 border_R border_B font_vmax">상호<br />(법인명)</div>
             <div class="col-08 border_B font_vmax">
               <input
                 type="text"
@@ -126,18 +90,9 @@
             </div>
             <div class="col-07 border_R border_B font_vmax">성 명</div>
             <div class="col-08 border_B font_vmax">
-              <input
-                type="text"
-                id="User_PC"
-                name="User_PC"
-                value="User_PC"
-                required
-                style="width: 100%; height: 100%; text-align: center"
-              />
+              <input type="text" id="User_PC" name="User_PC" value="User_PC" required style="width: 100%; height: 100%; text-align: center" />
             </div>
-            <div class="col-07 border_R border_B font_vmax">
-              사업장<br />(주소지)
-            </div>
+            <div class="col-07 border_R border_B font_vmax">사업장<br />(주소지)</div>
             <div class="col-08 border_B font_vmax">
               <input
                 type="text"
@@ -150,33 +105,16 @@
             </div>
             <div class="col-07 border_R border_T font_vmax">업태</div>
             <div class="col-08 font_vmax">
-              <input
-                type="text"
-                id="Sector"
-                name="Sector"
-                value="Sector"
-                required
-                style="width: 100%; height: 100%; text-align: center"
-              />
+              <input type="text" id="Sector" name="Sector" value="Sector" required style="width: 100%; height: 100%; text-align: center" />
             </div>
           </div>
           <div
             class="col-04 d-flex flex-wrap"
-            style="
-              font-size: 16px;
-              border-left: 1px solid black;
-              border-right: 1px solid black;
-              height: 100%;
-              text-align: center;
-            "
+            style="font-size: 16px; border-left: 1px solid black; border-right: 1px solid black; height: 100%; text-align: center"
           >
             <div>공급받는자</div>
           </div>
-          <div
-            id="company-sk_2"
-            class="col-06 d-flex flex-wrap"
-            style="height: 100%"
-          >
+          <div id="company-sk_2" class="col-06 d-flex flex-wrap" style="height: 100%">
             <div class="col-07 border_R border_B font_vmax">사업자 번호</div>
             <div class="col-08 border_B border_R font_vmax">
               <input
@@ -188,9 +126,7 @@
                 style="width: 100%; height: 100%; text-align: center"
               />
             </div>
-            <div class="col-07 border_R border_B font_vmax">
-              상호<br />(법인명)
-            </div>
+            <div class="col-07 border_R border_B font_vmax">상호<br />(법인명)</div>
             <div class="col-08 border_B font_vmax border_R">
               <input
                 type="text"
@@ -203,18 +139,9 @@
             </div>
             <div class="col-07 border_R border_B font_vmax">성 명</div>
             <div class="col-08 border_B border_R font_vmax">
-              <input
-                type="text"
-                id="User_PC_2"
-                name="User_PC_2"
-                value="User_PC_2"
-                required
-                style="width: 100%; height: 100%; text-align: center"
-              />
+              <input type="text" id="User_PC_2" name="User_PC_2" value="User_PC_2" required style="width: 100%; height: 100%; text-align: center" />
             </div>
-            <div class="col-07 border_R border_B font_vmax">
-              사업장<br />(주소지)
-            </div>
+            <div class="col-07 border_R border_B font_vmax">사업장<br />(주소지)</div>
             <div class="col-08 border_B border_R font_vmax">
               <input
                 type="text"
@@ -227,81 +154,33 @@
             </div>
             <div class="col-07 border_R border_T font_vmax">업태</div>
             <div class="col-08 border_R font_vmax">
-              <input
-                type="text"
-                id="Sector_2"
-                name="Sector_2"
-                value="Sector_2"
-                required
-                style="width: 100%; height: 100%; text-align: center"
-              />
+              <input type="text" id="Sector_2" name="Sector_2" value="Sector_2" required style="width: 100%; height: 100%; text-align: center" />
             </div>
           </div>
         </div>
         <!--작성일자 비고-->
-        <div
-          class="col-12 d-flex flex-wrap font_vmax"
-          style="border: 1px solid black"
-        >
-          <div class="col-07 border_R" style="text-align: center">
-            작 성 일 자
-          </div>
-          <div class="col-013 border_R" style="text-align: center">
-            공급가액
-          </div>
+        <div class="col-12 d-flex flex-wrap font_vmax" style="border: 1px solid black">
+          <div class="col-07 border_R" style="text-align: center">작 성 일 자</div>
+          <div class="col-013 border_R" style="text-align: center">공급가액</div>
           <div class="col-09 border_R" style="text-align: center">세액</div>
           <div class="col-07" style="text-align: center">비고</div>
         </div>
-        <div
-          class="col-12 d-flex flex-wrap font_vmax"
-          style="border: 1px solid black"
-        >
+        <div class="col-12 d-flex flex-wrap font_vmax" style="border: 1px solid black">
           <div class="col-07 border_R" style="text-align: center">
-            <input
-              id="date_PC"
-              type="text"
-              name="date_PC"
-              value="date_PC"
-              required
-              style="width: 100%; height: 100%; text-align: center"
-            />
+            <input id="date_PC" type="text" name="date_PC" value="date_PC" required style="width: 100%; height: 100%; text-align: center" />
           </div>
           <div class="col-013 border_R" style="text-align: center">
-            <input
-              type="text"
-              id="PC_TAX_1"
-              name="PC_TAX_1"
-              value="PC_TAX_1"
-              required
-              style="width: 100%; height: 100%; text-align: center"
-            />
+            <input type="text" id="PC_TAX_1" name="PC_TAX_1" value="PC_TAX_1" required style="width: 100%; height: 100%; text-align: center" />
           </div>
           <div class="col-09 border_R" style="text-align: center">
-            <input
-              type="text"
-              id="TAX_1"
-              name="TAX_1"
-              value="TAX_1"
-              required
-              style="width: 100%; height: 100%; text-align: center"
-            />
+            <input type="text" id="TAX_1" name="TAX_1" value="TAX_1" required style="width: 100%; height: 100%; text-align: center" />
           </div>
           <div class="col-07" style="text-align: center">
-            <input
-              type="text"
-              id="NOTE_1"
-              name="NOTE_1"
-              value="NOTE_1"
-              required
-              style="width: 100%; height: 100%; text-align: center"
-            />
+            <input type="text" id="NOTE_1" name="NOTE_1" value="NOTE_1" required style="width: 100%; height: 100%; text-align: center" />
           </div>
         </div>
 
-        <div
-          class="col-12 d-flex flex-wrap font_vmax"
-          style="border: 1px solid black"
-        >
+        <div class="col-12 d-flex flex-wrap font_vmax" style="border: 1px solid black">
           <div class="col-018 center_line border_R">월 일</div>
           <div class="col-09 center_line border_R">제품이름</div>
           <div class="col-01 center_line border_R">규 격</div>
@@ -313,19 +192,9 @@
           <div class="col-02 center_line">비고</div>
         </div>
 
-        <div
-          class="col-12 d-flex flex-wrap font_vmax"
-          style="border-left: 1px solid black; border-right: 1px solid black"
-        >
+        <div class="col-12 d-flex flex-wrap font_vmax" style="border-left: 1px solid black; border-right: 1px solid black">
           <div class="col-018 center_line border_R">
-            <input
-              id="date_PC_2"
-              type="text"
-              name="date_PC_2"
-              value="date_PC_2"
-              required
-              style="width: 100%; height: 100%; text-align: center"
-            />
+            <input id="date_PC_2" type="text" name="date_PC_2" value="date_PC_2" required style="width: 100%; height: 100%; text-align: center" />
           </div>
           <div class="col-09 center_line border_R">
             <input
@@ -338,141 +207,58 @@
             />
           </div>
           <div class="col-01 center_line border_R">
-            <input
-              type="text"
-              id="SI2"
-              name="SI2"
-              value="SI2"
-              required
-              style="width: 100%; height: 100%; text-align: center"
-            />
+            <input type="text" id="SI2" name="SI2" value="SI2" required style="width: 100%; height: 100%; text-align: center" />
           </div>
           <div class="col-01 center_line border_R">
-            <input
-              type="text"
-              id="Q2"
-              name="Q2"
-              value="Q2"
-              required
-              style="width: 100%; height: 100%; text-align: center"
-            />
+            <input type="text" id="Q2" name="Q2" value="Q2" required style="width: 100%; height: 100%; text-align: center" />
           </div>
 
           <div class="col-01 center_line border_R">
-            <input
-              type="text"
-              id="Price_1"
-              name="Price_1"
-              value="Price_1"
-              required
-              style="width: 100%; height: 100%; text-align: center"
-            />
+            <input type="text" id="Price_1" name="Price_1" value="Price_1" required style="width: 100%; height: 100%; text-align: center" />
           </div>
           <div class="col-07 center_line border_R">
-            <input
-              type="text"
-              id="PC_TAX_2"
-              name="PC_TAX_2"
-              value="PC_TAX_2"
-              required
-              style="width: 100%; height: 100%; text-align: center"
-            />
+            <input type="text" id="PC_TAX_2" name="PC_TAX_2" value="PC_TAX_2" required style="width: 100%; height: 100%; text-align: center" />
           </div>
           <div class="col-014 center_line border_R">
-            <input
-              type="text"
-              id="TAX_2"
-              name="TAX_2"
-              value="TAX_2"
-              required
-              style="width: 100%; height: 100%; text-align: center"
-            />
+            <input type="text" id="TAX_2" name="TAX_2" value="TAX_2" required style="width: 100%; height: 100%; text-align: center" />
           </div>
           <div class="col-02 center_line">
-            <input
-              type="text"
-              id="NOTE_2"
-              name="NOTE_2"
-              value="NOTE_2"
-              required
-              style="width: 100%; height: 100%; text-align: center"
-            />
+            <input type="text" id="NOTE_2" name="NOTE_2" value="NOTE_2" required style="width: 100%; height: 100%; text-align: center" />
           </div>
         </div>
         <div class="col-12 d-flex flex-wrap border_T">
           <div>
+            <div class="col-14 center_line border_R border_B border_L">합계 금액</div>
             <div class="col-14 center_line border_R border_B border_L">
-              합계 금액
-            </div>
-            <div class="col-14 center_line border_R border_B border_L">
-              <input
-                type="text"
-                id="SUM_M"
-                name="SUM_M"
-                value="SUM_M"
-                required
-                style="width: 100%; height: 100%; text-align: center"
-              />
+              <input type="text" id="SUM_M" name="SUM_M" value="SUM_M" required style="width: 100%; height: 100%; text-align: center" />
             </div>
           </div>
           <div>
             <div class="col-14 center_line border_R border_B">현 금</div>
             <div class="col-14 center_line border_R border_B">
-              <input
-                type="text"
-                id="Cash_1"
-                name="Cash_1"
-                value="Cash_1"
-                required
-                style="width: 100%; height: 100%; text-align: center"
-              />
+              <input type="text" id="Cash_1" name="Cash_1" value="Cash_1" required style="width: 100%; height: 100%; text-align: center" />
             </div>
           </div>
           <div>
             <div class="col-14 center_line border_R border_B">수 표</div>
             <div class="col-14 center_line border_R border_B">
-              <input
-                type="text"
-                id="CHECK_1"
-                name="CHECK_1"
-                value="CHECK_1"
-                required
-                style="width: 100%; height: 100%; text-align: center"
-              />
+              <input type="text" id="CHECK_1" name="CHECK_1" value="CHECK_1" required style="width: 100%; height: 100%; text-align: center" />
             </div>
           </div>
           <div>
             <div class="col-14 center_line border_B">어 음</div>
             <div class="col-14 center_line border_B">
-              <input
-                type="text"
-                id="BILL_1"
-                name="BILL_1"
-                value="BILL_1"
-                required
-                style="width: 100%; height: 100%; text-align: center"
-              />
+              <input type="text" id="BILL_1" name="BILL_1" value="BILL_1" required style="width: 100%; height: 100%; text-align: center" />
             </div>
           </div>
           <div>
-            <div class="col-14 center_line border_R border_B border_L">
-              외상미수금
-            </div>
+            <div class="col-14 center_line border_R border_B border_L">외상미수금</div>
 
             <div class="col-14 center_line border_R border_B border_L">
-              <input
-                type="text"
-                id="AR_1"
-                name="AR_1"
-                value="AR_1"
-                required
-                style="width: 100%; height: 100%; text-align: center"
-              />
+              <input type="text" id="AR_1" name="AR_1" value="AR_1" required style="width: 100%; height: 100%; text-align: center" />
             </div>
           </div>
-          <div class="font_vmax border_B border_R" style="padding-top: 15px">
-            이 금액을 청구함
-          </div>
+          <div class="font_vmax border_B border_R" style="padding-top: 15px">이 금액을 청구함</div>
         </div>
       </div>
     </div>

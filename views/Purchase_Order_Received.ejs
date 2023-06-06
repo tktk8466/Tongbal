@@ -62,7 +62,7 @@
     <script type="text/javascript">
 
       // 웹소켓 클라이언트 접속
-      const ws = new WebSocket("ws://localhost:8080");
+      const ws = new WebSocket("ws://" + window.location.hostname + ":8080");
       ws.onopen = () => {
         console.log("connected at server");
       };
@@ -153,7 +153,7 @@
         <div style="width: 10px"></div>
         <div
           class="col_resize"
-          style="text-align: center; background-color: white; display: none; min-width: 900px; max-height: 900px; height: 700px"
+          style="text-align: center; background-color: white; display: none; min-width: 900px; max-height: 1200px; height: 900px"
           id="PO_DIV"
         >
           <button
@@ -165,7 +165,7 @@
                 Display_none(Purchase_Order_<%=key%>),
               <%}%>
               toggleDiv(POtable)"
-            style="float: left; background-color: transparent; border: transparent"
+            style="float: left; background-color: rgb(233, 233, 233); border: transparent; border-radius: 3px"
           >
             <i class="bi bi-x-lg"></i>
           </button>
@@ -177,7 +177,7 @@
         <!---------- 채팅창 파트 ------------>
         <% for (var key in req.session.Received_Order) { %>
 
-        <div class="col_resize_chat content MY_DIV2_SIZE_960" id="PO_CHAT_DIV_<%=key%>" style="text-align: center; font-size: 1.75vw; display: none">
+        <div class="col_resize_chat content MY_DIV2_SIZE_960" id="PO_CHAT_DIV_<%=key%>" style="text-align: center; font-size: 1.5vw; display: none">
           <div id="CHAT" style="background-color: #d2e9f2; border: var(--bs-border-color-translucent) 1px solid">
             발신 : <%=req.session.R_CompanyInfo[key]['Comp_NAME']%> - [<%=req.session.Received_Order[key]['Title']%>]
           </div>

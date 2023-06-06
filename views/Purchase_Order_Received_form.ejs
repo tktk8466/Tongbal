@@ -1,8 +1,16 @@
 <% for(var key in req.session.Received_Order) { %>
 <div id="Purchase_Order_<%=key%>" class="col-12" style="text-align: center; display: none">
-  <button onclick="window.open('/PO_edit?type=R&key=<%=key%>','_blank')" style="font-size: 2vmin; justify-items: end" class="btn btn-light">
+  <button
+    class="btn btn-light"
+    onclick="window.open('/PO_edit?type=R&key=<%=key%>','_blank')"
+    style="font-size: 2vmin; justify-items: end; border: 1px solid black"
+  >
     수정
   </button>
+  <button class="btn btn-light" type="button" onclick="window.print()" style="font-size: 2vmin; justify-items: end; border: 1px solid black">
+    인쇄
+  </button>
+  <div class="col_resize_empty_2">&nbsp;</div>
   <div style="text-align: center; font-size: 32px; border-top: 1px solid #444444; border-left: 1px solid #444444; border-right: 1px solid #444444">
     발&nbsp;&nbsp;주&nbsp;&nbsp;서
   </div>
@@ -210,7 +218,6 @@
   <table id="tableId" class="col-12 pc" style="width: 100%; text-align: center; font-size: 1vmax; border-top: 1px solid #444444">
     <thead>
       <tr>
-        <th scope="col">No.</th>
         <th scope="col">제품코드</th>
         <th scope="col">제품명</th>
         <th scope="col">가로</th>
@@ -224,7 +231,6 @@
     <tbody id="PO_item_body">
       <% if (req.session.R_prd_info[key] != undefined) { for(var num in req.session.R_prd_info[key]) { %>
       <tr>
-        <th scope="row">1</th>
         <td>
           <input
             type="text"
@@ -310,7 +316,7 @@
     </tbody>
   </table>
   <div class="col-12" style="height: 25px">&nbsp;</div>
-  <textarea readonly class="col-12 border_A" style="overflow-y: scroll; height: 240px; padding: 10px" rows="8">
+  <textarea readonly class="col-12 border_A" style="overflow-y: scroll; height: 160px; padding: 10px" rows="8">
 <%= req.session.Received_Order[key]['Content'] %></textarea
   >
 </div>

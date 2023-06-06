@@ -7,6 +7,11 @@
     <!-- 커스텀 스크립트 -->
     <script src="/js/main.js"></script>
     <script src="/js/Board_Table.js"></script>
+    <script>
+      function Reset_PO() {
+        window.history.back();
+      }
+    </script>
     <!-- 커스텀 CSS -->
     <link href="/css/main.css" rel="stylesheet" />
     <link href="/css/font.css" rel="stylesheet" />
@@ -29,23 +34,11 @@
       input {
         border: none;
       }
-      .tooltip {
-        /* 툴팁을 꾸며주기 위한 CSS입니다. 다른 스타일을 원하면 수정해도 괜찮습니다. */
-        position: fixed;
-        padding: 10px 20px;
-        border: 1px solid #b3c9ce;
-        border-radius: 4px;
-        text-align: center;
-        font: italic 14px/1.3 sans-serif;
-        color: #333;
-        background: #fff;
-        box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
-      }
     </style>
   </head>
   <body>
     <form action="/PO_save" method="POST">
-      <div class="d-flex flex-wrap" style="justify-content: right; height: 20px">
+      <div class="d-flex flex-wrap" style="justify-content: center; height: 20px">
         <button
           class="btn btn-light"
           type="submit"
@@ -56,7 +49,7 @@
         <button class="btn btn-light" type="button" onclick="Reset_PO()" style="font-size: 20px; border: 1px solid black; margin-right: 20px">
           취소
         </button>
-        <button class="btn btn-light" type="button" onclick="onclick=window.print()" style="font-size: 20px; border: 1px solid black">인쇄</button>
+        <button class="btn btn-light" type="button" onclick="window.print()" style="font-size: 20px; border: 1px solid black">인쇄</button>
       </div>
       &nbsp;
       <div class="col-12" style="height: 10wh">&nbsp;</div>
@@ -317,8 +310,8 @@
           <input type="hidden" id="count" name="count" value="0" />
 
           <div class="col-12" style="justify-content: end; text-align: left">
-            <button type="input" style="border: none; outline: none; width: 25px; height: 25px; font-size: 16px" onclick="delete_row()">-</button>
-            <button type="input" style="border: none; outline: none; width: 25px; height: 25px; font-size: 16px" onclick="add_row()">
+            <button type="button" style="border: none; outline: none; width: 25px; height: 25px; font-size: 16px" onclick="delete_row()">-</button>
+            <button type="button" style="border: none; outline: none; width: 25px; height: 25px; font-size: 16px" onclick="add_row()">
               <i class="bi bi-plus-lg"></i>
             </button>
           </div>
@@ -327,7 +320,6 @@
           <table id="tableId" class="col-12 pc" style="width: 100%; text-align: center; font-size: 1vmax; border-top: 1px solid #444444">
             <thead>
               <tr>
-                <th scope="col"></th>
                 <th scope="col">제품코드</th>
                 <th scope="col">제품명</th>
                 <th scope="col">가로</th>
@@ -340,7 +332,6 @@
             </thead>
             <tbody id="PO_item_body">
               <tr>
-                <th scope="row"></th>
                 <td>
                   <input
                     type="text"
@@ -387,7 +378,6 @@
                     name="P_Unit"
                     value=""
                     placeholder="단위"
-                    data-tooltip="제품의 단위가 무엇인지 정의합니다. \r\n ex) Sheet(시트, 장), Roll(롤), Box(박스) 등 "
                     style="width: 100%; height: 100%; outline: none; border: none; text-align: center"
                   />
                 </td>

@@ -6,11 +6,11 @@ module.exports = {
     return new Promise(async (resolved, rejected) => {
       // 동기 처리
       try {
-        const sql_text_1 = " SELECT * FROM tb_purchase_order WHERE Contractor_ID = ?"; // 받은 발주서
-        const sql_text_2 = " SELECT * FROM tb_purchase_order WHERE OrderComp_ID = ?"; // 보낸 발주서
+        const sql_text_1 = " SELECT * FROM tb_purchase_order WHERE Contractor_ID = ? ORDER BY Order_Date DESC"; // 받은 발주서
+        const sql_text_2 = " SELECT * FROM tb_purchase_order WHERE OrderComp_ID = ? ORDER BY Order_Date DESC"; // 보낸 발주서
         const sql_text_3 = " SELECT * FROM tb_company WHERE UUID = ?"; // 내 회사 정보
         const sql_text_4 = " SELECT * FROM tb_company WHERE UUID = ?"; // 상대방 회사 정보
-        const sql_text_5 = " SELECT * FROM tb_chatting WHERE TB_CHAT_ROOM_ID = ?"; // 대화내용
+        const sql_text_5 = " SELECT * FROM tb_chatting WHERE TB_CHAT_ROOM_ID = ? ORDER BY id ASC"; // 대화내용
         const sql_text_6 = " SELECT * FROM tb_prd_info WHERE PO_UUID = ?"; // 발주서 제품 목록
         const sql_text_7 = " SELECT * FROM tb_attachment WHERE PO_UUID = ?"; // 발주서 파일 목록
 
@@ -245,7 +245,7 @@ module.exports = {
   getCompInfo: async (req, res) => {
     return new Promise(async (resolved, rejected) => {
       try {
-        const sql_text = "SELECT * FROM tb_company;";
+        const sql_text = "SELECT * FROM tb_company ORDER BY Comp_NAME";
         let connection = await database.conn();
         let [results, fields] = await connection.query(sql_text);
         if (results != undefined) {

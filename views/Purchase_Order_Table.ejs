@@ -314,6 +314,15 @@
             <button type="button" style="border: none; outline: none; width: 25px; height: 25px; font-size: 16px" onclick="add_row()">
               <i class="bi bi-plus-lg"></i>
             </button>
+            <span style="position: absolute; left: 43%">납기일 : </span>
+            <input type="datetime-local" id="currentDatetime" style="position: absolute; left: 46%; border: 1px solid black" />
+            <script>
+              const offset = new Date().getTimezoneOffset() * 60000;
+
+              const today = new Date(Date.now() - offset);
+              document.getElementById("currentDatetime").value = new Date().toISOString().slice(0, 16);
+              console.log(document.getElementById("currentDatetime").value);
+            </script>
           </div>
           <div class="col-12" style="height: 10wh">&nbsp;</div>
 

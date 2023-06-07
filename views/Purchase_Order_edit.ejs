@@ -299,6 +299,15 @@
             <button type="button" style="border: none; outline: none; width: 25px; height: 25px; font-size: 16px" onclick="delete_row()">-</button>
             <button type="button" style="border: none; outline: none; width: 25px; height: 25px; font-size: 16px" onclick="add_row()">
               <i class="bi bi-plus-lg"></i>
+              <span style="position: absolute; left: 43%">납기일 : </span>
+              <input type="datetime-local" id="currentDatetime" style="position: absolute; left: 46%; border: 1px solid black" />
+              <script>
+                const offset = new Date().getTimezoneOffset() * 60000;
+
+                const today = new Date(Date.now() - offset);
+                document.getElementById("currentDatetime").value = new Date().toLocaleDateString().slice(0, 16);
+                console.log(document.getElementById("currentDatetime").value);
+              </script>
             </button>
           </div>
           <div class="col-12" style="height: 5px">&nbsp;</div>
@@ -640,6 +649,15 @@
             <button type="button" style="border: none; outline: none; width: 25px; height: 25px; font-size: 16px" onclick="add_row()">
               <i class="bi bi-plus-lg"></i>
             </button>
+            <span style="position: absolute; left: 43%">납기일 : </span>
+            <input type="datetime-local" id="currentDatetime" style="position: absolute; left: 46%; border: 1px solid black" />
+            <script>
+              const offset = new Date().getTimezoneOffset() * 60000;
+
+              const today = new Date(Date.now() - offset);
+              document.getElementById("currentDatetime").value = today.toISOString().slice(0, 16);
+              console.log(document.getElementById("currentDatetime").value);
+            </script>
           </div>
           <div class="col-12" style="height: 20px">&nbsp;</div>
           <table id="tableId" class="col-12 pc" style="width: 100%; text-align: center; font-size: 1vmax; border-top: 1px solid #444444">
@@ -760,7 +778,7 @@
       <div style="text-align: center">
         <input type="file" name="filearray" id="file-input" multiple />
         <input type="hidden" name="PO_UUID" value="<%= req.session.Send_Order[key]['UUID'] %>" />
-        <button onlick="Form2Submit()">&nbsp;업로드&nbsp;</button>
+        <button onlick="FormSubmit(form2)">&nbsp;업로드&nbsp;</button>
         <div id="preview" class="d-flex flex-wrap"></div>
       </div>
     </form>
@@ -846,8 +864,9 @@
     </script>
 
     <script>
-      function Form2Submit() {
-        form2.submit();
+
+      function FormSubmit(name) {
+        name.submit();
       }
     </script>
   </body>

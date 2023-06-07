@@ -2,7 +2,8 @@
 <html lang="en">
   <head>
     <%- include ('header_login.ejs') %>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+    <script src="/node_modules/jquery/dist/jquery.js"></script>
     <!--비정상 접근 차단-->
     <% if(typeof(pass) === 'undefined') { %>
     <script type="text/javascript">
@@ -52,7 +53,7 @@
         newCell1.innerText = "<%= results[len]['President_NAME'] %>"; // 대표
         newCell2.innerText = "<%= results[len]['Business_NUM'] %>"; // 사업자번호
         newCell3.innerText = "<%= results[len]['Business_ADDR'] %>"; // 본사주소
-        newCell4.innerText = "<%= results[len]['Factory_ADDR(OPTIONAL)'] %>"; // 공장주소
+        newCell4.innerText = "<%= results[len]['Factory_ADDR'] %>"; // 공장주소
         newCell5.innerText = "<%= results[len]['Sectors'] %>"; // 업종
         newCell6.innerText = "<%= results[len]['TEL'] %>"; // TEL
         newCell7.innerText = "<%= results[len]['FAX'] %>"; // FAX
@@ -112,7 +113,6 @@
     <div style="margin-left: 50px">
       <input value="회사검색 : " style="outline: none; border: none; width: 60px" readonly />
       <input type="text" id="mykeyword" placeholder="검색어를 입력하세요" />
-      <!-- <button onClick="filter()">검색</button>-->
     </div>
 
     <div style="height: 10px"></div>

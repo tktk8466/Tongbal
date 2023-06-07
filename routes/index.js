@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const path = require("path");
 const time = require("../views/js/time.js");
+const mysql = require("mysql2/promise"); // mysql 모듈 로드
+const DB = require("../DB/Database.js");
 const db_query = require("../DB/login_out_query.js");
 const po_query = require("../DB/PO_query.js");
 const { v4 } = require("uuid");
@@ -50,7 +52,7 @@ router.get("/", async (req, res) => {
                 pass: true,
               });
             } else {
-              //console.log(time.timeString() + "Next Query will execute at " + req.session.NextQueryTime);
+              console.log(time.timeString() + "Next Query will execute at " + req.session.NextQueryTime);
               res.render("../views/Purchase_Order_Received.ejs", {
                 req,
                 pass: true,
@@ -295,12 +297,14 @@ router.get("/MYPAGE", (req, res) => {
 
 // 파일 업로드 처리를 위한 multer 미들웨어
 const multer = require("multer");
+const Database = require("../DB/Database.js");
 
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
     callback(null, "./uploads");
   },
   filename: (req, file, callback) => {
+    req.files.originalname = Buffer.from(file.originalname, "latin1").toString("utf-8");
     req.files.filename = uuid();
     callback(null, req.files.filename);
   },
@@ -325,6 +329,39 @@ router.post("/uploads", upload.array("filearray"), async (req, res, next) => {
     await po_query.UPLOAD_FILE(f_array);
 
     res.send("<script>window.close();</script >");
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+// 파일 다운로드 라우팅
+router.post("/downloads", async (req, res) => {
+  try {
+    let f_name = req.body.f_name;
+    let f_path = req.body.f_path;
+
+    // ./uploads :: app.js에 static 선언 되어있으므로
+    res.status(200).download(path.join("." + f_path), f_name, (err) => {
+      if (err) {
+        res.status(400).json({ error: "다운로드 실패", message: "파일을 찾을 수 없습니다. 관리자에게 문의하세요." });
+        console.log("파일 다운로드 " + err);
+      }
+
+      //res.send("<script>alert('파일을 찾을 수 없습니다. 관리자에게 문의하세요.'); window.history.back();</script >");
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+// 파일 삭제 라우팅
+router.post("/delete", async (req, res) => {
+  try {
+    let f_name = req.body.f_name;
+    let f_path = path.join("." + req.body.f_path);
+
+    await po_query.DELETE_FILE(f_name, f_path);
+    res.send("<script>window.history.back();</script >");
   } catch (err) {
     console.log(err);
   }

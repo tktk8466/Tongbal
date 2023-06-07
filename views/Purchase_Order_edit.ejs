@@ -241,7 +241,7 @@
                   type="text"
                   id="Factory_ADDR2"
                   name="Factory_ADDR"
-                  value="<%= req.session.MyCompanyInfo[0]['Factory_ADDR(OPTIONAL)'] %>"
+                  value="<%= req.session.MyCompanyInfo[0]['Factory_ADDR'] %>"
                   style="width: 100%; height: 100%; text-align: center"
                   readonly
                 />
@@ -429,10 +429,11 @@
       <div style="text-align: center">
         <input type="file" name="filearray" id="file-input" multiple />
         <input type="hidden" name="PO_UUID" value="<%= req.session.Received_Order[key]['UUID'] %>" />
-        <button onlick="TwoSubmit2()">업로드</button>
+        <button onlick="Form2Submit()">업로드</button>
         <div id="preview" class="d-flex flex-wrap"></div>
       </div>
     </form>
+
     <% } } %> <% if (type == 'S'){ %>
     <!------------------------------------------------->
 
@@ -590,7 +591,7 @@
                   type="text"
                   id="Factory_ADDR2"
                   name="Factory_ADDR"
-                  value="<%= req.session.S_CompanyInfo[key]['Factory_ADDR(OPTIONAL)'] %>"
+                  value="<%= req.session.S_CompanyInfo[key]['Factory_ADDR'] %>"
                   style="width: 100%; height: 100%; text-align: center"
                   readonly
                 />
@@ -777,7 +778,7 @@
       <div style="text-align: center">
         <input type="file" name="filearray" id="file-input" multiple />
         <input type="hidden" name="PO_UUID" value="<%= req.session.Send_Order[key]['UUID'] %>" />
-        <button onlick="TwoSubmit2()">&nbsp;업로드&nbsp;</button>
+        <button onlick="FormSubmit(form2)">&nbsp;업로드&nbsp;</button>
         <div id="preview" class="d-flex flex-wrap"></div>
       </div>
     </form>
@@ -826,7 +827,7 @@
             const files = Array.from(fileInput.files);
             files.forEach((file) => {
               preview.innerHTML += `
-                              <div id="${file.lastModified}">
+                              <div id="${file.lastModified}" style="margin-left:45%">
                                   ${file.name}
                                   <button data-index='${file.lastModified}' class='file-remove' style = "background-color : white; outline:none; border:none">X</button>
                               </div>`;
@@ -863,11 +864,9 @@
     </script>
 
     <script>
-      function TwoSubmit() {
-        form1.submit();
-      }
-      function TwoSubmit2() {
-        form2.submit();
+
+      function FormSubmit(name) {
+        name.submit();
       }
     </script>
   </body>

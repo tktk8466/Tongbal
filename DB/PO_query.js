@@ -11,7 +11,8 @@ module.exports = {
         const sql_text_3 = " SELECT * FROM tb_company WHERE UUID = ?"; // 내 회사 정보
         const sql_text_4 = " SELECT * FROM tb_company WHERE UUID = ?"; // 상대방 회사 정보
         const sql_text_5 = " SELECT * FROM tb_chatting WHERE TB_CHAT_ROOM_ID = ?"; // 대화내용
-        const sql_text_6 = " SELECT * FROM tb_prd_info WHERE PO_UUID = ?"; // 발주서 제품목록
+        const sql_text_6 = " SELECT * FROM tb_prd_info WHERE PO_UUID = ?"; // 발주서 제품 목록
+        const sql_text_7 = " SELECT * FROM tb_attachment WHERE PO_UUID = ?"; // 발주서 파일 목록
 
         let connection = await database.conn();
 
@@ -21,15 +22,19 @@ module.exports = {
           req.session.R_CompanyInfo = [];
           req.session.R_Chatting = [];
           req.session.R_prd_info = [];
+          req.session.R_file_list = [];
 
           for (var key in Received_Order) {
             let [R_CompanyInfo, fields_4] = await connection.query(sql_text_4, Received_Order[key]["OrderComp_ID"]); // 보낸 회사 정보
             let [R_Chatting, fields_5] = await connection.query(sql_text_5, Received_Order[key]["TB_CHAT_ROOM_ID"]); // 받은 발주서 채팅 내역
             let [R_prd_info, fields_6] = await connection.query(sql_text_6, Received_Order[key]["UUID"]); // 받은 발주서 제품목록 내역
-            if (R_CompanyInfo != undefined && R_Chatting != undefined && R_prd_info != undefined) {
+            let [R_file_list, fields_7] = await connection.query(sql_text_7, Received_Order[key]["UUID"]); // 받은 발주서 제품목록 내역
+
+            if (R_CompanyInfo != undefined && R_Chatting != undefined && R_prd_info != undefined && R_file_list != undefined) {
               req.session.R_CompanyInfo.push(R_CompanyInfo[0]);
               req.session.R_Chatting.push(JSON.stringify(R_Chatting));
               req.session.R_prd_info.push(R_prd_info);
+              req.session.R_file_list.push(R_file_list);
             } else {
               console.log("getPO :: Query Failed");
             }
@@ -44,15 +49,19 @@ module.exports = {
           req.session.S_CompanyInfo = [];
           req.session.S_Chatting = [];
           req.session.S_prd_info = [];
+          req.session.S_file_list = [];
 
           for (var key in Send_Order) {
             let [S_CompanyInfo, fields_4] = await connection.query(sql_text_4, Send_Order[key]["Contractor_ID"]); // 받은 회사 정보
             let [S_Chatting, fields_5] = await connection.query(sql_text_5, Send_Order[key]["TB_CHAT_ROOM_ID"]); // 보낸 발주서 채팅 내역
             let [S_prd_info, fields_6] = await connection.query(sql_text_6, Send_Order[key]["UUID"]); // 받은 발주서 제품목록 내역
-            if (S_CompanyInfo != undefined && S_Chatting != undefined && S_prd_info != undefined) {
+            let [S_file_list, fields_7] = await connection.query(sql_text_7, Send_Order[key]["UUID"]); // 보낸 발주서 제품목록 내역
+
+            if (S_CompanyInfo != undefined && S_Chatting != undefined && S_prd_info != undefined && S_file_list != undefined) {
               req.session.S_CompanyInfo.push(S_CompanyInfo[0]);
               req.session.S_Chatting.push(JSON.stringify(S_Chatting));
               req.session.S_prd_info.push(S_prd_info);
+              req.session.S_file_list.push(S_file_list);
             } else {
               console.log("getPO :: Query Failed");
             }
@@ -70,6 +79,7 @@ module.exports = {
 
         req.session.NextQueryTime = time.nextQueryTime(time.getNow());
         req.session.save();
+
         resolved(connection);
       } catch (err) {
         console.log(time.timeString() + " PO_Query.js :: getPO 쿼리 오류 : " + err);
@@ -186,8 +196,6 @@ module.exports = {
   UPLOAD_FILE: async (f_array) => {
     return new Promise(async (resolved, rejected) => {
       try {
-        console.log("PO_query.UPLOAD_FILE : ");
-
         const sql_text = "INSERT INTO tb_attachment(UUID, File_Name, File_Path, PO_UUID) VALUES (?, ?, ?, ?)";
         let connection = await database.conn();
         for (var len in f_array) {
@@ -211,31 +219,29 @@ module.exports = {
         console.log(time.timeString() + " UPLOAD_FILE:: err ::" + err);
       });
   },
-
-  DOWNLOAD_FILE: async (PO_UUID, f_path, f_name) => {
+  DELETE_FILE: async (f_name, f_path) => {
     return new Promise(async (resolved, rejected) => {
       try {
-        const sql_text = "SELECT * FROM tb_attachment WHERE PO_UUID = ?";
-        console.log(f_path + f_name);
+        const sql_text = "DELETE FROM tb_attachment WHERE File_Name = ? or File_Path = ?";
         let connection = await database.conn();
-        //await connection.query(sql_text, PO_UUID);
+        await connection.query(sql_text, [f_name, f_path]);
+        console.log("DB DELETED");
         resolved(connection);
       } catch (err) {
-        console.log(time.timeString() + " PO_Query.js :: DOWNLOAD_FILE 쿼리 오류 : " + err);
+        console.log(time.timeString() + " PO_Query.js :: getCompInfo 쿼리 오류 : " + err);
       }
     })
       .then((resolved) => {
         if (resolved != undefined) {
           resolved.release();
         } else {
-          console.log(time.timeString() + " PO_Query.js :: DB 연결 유실 at DOWNLOAD_FILE()");
+          console.log(time.timeString() + " PO_Query.js :: DB 연결 유실 at getCompInfo()");
         }
       })
       .catch((err) => {
-        console.log(time.timeString() + " DOWNLOAD_FILE:: err ::" + err);
+        console.log(time.timeString() + " getCompInfo:: err ::" + err);
       });
   },
-
   getCompInfo: async (req, res) => {
     return new Promise(async (resolved, rejected) => {
       try {

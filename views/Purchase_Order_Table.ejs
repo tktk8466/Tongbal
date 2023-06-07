@@ -422,7 +422,7 @@
     </form>
     <form action="/uploads" method="post" name="form2" enctype="multipart/form-data" target="2">
       <input type="file" name="filearray" id="file-input" multiple />
-      <button onlick="TwoSubmit2()">파일 입력</button>
+      <button onlick="FormSubmit(form2)">파일 입력</button>
       <div id="preview" class="d-flex flex-wrap"></div>
     </form>
 
@@ -506,12 +506,8 @@
     </script>
 
     <script>
-      function TwoSubmit() {
-        console.log("실행됨");
-        form1.submit();
-      }
-      function TwoSubmit2() {
-        form2.submit();
+      function FormSubmit(name) {
+        name.submit();
       }
     </script>
   </body>

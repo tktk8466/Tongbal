@@ -2,6 +2,7 @@
 <div id="Purchase_Order_<%=key%>" class="col-12" style="text-align: center; display: none">
   <button
     class="btn btn-light"
+    type="button"
     onclick="window.open('/PO_edit?type=S&key=<%=key%>','_blank')"
     style="font-size: 2vmin; justify-items: end; border: 1px solid black"
   >
@@ -165,7 +166,7 @@
             type="text"
             id="Business_Address_F"
             name="Business_Address_F"
-            value="<%=req.session.S_CompanyInfo[key]['Factory_ADDR(OPTIONAL)']%>"
+            value="<%=req.session.S_CompanyInfo[key]['Factory_ADDR']%>"
             style="width: 100%; height: 100%; text-align: center"
             readonly
           />
@@ -319,6 +320,37 @@
   <textarea readonly class="col-12 border_A" style="overflow-y: scroll; height: 160px; padding: 10px" rows="8">
 <%= req.session.Send_Order[key]['Content'] %></textarea
   >
-</div>
+  <div class="col-12" style="height: 25px">&nbsp;</div>
+  <!---------- 파일 목록 파트 ------------>
+  <p style="text-align: center">[첨부파일]</p>
+  <% for (var num in req.session.S_file_list[key]) { %>
+  <div style="text-align: left; margin-left: 40%">
+    <span type="text" style="text-decoration: underline" onclick="FormSubmit(form_down_<%=num%>)">
+      &nbsp;<%= req.session.S_file_list[key][num]['File_Name'] %>&nbsp;
+    </span>
+    &nbsp;&nbsp;
+    <button
+      type="button"
+      style="font-size: 13px; background: transparent; border: 1px solid black; border-radius: 3px"
+      onclick="FormSubmit(form_del_<%=num%>)"
+    >
+      &nbsp;X&nbsp;
+    </button>
+  </div>
+  <form action="/downloads" method="POST" name="form_down_<%=num%>" style="justify-content: center">
+    <input type="hidden" name="f_name" value="<%= req.session.S_file_list[key][num]['File_Name'] %>" />
+    <input type="hidden" name="f_path" value="<%= req.session.S_file_list[key][num]['File_Path'] %>" />
+  </form>
 
+  <form action="/delete" method="POST" name="form_del_<%=num%>" style="justify-content: center">
+    <input type="hidden" name="f_name" value="<%= req.session.S_file_list[key][num]['File_Name'] %>" />
+    <input type="hidden" name="f_path" value="<%= req.session.S_file_list[key][num]['File_Path'] %>" />
+  </form>
+  <%}%>
+</div>
 <%}%>
+<script>
+  function FormSubmit(name) {
+    name.submit();
+  }
+</script>

@@ -294,21 +294,17 @@
         <form action="/PO_items_save" method="POST">
           <input type="hidden" id="count" name="count" value="<%= req.session.R_prd_info[key].length %>" />
 
-          <input type="hidden" name="PO_UUID" value="<%= req.session.Received_Order[key]['UUID'] %>" />
+          <input type="hidden" name="po_uuid" value="<%= req.session.Received_Order[key]['UUID'] %>" />
           <div class="col-12" style="justify-content: end; text-align: left">
             <button type="button" style="border: none; outline: none; width: 25px; height: 25px; font-size: 16px" onclick="delete_row()">-</button>
             <button type="button" style="border: none; outline: none; width: 25px; height: 25px; font-size: 16px" onclick="add_row()">
               <i class="bi bi-plus-lg"></i>
-              <span style="position: absolute; left: 43%">납기일 : </span>
-              <input type="datetime-local" id="currentDatetime" style="position: absolute; left: 46%; border: 1px solid black" />
-              <script>
-                const offset = new Date().getTimezoneOffset() * 60000;
-
-                const today = new Date(Date.now() - offset);
-                document.getElementById("currentDatetime").value = new Date().toLocaleDateString().slice(0, 16);
-                console.log(document.getElementById("currentDatetime").value);
-              </script>
             </button>
+            <span style="position: absolute; left: 43%">납기일 : </span>
+            <input type="date" id="DeliveryDate" name="DeliveryDate" style="position: absolute; left: 46%; border: 1px solid black" />
+            <script>
+              document.getElementById("DeliveryDate").value = "<%= req.session.Received_Order[key]['Delivery_Date']%>";
+            </script>
           </div>
           <div class="col-12" style="height: 5px">&nbsp;</div>
           <table id="tableId" class="col-12 pc" style="width: 100%; text-align: center; font-size: 1vmax; border-top: 1px solid #444444">
@@ -643,20 +639,16 @@
         <!-- 테이블 -->
         <form action="/PO_items_save" method="POST">
           <input type="hidden" id="count" name="count" value="<%= req.session.S_prd_info[key].length %>" />
-          <input type="hidden" name="PO_UUID" value="<%= req.session.Send_Order[key]['UUID'] %>" />
+          <input type="hidden" name="po_uuid" value="<%= req.session.Send_Order[key]['UUID'] %>" />
           <div class="col-12" style="justify-content: end; text-align: left">
             <button type="button" style="border: none; outline: none; width: 25px; height: 25px; font-size: 16px" onclick="delete_row()">-</button>
             <button type="button" style="border: none; outline: none; width: 25px; height: 25px; font-size: 16px" onclick="add_row()">
               <i class="bi bi-plus-lg"></i>
             </button>
             <span style="position: absolute; left: 43%">납기일 : </span>
-            <input type="datetime-local" id="currentDatetime" style="position: absolute; left: 46%; border: 1px solid black" />
+            <input type="date" id="DeliveryDate" name="DeliveryDate" style="position: absolute; left: 46%; border: 1px solid black" />
             <script>
-              const offset = new Date().getTimezoneOffset() * 60000;
-
-              const today = new Date(Date.now() - offset);
-              document.getElementById("currentDatetime").value = today.toISOString().slice(0, 16);
-              console.log(document.getElementById("currentDatetime").value);
+              document.getElementById("DeliveryDate").value = "<%= req.session.Send_Order[key]['Delivery_Date']%>";
             </script>
           </div>
           <div class="col-12" style="height: 20px">&nbsp;</div>
@@ -864,7 +856,6 @@
     </script>
 
     <script>
-
       function FormSubmit(name) {
         name.submit();
       }

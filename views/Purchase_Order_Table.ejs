@@ -38,6 +38,7 @@
   </head>
   <body>
     <form action="/PO_save" method="POST">
+      <input type="hidden" id="po_uuid" name="po_uuid" value="<%= PO_UUID %>" />
       <div class="d-flex flex-wrap" style="justify-content: center; height: 20px">
         <button
           class="btn btn-light"
@@ -60,6 +61,7 @@
             name="title_PO"
             value=""
             placeholder="제목을 입력해 주세요"
+            required
             style="
               width: 100%;
               text-align: center;
@@ -149,7 +151,6 @@
                             id="TEL"
                             name="TEL"
                             value="<%= req.session.MyCompanyInfo[0]['TEL'] %>"
-                            required
                             readonly
                             style="width: 100%; height: 100%; text-align: center"
                           />
@@ -163,7 +164,6 @@
                             id="FAX"
                             name="FAX"
                             value="<%= req.session.MyCompanyInfo[0]['FAX'] %>"
-                            required
                             readonly
                             style="width: 100%; height: 100%; text-align: center"
                           />
@@ -189,7 +189,6 @@
                             name="Comp_NAME2"
                             placeholder="회사명"
                             value="<%= rows[0] %>"
-                            required
                             readonly
                             style="width: 100%; height: 100%; text-align: center"
                           />
@@ -204,7 +203,6 @@
                             name="President_NAME_2"
                             placeholder="대표자 성명"
                             value="<%= rows[1] %>"
-                            required
                             readonly
                             style="width: 100%; height: 100%; text-align: center"
                           />
@@ -219,7 +217,6 @@
                             name="Business_NUM2"
                             placeholder="사업자 번호"
                             value="<%= rows[2] %>"
-                            required
                             readonly
                             style="width: 100%; height: 100%; text-align: center"
                           />
@@ -234,7 +231,6 @@
                             name="Business_ADDR2"
                             placeholder="본사 주소"
                             value="<%= rows[3] %>"
-                            required
                             readonly
                             style="width: 100%; height: 100%; text-align: center"
                           />
@@ -249,7 +245,6 @@
                             name="Business_Address_F"
                             placeholder="공장 주소"
                             value="<%= rows[4] %>"
-                            required
                             readonly
                             style="width: 100%; height: 100%; text-align: center"
                           />
@@ -278,7 +273,6 @@
                             name="TEL2"
                             placeholder="TEL"
                             value="<%= rows[6] %>"
-                            required
                             readonly
                             style="width: 100%; height: 100%; text-align: center"
                           />
@@ -293,7 +287,6 @@
                             name="Fax2"
                             placeholder="FAX"
                             value="<%= rows[7] %>"
-                            required
                             readonly
                             style="width: 100%; height: 100%; text-align: center"
                           />
@@ -307,7 +300,7 @@
           </table>
           <div class="col-12" style="height: 10wh">&nbsp;</div>
 
-          <input type="hidden" id="count" name="count" value="0" />
+          <input type="hidden" id="count" name="count" value="1" />
 
           <div class="col-12" style="justify-content: end; text-align: left">
             <button type="button" style="border: none; outline: none; width: 25px; height: 25px; font-size: 16px" onclick="delete_row()">-</button>
@@ -315,14 +308,7 @@
               <i class="bi bi-plus-lg"></i>
             </button>
             <span style="position: absolute; left: 43%">납기일 : </span>
-            <input type="datetime-local" id="currentDatetime" style="position: absolute; left: 46%; border: 1px solid black" />
-            <script>
-              const offset = new Date().getTimezoneOffset() * 60000;
-
-              const today = new Date(Date.now() - offset);
-              document.getElementById("currentDatetime").value = new Date().toISOString().slice(0, 16);
-              console.log(document.getElementById("currentDatetime").value);
-            </script>
+            <input type="date" id="DeliveryDate" name="DeliveryDate" style="position: absolute; left: 46%; border: 1px solid black" required />
           </div>
           <div class="col-12" style="height: 10wh">&nbsp;</div>
 
@@ -431,7 +417,8 @@
     </form>
     <form action="/uploads" method="post" name="form2" enctype="multipart/form-data" target="2">
       <input type="file" name="filearray" id="file-input" multiple />
-      <button onlick="FormSubmit(form2)">파일 입력</button>
+      <input type="hidden" name="PO_UUID" value="<%= PO_UUID %>" />
+      <button onlick="FormSubmit(form2)">&nbsp;업로드&nbsp;</button>
       <div id="preview" class="d-flex flex-wrap"></div>
     </form>
 

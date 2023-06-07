@@ -4,6 +4,7 @@ const path = require("path");
 const time = require("../views/js/time.js");
 const mysql = require("mysql2/promise"); // mysql 모듈 로드
 const DB = require("../DB/Database.js");
+const fs = require("fs");
 const db_query = require("../DB/login_out_query.js");
 const po_query = require("../DB/PO_query.js");
 const { v4 } = require("uuid");
@@ -32,7 +33,7 @@ router.get("/", async (req, res) => {
         } else {
           if (req.query.rows != undefined) {
             const rows = req.query.rows.split(",");
-            res.render("../views/Purchase_Order_M.ejs", { req, rows, pass: true });
+            res.render("../views/Purchase_Order_M.ejs", { req, rows, PO_UUID: uuid(), pass: true });
           } else {
             await po_query.getCompInfo(req, res);
           }
@@ -164,9 +165,10 @@ router.get("/PO_edit", (req, res) => {
 
 router.post("/PO_items_save", async (req, res) => {
   try {
-    let count = req.body.count;
+    let DeliveryDate = req.body.DeliveryDate; // 납기일 수정
 
-    let PO_UUID = req.body.PO_UUID;
+    let count = req.body.count;
+    let PO_UUID = req.body.po_uuid;
     let Content = req.body.Content;
     let P_Code = req.body.P_Code;
     let P_Name = req.body.P_Name;
@@ -177,7 +179,7 @@ router.post("/PO_items_save", async (req, res) => {
     let P_Price = req.body.P_Price;
     let P_VAT = req.body.P_VAT;
 
-    await po_query.updatePO_content(PO_UUID, Content);
+    await po_query.updatePO_content(PO_UUID, Content, DeliveryDate);
     await po_query.clearPO_item(PO_UUID);
     if (count != 0) {
       for (var i = 0; i < count; i++) {
@@ -199,18 +201,22 @@ router.post("/PO_items_save", async (req, res) => {
 router.post("/PO_save", async (req, res) => {
   // 작성된 발주서 저장
   try {
-    let PO_UUID = uuid(); // PO_UUID 직접 생성
+    let PO_UUID = req.body.po_uuid; // PO_UUID 직접 생성
+    console.log("UUID : " + PO_UUID);
     let title = req.body.title_PO;
     let Content = req.body.Content;
     let Business_NUM = req.body.Business_NUM; // 내 회사 이름
     let Business_NUM2 = req.body.Business_NUM2; // 상대 회사 이름
+    let DeliveryDate = req.body.DeliveryDate; // 납기일 수정
+
     // Business_NUM으로 "SELECT UUID FROM tb_company WHERE Business_NUM = ?" 에 넣어서 서브쿼리로 사용
     let Chat_Room_Id = uuid(); // Chat_Room_Id 직접 생성
 
-    await po_query.savePO(PO_UUID, title, Content, Business_NUM, Business_NUM2, Chat_Room_Id);
+    await po_query.savePO(PO_UUID, title, Content, DeliveryDate, Business_NUM, Business_NUM2, Chat_Room_Id);
 
     // tb_prd_info 삽입
     let count = req.body.count;
+    console.log("count : " + count);
     let P_Code = req.body.P_Code;
     let P_Name = req.body.P_Name;
     let P_Width = req.body.P_Width;
@@ -361,6 +367,11 @@ router.post("/delete", async (req, res) => {
     let f_path = path.join("." + req.body.f_path);
 
     await po_query.DELETE_FILE(f_name, f_path);
+    fs.unlink(f_path, function (err) {
+      if (err) {
+        console.log("Error : ", err);
+      }
+    });
     res.send("<script>window.history.back();</script >");
   } catch (err) {
     console.log(err);

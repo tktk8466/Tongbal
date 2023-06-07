@@ -139,8 +139,8 @@
           >
             <th scope="row"><%= req.session.Received_Order[key]["Title"] %></th>
             <td><%= req.session.R_CompanyInfo[key]["Comp_NAME"] %></td>
-            <td><%= req.session.Received_Order[key]["Order_Date"].split(' ')[0] %></td>
-            <td><%= req.session.Received_Order[key]["Delivery_Date"].split(' ')[0] %></td>
+            <td><%= req.session.Received_Order[key]["Order_Date"] %></td>
+            <td><%= req.session.Received_Order[key]["Delivery_Date"] %></td>
           </tr>
           <%}}%>
         </tbody>

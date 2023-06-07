@@ -5,7 +5,7 @@ const time = require("../views/js/time.js");
 const mysql = require("mysql2/promise"); // mysql 모듈 로드
 const DB = require("../DB/Database.js");
 const fs = require("fs");
-const db_query = require("../DB/login_out_query.js");
+const db_query = require("../DB/Login_out_query.js");
 const po_query = require("../DB/PO_query.js");
 const { v4 } = require("uuid");
 const uuid = () => {
@@ -53,7 +53,7 @@ router.get("/", async (req, res) => {
                 pass: true,
               });
             } else {
-              console.log(time.timeString() + "Next Query will execute at " + req.session.NextQueryTime);
+              //console.log(time.timeString() + "Next Query will execute at " + req.session.NextQueryTime);
               res.render("../views/Purchase_Order_Received.ejs", {
                 req,
                 pass: true,
@@ -202,7 +202,6 @@ router.post("/PO_save", async (req, res) => {
   // 작성된 발주서 저장
   try {
     let PO_UUID = req.body.po_uuid; // PO_UUID 직접 생성
-    console.log("UUID : " + PO_UUID);
     let title = req.body.title_PO;
     let Content = req.body.Content;
     let Business_NUM = req.body.Business_NUM; // 내 회사 이름
@@ -216,7 +215,6 @@ router.post("/PO_save", async (req, res) => {
 
     // tb_prd_info 삽입
     let count = req.body.count;
-    console.log("count : " + count);
     let P_Code = req.body.P_Code;
     let P_Name = req.body.P_Name;
     let P_Width = req.body.P_Width;

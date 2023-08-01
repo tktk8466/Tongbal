@@ -1,23 +1,6 @@
 function Reset_PO() {
   window.history.back();
-  /*
-  PO3.style.display = "block";
-  document.getElementById("title_PO").value = "";
-  document.getElementById("Comp_NAME").value = "";
-  document.getElementById("President_NAME").value = "";
-  document.getElementById("Business_Address").value = "";
-  document.getElementById("TEL").value = "";
-  document.getElementById("FAX").value = "";
 
-  document.getElementById("Comp_NAME_2").value = "";
-  document.getElementById("President_NAME_2").value = "";
-  document.getElementById("Business_NUM").value = "";
-  document.getElementById("Business_Address_2").value = "";
-  document.getElementById("Business_Address_F").value = "";
-  document.getElementById("Sectors").value = "";
-  document.getElementById("TEL2").value = "";
-  document.getElementById("Fax2").value = "";
-  */
 }
 
 function addRow_Purchase_Order_Board() {

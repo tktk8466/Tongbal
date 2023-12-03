@@ -1,3 +1,4 @@
 
 .DS_Store
-DB/Database.js
+DB_data.json
+uploads
